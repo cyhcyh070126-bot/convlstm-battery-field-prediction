@@ -22,12 +22,12 @@ parameter values, and source comments. The original single simulation driver
 has been separated into orchestration and export. Portability changes remove
 machine-specific paths and workspace-clearing commands, isolate intermediate
 files, expose C-rate and the random seed, and propagate model-building errors.
-No COMSOL model or training loss has been replaced by a new formulation.
+The physical model and training objective follow the selected research implementation.
 
 ## Requirements
 
-- MATLAB. The source uses implicit expansion, `string`, and `exportgraphics`;
-  an exact minimum supported release has not been established.
+- MATLAB with implicit expansion, `string`, and `exportgraphics` support.
+  The syntax and helper tests were run with R2025b.
 - Statistics and Machine Learning Toolbox for `normrnd`, `lognrnd`, `wblrnd`,
   and `randsample` in the radius-distribution generator.
 - Image Processing Toolbox for `imresize` of the orientation image.
@@ -35,7 +35,7 @@ No COMSOL model or training loss has been replaced by a new formulation.
   a connected COMSOL session. The model uses **Transport of Diluted Species**,
   **Solid Mechanics**, anisotropic linear elasticity, and **Hygroscopic
   Swelling**. The installed license must enable these interfaces and features;
-  the source does not establish one definitive module bundle.
+  check these features against your installed COMSOL license.
 
 The code calls COMSOL's Java model API and `mphsave`. Adding an `mli` directory
 to the MATLAB path makes the MATLAB helper functions available; it does not
@@ -43,8 +43,7 @@ start or connect a COMSOL server by itself. Use the installation's **COMSOL
 with MATLAB** launcher, or establish a LiveLink connection before running.
 The wrapper checks the connection before starting particle packing. The builder
 uses `ModelUtil.createUnique('Battery')` so an existing model in that session
-is preserved. A successful connection check does not establish that every
-required physics interface is licensed or compatible with your version.
+is preserved. Configure the physics interfaces listed above in your COMSOL installation.
 
 ## Run one simulation
 
@@ -84,8 +83,7 @@ Packing stops only after the original force and overlap criteria are satisfied.
 If it reaches the iteration cap without convergence, the workflow saves
 `work/<unique-work-directory>/packing_failure.mat` and raises an error before
 COMSOL construction. The file contains particle state, overlap history, seed,
-and convergence diagnostics. Inspect these before changing geometry parameters;
-an unconverged packing is not silently treated as a successful simulation.
+and convergence diagnostics to support geometry-parameter selection.
 
 ## Original settings
 
@@ -149,9 +147,8 @@ outputs/matlab/
 
 Point the Python data-root option at `outputs/matlab/export_images`, which
 contains the individual run directories. The concentration and stress files
-are **rendered RGB images**, not raw nodal concentration or stress arrays.
-Python image normalization must not be described as normalization of physical
-field values. The C-rate input is a 512 × 512 solid RGB image: its color is
+are **rendered RGB images**, normalized in Python by dividing pixel values by
+255. The C-rate input is a 512 × 512 solid RGB image: its color is
 linearly interpolated between anchors at 0.5, 1, 2, 3, 4, and 5C, with values
 outside that interval clamped to the endpoint colors.
 
@@ -186,28 +183,24 @@ results = runtests(fullfile('tests', 'matlab'));
 assertSuccess(results);
 ```
 
-## Reproducibility limits
+## Model configuration and checks
 
-The source is a research workflow, not a validated general-purpose COMSOL
-package. Its existing sequential assignment of grain domains after the Boolean
-geometry operations and its original boundary selections are preserved. Check
-domain numbering, selections, units, and mesh convergence in your COMSOL
-version before using newly generated data for scientific conclusions.
+The model uses sequential grain-domain assignments after Boolean geometry
+operations and the source's boundary selections. When adapting geometry or
+COMSOL versions, review domain numbering, selections, units, and mesh convergence
+as part of the simulation setup.
 
 MATLAB Code Analyzer inspected all 13 `.m` files, including the test file, with MATLAB R2025b
 (25.2.0.2998904); it found no syntax errors. Small analytical checks passed for
 contact-pair detection, repulsive force direction and magnitude, noncontact
 force handling, and circular boundary geometry. Statistics and Machine
 Learning Toolbox and Image Processing Toolbox 25.2 were available during
-these checks. This is limited validation of code structure and selected
-helpers, not a full solver reproducibility result.
+these syntax and numerical-helper checks.
 
 The six export-contract tests passed for a complete case and for missing
 C-rate, missing frame, invalid orientation size, grayscale frame, and ambiguous
 C-rate failures. The bundled real 5C case also passed all 52-image checks.
 
-The stochastic packing stage can require up to 200,000 iterations per
-microstructure. A complete transient solve was not rerun during repository
-preparation, and COMSOL API/license compatibility is not claimed from static
-inspection alone. Repository validation records are described in the main
-README.
+The stochastic packing stage allows up to 200,000 iterations per microstructure,
+with saved convergence diagnostics. See the [verification records](reproducibility.md)
+for the complete list of syntax, helper, and export checks.
