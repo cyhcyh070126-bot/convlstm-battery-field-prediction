@@ -1,0 +1,7 @@
+# Install the PyTorch build appropriate for your CPU/GPU before this file.
+torch>=2.6,<3
+numpy>=1.24,<3
+opencv-python-headless>=4.8,<5
+pytorch-msssim>=1.0,<2
+matplotlib>=3.7,<4
+Pillow>=10,<13

@@ -1,0 +1,933 @@
+{
+  "schema_version": 1,
+  "description": "Two original simulation-image cases for format inspection and toy smoke runs. Not a benchmark or a verified held-out split.",
+  "source": "Original experiment export_images directory; public paths contain no workstation-specific directories.",
+  "path_base": "examples/",
+  "copy_policy": "PNG files copied byte-for-byte without resampling, normalization, or image editing; destination SHA-256 verified against original source SHA-256.",
+  "representation": "Rendered RGB simulation images, not scalar fields in physical units.",
+  "split_status": "No historical training/validation/test membership was available for these cases.",
+  "cases": [
+    {
+      "directory": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415",
+      "parameters_encoded_in_directory_name": {
+        "N": "60",
+        "mu": "2.00",
+        "sigma": "0.10",
+        "R0": "17.245",
+        "C": "1",
+        "ID": "07415"
+      },
+      "distribution_label": "Lognormal",
+      "parameter_note": "Values are transcribed from directory names; ID is an identifier, not an established RNG seed. No units are inferred for mu, sigma, or R0.",
+      "frame_times_seconds": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400
+      ],
+      "time_note": "Times follow source filenames and the MATLAB exporter tlist_values=0:100:2400.",
+      "files": [
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00000.png",
+          "bytes": 23305,
+          "sha256": "9c9edcb0295c64e0ca9c39abf3a06b9aee81a354db32e23dfb4bfce4410a9cd1",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00100.png",
+          "bytes": 54655,
+          "sha256": "3a2c23add692744534d00c2d036adcf50c4f29a4d68923d33c5b8851bf42311a",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00200.png",
+          "bytes": 67253,
+          "sha256": "6095767e636f878f9b1cb9914114243ad520aa65cafce9b847bae5abb75215a4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00300.png",
+          "bytes": 76451,
+          "sha256": "0ba01a3b87f44cf7164e89541d0f9106449772d6a315ac236e913d10d175cbd9",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00400.png",
+          "bytes": 83791,
+          "sha256": "df5f7bd9a47903877f518586eb905c1e8dd7207e1d76b3a19eaf3223391a7081",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00500.png",
+          "bytes": 90175,
+          "sha256": "e9d57c55b59096d6fb8a3070a8c6dfeea40ed5e3e2b6c2a14cca38f8a117ca3e",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00600.png",
+          "bytes": 95607,
+          "sha256": "ed2a557a8b0b3e5de50f2ab2291a819552c4ed0f3159d256f290a710be558e3f",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00700.png",
+          "bytes": 100141,
+          "sha256": "c3fb4e36f656cfde195fec2d16149a3bbc24b99fd356e97ed9c561004a8c84eb",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00800.png",
+          "bytes": 104056,
+          "sha256": "c3c564995c47b5d7bd8e9b8ad84153f35b20f33106e70ea6c6d6fd6545e726c3",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t00900.png",
+          "bytes": 106925,
+          "sha256": "98bde0f633ec94c7fffde6cba4910dae15ddc1b2e924030deec3559f1328affe",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01000.png",
+          "bytes": 110010,
+          "sha256": "35e60734b71e092c027577ef09bcfe05cb66fa15f3958cd541a31d82b111f56f",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01100.png",
+          "bytes": 112511,
+          "sha256": "2d52de4865f0a5a90f630355bbe2351d59644f3f9ee660b520646a9134dc2822",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01200.png",
+          "bytes": 114948,
+          "sha256": "e22c31fd29ab16569150f37dea93d9cc2d366c248784460b4e76c3065d3efa55",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01300.png",
+          "bytes": 117036,
+          "sha256": "295e0a95bf8a8dfd630ca1705690633c1fb6da5d79f5b27558071de9eb1b08d2",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01400.png",
+          "bytes": 119090,
+          "sha256": "3c2502bacd08378e53c236b3dc8c5556a250663082866414fcbd8944de9732b4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01500.png",
+          "bytes": 120529,
+          "sha256": "a26a03ee1ecb577e45129f06c441d009449f507310ebac695a9bb82f5f959453",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01600.png",
+          "bytes": 122215,
+          "sha256": "8fb53104e06f448cff2a59f1448f0bb8b67aaf1827c289402f540cbe0ebc8601",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01700.png",
+          "bytes": 123545,
+          "sha256": "cb1e36cd15cb5a294a95c7af29c17a93d9e55e2456a00b5c0fdb369739a7ac6b",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01800.png",
+          "bytes": 124836,
+          "sha256": "f10ee8e016a39724f0df2836a5b6a43b86e80b35c10e1cf9279b8bfcf9f87243",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t01900.png",
+          "bytes": 125753,
+          "sha256": "acd552976fbc17a3c1b4e68ace7e3f82ea087488fbe66bc2c8dbc3d4527d9c85",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t02000.png",
+          "bytes": 126763,
+          "sha256": "e4b5d7cc6a06fb40fde64e5a85cb69b7d7c01ab3d49e55742a113ff9999324f0",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t02100.png",
+          "bytes": 127845,
+          "sha256": "e48ba6c7eed3d7d7b760422da897d5f7241cc17d1c157691fe2b29b15621781e",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t02200.png",
+          "bytes": 128575,
+          "sha256": "547a28d8041e1f6130171c42f745d8238b50e510d1001407ece7af0422317846",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t02300.png",
+          "bytes": 129164,
+          "sha256": "a3127de304e0412665bf5335e9ea127662e00e4777d8f9b40781623bf986a75d",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/1_Concentration/concentration_t02400.png",
+          "bytes": 129703,
+          "sha256": "9db0feec9e5c822990fa12de1412532774b7ca3abe5f344e2a01cd7052f6e82c",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00000.png",
+          "bytes": 26636,
+          "sha256": "2e6cc6e301e0d7c9875ae6c4aa822b4e42d9973843fc6fdec236066335e0d629",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00100.png",
+          "bytes": 130916,
+          "sha256": "51694d3d3cb28cc5da331d9a8166bb0d26c2cd8c038a6e4a3f0848680d176537",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00200.png",
+          "bytes": 150724,
+          "sha256": "92b5dd86af5c9f30fda9180ec17a61e334a21b54c3926adf25a27f58f9c2c8b4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00300.png",
+          "bytes": 164053,
+          "sha256": "44e3af2c0d0da26a9d32dc1d57d0ea357ddbc0d56c62670b8ea19800087f8885",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00400.png",
+          "bytes": 173864,
+          "sha256": "51509754516d99f41aabb7b4e25ef62971aaf82ea732aa3c340b22091952fced",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00500.png",
+          "bytes": 181729,
+          "sha256": "bfb207386321e32e777f5c553b65896fa7db9fddc31ebbdbad95aba999cbca1c",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00600.png",
+          "bytes": 189070,
+          "sha256": "b5b103761d4737cb230e083301656e2b9ac389670ea48426ccfdae82baf5ca4f",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00700.png",
+          "bytes": 195313,
+          "sha256": "6dc0b3c208f18869e08dfc6a1a5efaecd655a99129a964556dc6d40b6a58b685",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00800.png",
+          "bytes": 200976,
+          "sha256": "84b26ca07a9559fe9cd0d55525b041e7c01c377e9007ff8aff41b3e7bb86b145",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t00900.png",
+          "bytes": 206303,
+          "sha256": "e1b471f12e996b22ae3bc1404d6dc13409e4da824af483eba39296586d07ad36",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01000.png",
+          "bytes": 211079,
+          "sha256": "fb94bf638a9e85db1f3aaaa6a29c5e9e906cd10799c18b17fc60afab71d3304a",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01100.png",
+          "bytes": 215612,
+          "sha256": "e9da13da05ba35e33f1b6bdb8e4e83670bca64075dc61b960720063a47326023",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01200.png",
+          "bytes": 219661,
+          "sha256": "fe8f18bfedd3e2fce4627dee9c16a09a4c470d6d834421d6a5144d5ccbfeb9df",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01300.png",
+          "bytes": 223140,
+          "sha256": "3a74c0cfaae6710c5160ae78766939be5f266ab7624372cd90399da3ea0858a4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01400.png",
+          "bytes": 226498,
+          "sha256": "a86562a966fdd598bfd4af214f056b548a145294bbe6cfc6dea6617b64c6cbb1",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01500.png",
+          "bytes": 229505,
+          "sha256": "59ea64cacef74909e7acd96b9d6558bfcb897b400ad98201fc1d3effc0ae670b",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01600.png",
+          "bytes": 232624,
+          "sha256": "8a8d056fb2b3a82b8a81d60f1cb326dbd487fddde5864b1ef1de110e05b3c207",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01700.png",
+          "bytes": 235637,
+          "sha256": "b59db045021d2f7d0c5c669296b7b56f31a33c354ba7fb2bbac9c4186a561641",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01800.png",
+          "bytes": 238312,
+          "sha256": "99fdbeade7edaf20be7637b233b72d0581f814f2e3572d3960ff5b458f439535",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t01900.png",
+          "bytes": 240966,
+          "sha256": "b604d48ceec6948b602a296bd1380fff1a6d319f35345c62eaf5a3ec2cb72bdc",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t02000.png",
+          "bytes": 243710,
+          "sha256": "e27446ac09d91cc6c976720134bcb49e573e5f10bd0dac845c179f39dba0087a",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t02100.png",
+          "bytes": 246336,
+          "sha256": "53c745642ba8d394d4ea850044fe9f96779f6af3216f98e568e9316f81f24ce4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t02200.png",
+          "bytes": 248815,
+          "sha256": "5751e8c96de028b63c24aa1b612e8e4fe615b2f8fe38561681228cf1284353c0",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t02300.png",
+          "bytes": 250942,
+          "sha256": "148d5dc1d35044789a67043aa43cf01ad1e9092b754e817bb9ceb15fb8647050",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/2_Stress/stress_mises_t02400.png",
+          "bytes": 253301,
+          "sha256": "74d6fbcc617f7e53a751f470603972950f5fae3f0b3efa81afef15cf88cefb09",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/3_Voronoi_Geometry/05_Voronoi_Theta_Colored.png",
+          "bytes": 81701,
+          "sha256": "50c67dd399573b970122ffa37b05f7904b453d9cf7a5cf38185f5b8d677d1ac0",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/C-rate/1C.png",
+          "bytes": 1897,
+          "sha256": "3f1210b5445744049c4221a1de1469189b2351732c8a09dc27a6813756bb5437",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        }
+      ],
+      "total_bytes": 7854202
+    },
+    {
+      "directory": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+      "parameters_encoded_in_directory_name": {
+        "N": "60",
+        "mu": "2.00",
+        "sigma": "0.10",
+        "R0": "17.288",
+        "C": "5",
+        "ID": "93203"
+      },
+      "distribution_label": "Lognormal",
+      "parameter_note": "Values are transcribed from directory names; ID is an identifier, not an established RNG seed. No units are inferred for mu, sigma, or R0.",
+      "frame_times_seconds": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400
+      ],
+      "time_note": "Times follow source filenames and the MATLAB exporter tlist_values=0:100:2400.",
+      "files": [
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00000.png",
+          "bytes": 23240,
+          "sha256": "043cd95c79c53195bd872194b02eb118b82fee0034e45b12a35389f3bdf42dca",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00100.png",
+          "bytes": 80711,
+          "sha256": "42e1983138c9b7c9925c3b06a0f41200f9a6f8c0aea776e5a903139467d4b536",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00200.png",
+          "bytes": 92893,
+          "sha256": "337ed3b6f2b6e4454cbf4f8f45fdd4361e4c1653e4d398292deb6e17d35a65c2",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00300.png",
+          "bytes": 97891,
+          "sha256": "bf545508a99a9c72052aca39e6a4547a696d216db44d33c3358f8f8e6183dccd",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00400.png",
+          "bytes": 101273,
+          "sha256": "fbbdce0a24216e57377b4d49c904c9fb7fa99b3d815bcd280908b4bb2e745b56",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00500.png",
+          "bytes": 104405,
+          "sha256": "667be479b4c4f7be38d8aae8de4c03a7efd6819312966a5e93ef7a0d4165b183",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00600.png",
+          "bytes": 106445,
+          "sha256": "473a06d25fceaa3b45916d0f123db7423ecae2ce54c37fc2f73a01a52ab1dd7a",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00700.png",
+          "bytes": 107207,
+          "sha256": "3cb8ef2899cfcf302ddd92177f3eeb51e591c8301d435cb012dbf7ed48c7d6f2",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00800.png",
+          "bytes": 108412,
+          "sha256": "997f3f8ebfc98cb6ad99809b705ac11b1facbe6a99dda827f947bb53479c1b6e",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t00900.png",
+          "bytes": 108554,
+          "sha256": "7f714d1a0fc9d9b31c4a1279c8af6d0bf10f8e886a2898af2ca40a5ab83594b0",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01000.png",
+          "bytes": 109237,
+          "sha256": "8cb54196a765b49857ee0fcffb52a8e6384510e29180549b54b2517ca02b6ad1",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01100.png",
+          "bytes": 109718,
+          "sha256": "7528d7fbd5cee38081697e24e39184b17053ce376a29aa66644b4c6d3b082592",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01200.png",
+          "bytes": 109732,
+          "sha256": "c2b7c2a692acfcb3f79f245c2e290ea40e31bf7cb8c883760987fa4e5f312c16",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01300.png",
+          "bytes": 109847,
+          "sha256": "25e8a794fab8bcb93da8cb6d1c1f7df412953810595206014c41635f2ea8768b",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01400.png",
+          "bytes": 110450,
+          "sha256": "66ebaf8196ee0486f87100f1b09416d5c38a68c63ce3eec70897e54d09a21065",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01500.png",
+          "bytes": 111041,
+          "sha256": "d3e854a0d1fda0d748871f1744e6e4a5cbbb239465beb7f7dd1e9fa5a7655f13",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01600.png",
+          "bytes": 111486,
+          "sha256": "d7dce0acd8f15b5f787ba34850c56174ecd604ac89dd68706aefa13ed7f410f3",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01700.png",
+          "bytes": 111926,
+          "sha256": "e51e8ec1d7802f39b7870e0b140d57a470835e13e662726a8b1ef33ae2ca1c66",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01800.png",
+          "bytes": 112085,
+          "sha256": "b0ff375aef5f45b41dbd4302101849c8d2af57ca75848b15770877726c3d2e62",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t01900.png",
+          "bytes": 112442,
+          "sha256": "e4780e650a85e5bbc040a1077140668eb51299cb16cd9dad518ee330bb3a0a5e",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t02000.png",
+          "bytes": 112803,
+          "sha256": "28942487c11b8d6b54dc0ec5d85f5f5306b36c029c3a30c2c3e710be5c00c461",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t02100.png",
+          "bytes": 112650,
+          "sha256": "7a99d97a0ce3de0e9447f7d84824fef4ca1596f5fdadb9fbe877defdead0b097",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t02200.png",
+          "bytes": 112402,
+          "sha256": "6d3cf8fa16920c627b0736537503f05694012a1bfb5ddabe9e1bfd01304a96b9",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t02300.png",
+          "bytes": 112348,
+          "sha256": "65be989f6d48977212a2ee951cd52908f4dd3f29d3ed09e82a808bb5e6159e64",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/1_Concentration/concentration_t02400.png",
+          "bytes": 112144,
+          "sha256": "8c712a360f2ad496350f32da0114ab8c860248859b68373064b8e0a93b0335db",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00000.png",
+          "bytes": 26937,
+          "sha256": "5d3bdf347fb4994a0c805cc7829bf1adb7c381ab98c5a703c2eb1b167f1f46ac",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00100.png",
+          "bytes": 227514,
+          "sha256": "a0809a6a328c3fc5e48b827a8db2d2ee47f58894c331bdd776dd0e848e34d7b5",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00200.png",
+          "bytes": 247619,
+          "sha256": "0596fcca03da3e8d045f4920b63be549819b181156b999d090ad0c11915afb68",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00300.png",
+          "bytes": 261043,
+          "sha256": "c84b3425776c60e22d124e8081bc932c4180e9462192a060da433476a0b13fc4",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00400.png",
+          "bytes": 272875,
+          "sha256": "b6c376ca4c2ca89f93900138097f162f9d2fe27d720f25e596ee700aacb9be0f",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00500.png",
+          "bytes": 283750,
+          "sha256": "6f0f0b58359eba94f617e018e0bf80863fbaee21d22f68de1298220dc1e22926",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00600.png",
+          "bytes": 294862,
+          "sha256": "cbe64081996ad9d34decd9ed132f277da0cf76451b512b61db9bdb33dfbdfede",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00700.png",
+          "bytes": 305495,
+          "sha256": "d80d403e558f56390754f18d645633923f5fc943b2ae50ca5e13832a9237afae",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00800.png",
+          "bytes": 315958,
+          "sha256": "78cd69ecb57b3697870f43edefa7e25f5f16427c71210fbba5134c6a25ceebf3",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t00900.png",
+          "bytes": 326342,
+          "sha256": "1bc8334b7c5817ddba1ea8d98a44e13beb37d200162770a619000ec0e982e491",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01000.png",
+          "bytes": 335601,
+          "sha256": "9e0a8c9def0d2e5ce401b35a109b276b833b9c37cb1376445e36b01e73ba77dc",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01100.png",
+          "bytes": 344578,
+          "sha256": "875698cfd638f0ec0a37008326ddebd81f67312205ab5c3714cf9171dda33372",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01200.png",
+          "bytes": 352656,
+          "sha256": "3f4dde017459a45024c392102f751ead5a5cb8d4b9bbf9651bb259011c60129d",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01300.png",
+          "bytes": 360373,
+          "sha256": "282433160b92d944469091e760dc1dc0c34fcb5ff728b77bfbc650427918dbcd",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01400.png",
+          "bytes": 367506,
+          "sha256": "00908cfe0f91c7d8268eb2f21aa8f6afd698cd1980429c0ab1afe9a20e46f438",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01500.png",
+          "bytes": 373770,
+          "sha256": "17f45bc2b9f32befb4d6afc0905fc4f0e76002b30d4da98f7d10d4335bd458b0",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01600.png",
+          "bytes": 379076,
+          "sha256": "dfed4ed62ab5127bb95f30689f483351d33d9e51f3804e8367c764e607c4e333",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01700.png",
+          "bytes": 384069,
+          "sha256": "ca10d6f190457d5ad6d92894e6f5932675dd04cd3c40dd8fc7f4853106d31423",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01800.png",
+          "bytes": 388417,
+          "sha256": "2991f602e561353a4889436cd6ebe259ed2f8e97d03752f17480f5490739d1c1",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t01900.png",
+          "bytes": 392267,
+          "sha256": "7cc9c381ff383713e2717697e86233e8db59aa8e1586b13ff8df7832e898d408",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t02000.png",
+          "bytes": 395640,
+          "sha256": "8d0f06b4468dccaaf111933edd6a6078ad0e2e4c9a61ac430ef17bcaf38fae39",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t02100.png",
+          "bytes": 398417,
+          "sha256": "4418feaaba96c60808c710c17fd43cd80bafc21fdbbd92efffa4d89557dad095",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t02200.png",
+          "bytes": 400732,
+          "sha256": "a8dbc52305935961a54e1c46a44c75ca6e7c110277fdb430c552c6b08a9d7e82",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t02300.png",
+          "bytes": 402585,
+          "sha256": "a9ee68488807dbf1932e9bb8d5f1b12606235c1c07802d59fe5345988270b797",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/2_Stress/stress_mises_t02400.png",
+          "bytes": 404206,
+          "sha256": "8907670379bdd033ffb35a35113b7d5dcc20544339fcacbbbb5180d2217fde90",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/3_Voronoi_Geometry/05_Voronoi_Theta_Colored.png",
+          "bytes": 83307,
+          "sha256": "39884d9cb565c9219efd96cc529180f99f5b1053ae40cbf34c512568e69022c8",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        },
+        {
+          "path": "data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/C-rate/5C.png",
+          "bytes": 1897,
+          "sha256": "db3c411e5c16b1c4a09717164241fa0bcab11445936c70983583652a8417dd14",
+          "width": 512,
+          "height": 512,
+          "source_png_mode": "RGB"
+        }
+      ],
+      "total_bytes": 10928834
+    }
+  ],
+  "file_count": 104,
+  "total_bytes": 18783036
+}

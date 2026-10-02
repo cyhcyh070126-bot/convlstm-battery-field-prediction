@@ -1,0 +1,39 @@
+# Local environments and Python caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Training data, checkpoints, and generated runs
+/data/
+/outputs/
+/runs/
+/checkpoints/
+/export_images/
+*.pth
+*.pt
+*.ckpt
+*.mat
+*.mph
+*.mphbin
+*.mphlog
+
+# MATLAB / editor temporary files
+*.asv
+*.m~
+*.log
+*.bak
+*.mojibake_backup
+.vs/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local credentials and environment settings
+.env
+.env.*
+!.env.example
+
+# Local publication audit (kept outside the public source tree)
+local/

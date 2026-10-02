@@ -1,0 +1,71 @@
+{
+  "description": "Selected original source files used for repository preparation; hashes refer to the original copies before packaging.",
+  "prepared_on": "2026-10-02",
+  "files": [
+    {
+      "path": "训练代码/单帧预测模型/train_pytorch.py",
+      "bytes": 11289,
+      "sha256": "4941f577527657dded5140a0178b228850420ad1bb7c94517c8568dc4aef0d1b"
+    },
+    {
+      "path": "训练代码/连续预测模型/finetune_sequence.py",
+      "bytes": 13884,
+      "sha256": "328b3e75e05982516365ee9ebf66b0341247ab617a395b0685a4034b6dd29dbc"
+    },
+    {
+      "path": "convlstm.py",
+      "bytes": 4543,
+      "sha256": "a80edab78d8cbd917a44c677352e0fffe326a5ff8b99b4baabc8dc52c0d2e82f"
+    },
+    {
+      "path": "data_loader.py",
+      "bytes": 3304,
+      "sha256": "310a59df6a8ba0fbf17760a99eb634bb2039e897929d0a0b240b83cdf2851903"
+    },
+    {
+      "path": "main_D21origin.m",
+      "bytes": 25759,
+      "sha256": "08d77af44444c1a0acceb64a71b16f03af2fbd7698ee064f4f32bc662dca5f8b"
+    },
+    {
+      "path": "build_full_comsol_model.m",
+      "bytes": 12897,
+      "sha256": "ea30637ebf8f5c251a8b7b61deac4675392e56cbf51da970dc9f27579785c63f"
+    },
+    {
+      "path": "run_single_simulation.m",
+      "bytes": 19250,
+      "sha256": "7c8c2b9b5b04e3e896d6db06ce2f1aa74b95fccb54b30157edc511b5fb9e0a2b"
+    },
+    {
+      "path": "Contact_Detection_By_Boundary_Box1.m",
+      "bytes": 2787,
+      "sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6"
+    },
+    {
+      "path": "calculate_force.m",
+      "bytes": 1327,
+      "sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475"
+    },
+    {
+      "path": "Draw_particle_Cricle_2D.m",
+      "bytes": 1244,
+      "sha256": "9e2a53d486c9b16336a00dc2309fef140b8054517e4f80f1ef2838551a370242"
+    },
+    {
+      "path": "Draw_Polycrystal.m",
+      "bytes": 3479,
+      "sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d"
+    },
+    {
+      "path": "Circle_Boundary.m",
+      "bytes": 892,
+      "sha256": "46cafb91b0ca8f909450a393f997bc262d0ed1fbe6225ddfaadbf4a62514eee0"
+    },
+    {
+      "path": "Draw_particle_Cricle.m",
+      "bytes": 469,
+      "sha256": "4a498e31a13e02d1068200bcb400591373acb91af0e731092dca473a47c9cfd4"
+    }
+  ]
+}
