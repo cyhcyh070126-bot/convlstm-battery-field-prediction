@@ -1,20 +1,28 @@
 # Data format and interpretation
 
+For a picture-by-picture explanation of one case, read
+[the complete MATLAB–COMSOL sample guide](simulation-sample.md).
+
 ## One directory per simulated case
 
 The dataset root contains case directories with the original experiment names, for example:
 
 ```text
-N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.245_C=1_ID=07415/
+N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/
   1_Concentration/concentration_t00000.png ... concentration_t02400.png
   2_Stress/stress_mises_t00000.png ... stress_mises_t02400.png
   3_Voronoi_Geometry/05_Voronoi_Theta_Colored.png
-  C-rate/1C.png
+  C-rate/5C.png
 ```
 
 The folder name records `N`, distribution label, `mu`, `sigma`, `R0`, C-rate, and a case `ID`. The example manifest preserves these encoded values. The ID identifies the simulation case; physical parameters and random seeds are recorded separately by the simulation workflow.
 
 The `05_` geometry image supplies the static orientation input. The examples contain the images used by the Python pipeline; the MATLAB workflow additionally produces geometry illustrations, COMSOL `.mph` files, and `.mat` metadata.
+
+One case's learning-image collection comprises **25 concentration + 25 stress + 1 orientation + 1 C-rate image = 52 PNGs**. A run targeting one field uses
+that field's 25 images and the two shared conditioning maps. Four additional
+geometry-construction plots bring the complete image export to **56 PNGs**;
+case 93203's four plots are in [`assets/sample-5c/`](../assets/sample-5c/).
 
 ## Images and time
 

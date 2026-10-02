@@ -9,6 +9,12 @@ This directory contains two complete, original image sequences from the MATLAB/C
 
 Each case also includes one grain-orientation image and one C-rate image. All 104 PNGs are RGB, 512 x 512 pixels. The combined image payload is 18,783,036 bytes (about 17.9 MiB).
 
+The 5C case's four original geometry-construction plots are also provided in
+[`assets/sample-5c/`](../assets/sample-5c/). Together with its 52 learning images
+here, they form the **complete 56-PNG image export for case 93203**.
+Read the [illustrated sample guide](../docs/simulation-sample.md) to see each
+component, the MATLAB–COMSOL generation process, and the resulting training windows.
+
 ## Intended use
 
 Use `examples/data` as the dataset root. The CPU training walkthrough uses one case for training and one for validation to exercise both stages and checkpoint saving. Keep overlapping windows from each case together within its assigned split. The pretrained 5C evaluation uses case 93203 as the demonstration sequence.

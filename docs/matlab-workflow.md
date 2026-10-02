@@ -5,6 +5,10 @@ microstructure, builds a coupled COMSOL model, solves the transient problem, and
 exports the rendered concentration and von Mises stress sequences used by the
 Python image-prediction pipeline.
 
+The [illustrated 5C sample guide](simulation-sample.md) pairs original geometry
+plots, conditioning maps, and field snapshots with a file-by-file explanation
+of the generated case.
+
 ## Files and execution order
 
 ```text
@@ -160,6 +164,11 @@ It also records packing convergence, iteration count, and the measured force
 and overlap against their original tolerances.
 Large simulation outputs and COMSOL `.mph` files are generated locally,
 not required to browse the repository or run Python on the included example.
+
+A complete generated case contains **56 PNGs, two MAT files, and one solved
+MPH model**. The PNGs comprise 25 concentration, 25 stress, five geometry, and
+one C-rate image. Four geometry plots explain construction; the remaining
+52 images make up the concentration/stress learning collection.
 
 Required image-export failures stop the workflow. Before reporting a successful
 export, the validator decodes all **52 required images**: 25 concentration
