@@ -1,0 +1,21 @@
+{
+  "description": "Local simulation archive inventory at packaging; not a reconstructed checkpoint training split. Full image archive is not bundled.",
+  "inventory_date": "2026-10-02",
+  "case_count": 262,
+  "c_rate_case_counts": {
+    "1.0": 43,
+    "5.0": 49,
+    "3.0": 44,
+    "4.0": 43,
+    "2.0": 43,
+    "0.5": 40
+  },
+  "concentration_frame_count_distribution": {
+    "25": 261,
+    "19": 1
+  },
+  "stress_frame_count_distribution": {
+    "25": 261,
+    "18": 1
+  }
+}

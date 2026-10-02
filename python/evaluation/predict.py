@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import hashlib
 import json
 from pathlib import Path
 
@@ -133,6 +134,9 @@ def main():
     save_comparison([to_image(p) for p in predictions], [to_image(t) for t in targets],
                     labels, args.output_dir, args.field, make_gif=not args.no_gif)
     report = dict(field=args.field, case=args.case_dir.name, checkpoint=args.checkpoint.name,
+                  checkpoint_sha256=hashlib.sha256(args.checkpoint.read_bytes()).hexdigest(),
+                  architecture="Conv3d + three ConvLSTM layers + RGB decoder",
+                  parameter_count=sum(parameter.numel() for parameter in model.parameters()),
                   input_length=input_length, start_index=args.start_index, image_size=image_size,
                   predict_length=args.predict_length, metrics_domain="RGB images normalized to [0,1]",
                   checkpoint_contains_training_metadata=bool(metadata),
