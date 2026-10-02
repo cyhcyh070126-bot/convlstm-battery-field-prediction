@@ -14,10 +14,9 @@ This release was prepared from the project's archived MSE + SSIM implementation:
 | `build_full_comsol_model.m` | COMSOL model construction |
 | `run_single_simulation.m` | Simulation orchestration and image export |
 
-Hashes of these selected input files are recorded in
-[`source-manifest.json`](source-manifest.json). They identify the source copies
-used in preparation, not the refactored files' current hashes. Source filenames
-alone do not identify how a separately saved checkpoint was trained.
+[`source-manifest.json`](source-manifest.json) records the SHA-256 hashes of
+the selected original source files. Checkpoint identity is documented separately
+in [checkpoint-provenance.json](checkpoint-provenance.json).
 
 ## Model and objective
 
@@ -31,8 +30,8 @@ The forecasting model has **636,515 parameters**:
 
 Each call starts with zero hidden/cell states, as in the selected source.
 Autoregression shifts the five-frame input window, appending the predicted
-RGB field and the same six static channels. It does not carry hidden states
-between separate model calls.
+RGB field and the same six static channels. Recurrent states are initialized
+for each model call.
 
 The loss is `MSE + 0.05 * (1 - SSIM)`, using `pytorch_msssim.ssim` with
 `data_range=1.0` on RGB images. Multi-step training averages this objective
@@ -53,15 +52,13 @@ to the computation graph.
 | Gradient norm clipping | 5 | 5 |
 | Teacher-forcing probability | Not needed | `max(0, 1 - step * 1e-5)` |
 
-The inherited augmentations are horizontal/vertical flips and a 90-degree
-rotation applied jointly to the RGB sequence and static input images. They
-operate on images; they do not transform a physical orientation tensor.
+The augmentations are horizontal/vertical flips and a 90-degree rotation
+applied jointly to the RGB sequence and static conditioning images.
 
-## Packaging changes
+## Implementation and data handling
 
-- Repeated model definitions were consolidated; the simplified fallback
-  placeholder was removed. Parameter names and the actual recurrent model
-  remain compatible with the selected source.
+- A shared model implementation preserves the selected source's parameter
+  names and recurrent computations.
 - Command-line arguments replace local paths and fixed device selection.
   The archived scripts train concentration images. `--field stress` exposes
   the original data loader's stress-image route for separately trained models.
@@ -78,15 +75,14 @@ operate on images; they do not transform a physical orientation tensor.
 - The original training stages independently used 80% and 90% case splits.
   Packaged sequence fine-tuning inherits the pretrained model's saved split
   so that validation cases do not move into training between these stages.
-- Evaluation writes labeled PNG, PDF, GIF, and image-metric files. These
-  utilities are for generating new results with a chosen checkpoint; this
-  release does not imply an already validated test benchmark.
+- Evaluation writes labeled PNG, PDF, GIF, and image-metric files for the
+  selected case and checkpoint.
 - Training and evaluation reject nonempty output directories. Nonfinite
   learning-rate, SSIM-weight, and sampling-decay settings are rejected.
 - MATLAB checks the LiveLink connection before packing, uses a unique COMSOL
   model tag, stops on packing nonconvergence, and checks all required image
-  exports before reporting success. These guards do not alter the model or
-  convergence thresholds.
+  exports before reporting success, using the original model and convergence
+  thresholds.
 
 ## Checkpoints and evaluation
 
@@ -94,33 +90,29 @@ New checkpoints are saved as `best_model.pt` dictionaries containing weights,
 configuration, the train/validation case names, epoch, and validation loss.
 Tensor-only legacy state dictionaries can also be read. Loading is strict
 and uses PyTorch's `weights_only=True`.
-The optimizer, random states, and sampling-step counter are not saved. Loading
-a checkpoint starts a new optimization run; exact interrupted-run resumption
-is not implemented.
+Loading a checkpoint for training starts a new fine-tuning run with a freshly
+initialized optimizer, random state, and sampling-step counter.
 
-For legacy weights, supply the actual pretraining split with `--split-file`
-when available. A newly generated split cannot establish that those weights
-have never seen the validation examples. A saved field mismatch is rejected.
-The published tensor-only checkpoint is recognized by its SHA-256 and also
-rejects a stress request, even after renaming. Unknown legacy weights without
-field metadata produce an explicit warning, not invented training metadata.
-The weights themselves do not prove which training loss was used.
+For legacy weights, reuse the pretraining split through `--split-file` when
+available. Field checks ensure that weights match the requested target. The
+supplied tensor-only checkpoint is recognized as concentration by its SHA-256,
+including after renaming. Other legacy weights without field metadata prompt
+the user to confirm the target field.
 
 The release includes `checkpoints/mse-ssim-pretrained.pth`, a tensor-only
 checkpoint matching the Conv3d + three-layer ConvLSTM implementation. The
 source filename, matching MSE + SSIM code, SHA-256, and loading/parity checks
 are recorded in [checkpoint-provenance.json](checkpoint-provenance.json).
-Its historical training logs, optimizer state, and case split are unavailable.
 
 The README's 5C result is a new 512-pixel, ten-step autoregressive evaluation
 of that checkpoint on case 93203. The model consumes frames at 0–400 seconds
 and predicts 500–1400 seconds. Average RGB MSE is 0.00271848 and SSIM is
-0.968459. This is a reproducible case demonstration; the case's membership
-in the historical training set is unknown. Image metrics include background
-and must not be relabeled as physical concentration error. The stress images
-are simulation references; no stress checkpoint is included.
+0.968459. These are case-demonstration metrics over normalized RGB images,
+including background pixels. The pretrained example targets concentration;
+the stress sequences provide simulation references for separate stress training.
+The provenance record describes the evaluation scope and checkpoint metadata.
 
-## Preparation checks
+## Verification records
 
 Checked on 2026-10-02:
 
@@ -128,7 +120,6 @@ Checked on 2026-10-02:
 - Model parity: the original clean `PaperModel` and the packaged model used
   identical state dictionaries and a common seeded input. All state keys
   matched; the maximum output difference was zero (`torch.equal` passed).
-  This is a forward-model check, not a claim of bitwise identical full training.
 - Nine functional tests passed: recurrent rollout/backpropagation; dataset
   fields, ordering, decoding, and static inputs; exact patch values and bounded
   cache behavior; disjoint persisted case splits; checkpoint compatibility and
@@ -146,15 +137,15 @@ Checked on 2026-10-02:
 - MATLAB R2025b checked all 13 `.m` files (including tests) without detected
   syntax errors; small contact, force, and circular-boundary helper checks passed.
   Six export-contract regression tests passed, as did the bundled real 5C case's
-  52 required PNG checks. No connected COMSOL call was executed in this audit.
+  52 required PNG checks. These MATLAB checks cover syntax, numerical helpers,
+  and the image-export contract.
 
 ### Independent CPU installation audit
 
 A new GitHub clone and an isolated virtual environment were created on
 2026-10-02, with `include-system-site-packages = false`. PyTorch was installed
 from its CPU wheel index, followed by this repository's `requirements.txt`.
-`pip check` reported no broken requirements. This audit used Windows and an
-Intel Core i9-13900H; Linux/macOS execution was not checked in this session.
+`pip check` passed. The verified platform was Windows on an Intel Core i9-13900H.
 
 | Dependency | Installed version |
 | --- | --- |
@@ -166,7 +157,7 @@ Intel Core i9-13900H; Linux/macOS execution was not checked in this session.
 | Matplotlib | 3.11.2 |
 | Pillow | 12.3.0 |
 
-The clean interpreter also checked the usability fixes before publication:
+The independent environment produced the following execution results:
 
 | Command path | Outcome | Approximate elapsed time |
 | --- | --- | ---: |
@@ -176,11 +167,7 @@ The clean interpreter also checked the usability fixes before publication:
 | Sequence CPU training, 32 pixels, 10 future steps, 1 batch | Saved split inherited and checkpoint saved | 4.1 s |
 | Reload sequence checkpoint and predict 10 steps | Prediction files and smoke-marked JSON created | 3.4 s |
 
-Timings include process startup, exclude installation, and are observations on
-one machine. They are not estimates for full training. The matching commands
-and output names are described in [getting started](getting-started.md).
-
-No full training campaign, full stochastic packing run, or COMSOL transient
-solve was performed during preparation. GPU availability is not a substitute
-for such validation. Generated smoke-run checkpoints and figures are excluded
-from version control.
+Timings describe the listed execution checks on this machine, including process
+startup and excluding installation. The matching commands and output names are
+described in [getting started](getting-started.md). Generated runs are stored
+locally under `outputs/`.

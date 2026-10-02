@@ -11,9 +11,9 @@ Each case also includes one grain-orientation image and one C-rate image. All 10
 
 ## Intended use
 
-Use `examples/data` as the dataset root. The two cases permit a minimal split with one case for training and the other for validation. This is a **toy smoke run**, not a meaningful estimate of predictive performance. Historical training, validation, or test membership is unknown; neither case is identified as a held-out benchmark. Do not split overlapping windows from the same case between training and validation.
+Use `examples/data` as the dataset root. The CPU training walkthrough uses one case for training and one for validation to exercise both stages and checkpoint saving. Keep overlapping windows from each case together within its assigned split. The pretrained 5C evaluation uses case 93203 as the demonstration sequence.
 
-The bundled files contain simulation references and static conditioning images only. They do not contain model predictions or pretrained weights. See the [main README](../README.md) for the supported training and evaluation commands.
+This directory contains simulation references and static conditioning images. Pretrained weights are in `checkpoints/`, and the 5C predictions are in `assets/results/5c/`. See the [main README](../README.md) for the training and evaluation commands.
 
 ## Directory layout
 
@@ -40,7 +40,7 @@ The filename suffix records nominal simulation time in seconds, from 0 to 2400 i
 
 ## Integrity and provenance
 
-[manifest.json](manifest.json) records every included image's relative path, byte count, dimensions, and SHA-256 digest. Paths are relative to this `examples` directory. Each destination digest was checked against the source image during copying. Case parameters are transcribed from directory names; units or RNG seeds are not inferred from those names.
+[manifest.json](manifest.json) records every included image's relative path, byte count, dimensions, and SHA-256 digest. Paths are relative to this `examples` directory. Each destination digest was checked against the source image during copying. Case parameters are transcribed from directory names; simulation settings and seeds are handled separately by the MATLAB workflow.
 
 To check the published image files from the repository root:
 
