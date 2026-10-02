@@ -2,6 +2,7 @@
 
 import random
 import re
+from collections import OrderedDict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -11,6 +12,7 @@ import torch
 from torch.utils.data import Dataset
 
 FIELD_DIRECTORIES = {"concentration": "1_Concentration", "stress": "2_Stress"}
+STATIC_CACHE_SIZE = 8
 
 
 def natural_key(path):
@@ -81,7 +83,9 @@ class BatteryDataset(Dataset):
         self.use_patches, self.augment = use_patches, augment
         self.grid = image_size // patch_size if use_patches else 1
         self.cases = [read_case(p, field, input_length + predict_length) for p in folders]
-        self.static_cache = {}
+        # Bound memory per DataLoader worker instead of keeping every case's
+        # six-channel 512-pixel static maps for the entire training run.
+        self.static_cache = OrderedDict()
         self.samples = []
         for case_index, case in enumerate(self.cases):
             for start in range(len(case.frames) - input_length - predict_length + 1):
@@ -101,14 +105,23 @@ class BatteryDataset(Dataset):
                 load_rgb(case.orientation, self.image_size),
                 load_rgb(case.c_rate, self.image_size),
             ], axis=-1)
+            if len(self.static_cache) > STATIC_CACHE_SIZE:
+                self.static_cache.popitem(last=False)
+        self.static_cache.move_to_end(case_index)
         static = self.static_cache[case_index]
         paths = case.frames[start:start + self.input_length + self.predict_length]
-        sequence = np.stack([np.concatenate([load_rgb(p, self.image_size), static], axis=-1)
-                             for p in paths])
+        region = (slice(None), slice(None))
         if self.use_patches:
             row, col = divmod(patch, self.grid)
             h, w = row * self.patch_size, col * self.patch_size
-            sequence = sequence[:, h:h + self.patch_size, w:w + self.patch_size]
+            region = (slice(h, h + self.patch_size), slice(w, w + self.patch_size))
+            static = static[region]
+        # Resize each frame as before, but crop it before building the temporal
+        # tensor. Patch training need not materialize a full 9-channel window.
+        sequence = np.stack([
+            np.concatenate([load_rgb(p, self.image_size)[region], static], axis=-1)
+            for p in paths
+        ])
         tensor = torch.from_numpy(sequence).permute(0, 3, 1, 2).contiguous()
         if self.augment:
             if random.random() > 0.5:

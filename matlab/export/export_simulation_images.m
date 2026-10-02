@@ -107,8 +107,8 @@ try
 fprintf('-----------------------------------------------------------\n');
 
 catch c_rate_err
-    disp('--- 警告: 生成 C-rate 纯色图失败 ---');
-    disp(c_rate_err.message);
+    fprintf(2, 'Required C-rate image could not be exported to: %s\n', folder_c_rate);
+    rethrow(c_rate_err);
 end
 % --- 【【【【 新增模块 V3 结束 】】】】 ---
 
@@ -214,6 +214,9 @@ img_export.set('size', 'manualweb'); % <-- 1. (设置预设为 "手动")
         fprintf('... 已导出: t = %.0f s (浓度 & 应力)\n', current_time);
     end
 
+    % A successful export must be immediately usable by the Python loader.
+    validate_simulation_exports(fullfile(base_output_folder, run_folder_name), ...
+        workflow_time_values, C_RATE_TO_RUN);
     disp('--- 步骤 4 自动化导出完成! ---');
     fprintf('-----------------------------------------------------------\n');
 

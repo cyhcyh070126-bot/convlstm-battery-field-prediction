@@ -16,14 +16,9 @@ clear model;
 %close all; % 关闭所有旧的 figure 窗口
 disp('--- COMSOL 建模脚本已启动 ---');
 
-% --- 0. 清理 COMSOL 服务 ---
+% --- 0. Connect to the existing COMSOL session without deleting its models. ---
 import com.comsol.model.*
 import com.comsol.model.util.*
-try
-    ModelUtil.remove('Model');
-catch
-    disp('... 正在创建新模型 ...');
-end
 
 try
     % --- 1. 加载来自 main_D21origin.m 的数据 ---
@@ -39,7 +34,7 @@ try
 
     % --- 2. 创建模型和物理场（来自你的脚本） ---
     disp('创建 COMSOL 模型、参数和物理场接口...');
-    model = ModelUtil.create('Model');
+    model = ModelUtil.createUnique('Battery');
     model.modelPath(pwd); % Use the isolated working directory.
     model.component.create('comp1', true);
     model.component('comp1').geom.create('geom1', 2);

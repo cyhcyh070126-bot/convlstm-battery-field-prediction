@@ -9,6 +9,12 @@ and stress images in polycrystalline battery materials. This release includes
 the **Conv3d + three-layer ConvLSTM model**, its **MSE + SSIM pretrained weights**,
 and a complete **5C concentration-prediction example**.
 
+**Start here:** [install and predict on CPU](#6-run-the-example) ·
+[check the training pipeline](#7-train-or-generate-new-data) ·
+[troubleshooting](docs/getting-started.md#troubleshooting).
+The bundled images and weights are enough to run Python prediction immediately;
+MATLAB and COMSOL are only needed to generate new simulation data.
+
 ## 1. Dataset and the 5C example
 
 MATLAB generates particle packing and Voronoi grain geometry. COMSOL solves the
@@ -49,6 +55,8 @@ physical field.
 These dataset-reference animations are reused unchanged from the
 [research homepage](https://cyhcyh070126-bot.github.io/cv/). The 5C input maps
 above and prediction results in Section 5 identify the specific example case.
+The source GIFs do not record a case ID or C-rate; they are dataset illustrations,
+not verified animations of case 93203.
 
 The orientation and field colors encode different quantities. Historical
 exports have different plotting margins and have not been geometrically
@@ -173,7 +181,8 @@ error accumulates through the rollout, visible in the per-frame CSV and figures.
 
 ## 6. Run the example
 
-Use Python 3.10 or newer. Preparation checks used Python 3.12 and PyTorch 2.10.
+Use **Python 3.12** for the tested installation below. No GPU is needed for the
+quick preview. Run all commands from the repository root.
 
 ```bash
 git clone https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction.git
@@ -182,21 +191,45 @@ python -m venv .venv
 ```
 
 Activate with `.venv\Scripts\Activate.ps1` on Windows PowerShell, or
-`source .venv/bin/activate` on Linux/macOS. Install the PyTorch build appropriate
-for your hardware, then install the dependencies:
+`source .venv/bin/activate` on Linux/macOS. If PowerShell blocks activation,
+replace `python` in the remaining commands with `.venv\Scripts\python.exe`;
+no system policy change is needed. For the tested Windows CPU installation
+(the CPU index also provides Linux wheels):
 
 ```bash
+python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
 python -m pip install -r requirements.txt
+python -m pip check
 ```
 
-Run the included checkpoint on the 5C case:
+For CUDA or macOS, choose the matching build using the
+[PyTorch installation selector](https://pytorch.org/get-started/locally/)
+before installing `requirements.txt`. The CPU build above cannot use CUDA.
+
+**First result: a small CPU preview.** This uses the supplied MSE + SSIM weights,
+resizes the images to 64 × 64, and predicts three steps:
+
+```bash
+python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-preview --field concentration --image-size 64 --predict-length 3 --device cpu
+```
+
+Open `outputs/5c-preview/rollout.gif` or `comparison.png`. Expect three predicted
+PNG frames, a comparison PNG/PDF, a GIF, `metrics.csv`, and `evaluation.json`.
+This preview took about 3 seconds on the audited i9-13900H laptop after installation;
+other machines will differ. Its resized, three-step metrics are **not** the
+512-pixel, ten-step results reported above.
+
+**Reproduce the displayed 5C evaluation** at 512 × 512 and ten steps:
 
 ```bash
 python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-prediction --field concentration --predict-length 10
 ```
 
 Use a new or empty output directory. The evaluator writes a comparison PNG/PDF,
-GIF, predicted PNG frames, per-frame CSV metrics, and a JSON report.
+GIF, predicted PNG frames, per-frame CSV metrics, and a JSON report. The default
+device is CUDA when available, otherwise CPU. Full-resolution execution is much
+heavier than the preview; published figures were evaluated on a GPU.
+See [setup, expected files, and common errors](docs/getting-started.md).
 
 ## 7. Train or generate new data
 
@@ -205,6 +238,12 @@ For a short CPU execution check with the bundled cases:
 ```bash
 python -m python.train.single_frame --data-dir examples/data --output-dir outputs/smoke --field concentration --epochs 1 --batch-size 1 --val-batch-size 1 --image-size 32 --patch-size 32 --max-batches 1 --device cpu
 ```
+
+Success produces `best_model.pt`, `config.json`, `split.json`, and `history.csv`.
+This command processes just one training batch and one validation batch; its
+weights and losses are installation checks, not research results. The
+[complete CPU walkthrough](docs/getting-started.md#check-both-training-stages)
+also tests sequence fine-tuning and reloading its saved weights.
 
 For full training, arrange your own cases as in the [data-format guide](docs/data-format.md):
 
@@ -217,6 +256,15 @@ Use `--field stress` with separate output directories to train a stress model.
 The bundled cases are execution examples, not a replacement for a full training
 and validation collection. Run `--help` for configurable batch sizes, device,
 learning rate, and rollout length.
+
+The historical default batches (64 for initial training, 16 for sequence
+training) require substantial memory. Start with `--batch-size 1 --val-batch-size 1`
+on a smaller GPU, especially for ten-step training. This changes the batch
+configuration, not the loss. Static-image caching is bounded to eight cases
+per dataset instance per worker; `--num-workers 0` is the simplest starting point.
+Checkpoints initialize a new training run; optimizer and sampling-step state
+are not saved, so `--checkpoint` is **not an exact interrupted-run resume**.
+Both training and evaluation reject nonempty output directories.
 
 To generate new simulations, use a MATLAB session connected to COMSOL LiveLink:
 
