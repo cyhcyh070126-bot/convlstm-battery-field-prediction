@@ -27,7 +27,7 @@ two complete cases; it does not include the entire image archive.
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Archived cases | 40 | 43 | 43 | 44 | 43 | 49 |
 
-The example throughout this README is **5C, case 93203**:
+The input maps and pretrained prediction example use **5C, case 93203**:
 `N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203`.
 It contains 60 grains and 512 × 512 RGB exports at 100-second intervals from
 0 to 2400 seconds. See the [dataset inventory](docs/dataset-inventory.json)
@@ -42,9 +42,13 @@ Its three channels are carried alongside the three orientation channels at
 every time step. This is the dataset's image encoding, not an extra predicted
 physical field.
 
-| Concentration reference at 1000 s | Stress reference at 1000 s |
+| Concentration evolution | Von Mises stress evolution |
 | :---: | :---: |
-| ![5C concentration reference](assets/figures/concentration-reference.png) | ![5C stress reference](assets/figures/stress-reference.png) |
+| ![Dataset concentration evolution from the research homepage](assets/gifs/dataset-concentration.gif) | ![Dataset von Mises stress evolution from the research homepage](assets/gifs/dataset-stress.gif) |
+
+These dataset-reference animations are reused unchanged from the
+[research homepage](https://cyhcyh070126-bot.github.io/cv/). The 5C input maps
+above and prediction results in Section 5 identify the specific example case.
 
 The orientation and field colors encode different quantities. Historical
 exports have different plotting margins and have not been geometrically
@@ -127,7 +131,9 @@ the available dataset field; stress prediction requires its own trained model.
 
 Both stages use the same supervised objective:
 
-$$\mathcal{L}=\operatorname{MSE}(\hat I,I)+0.05\,[1-\operatorname{SSIM}(\hat I,I)].$$
+```math
+\mathcal{L}=\mathrm{MSE}(\hat{I},I)+0.05\left[1-\mathrm{SSIM}(\hat{I},I)\right]
+```
 
 MSE measures pixelwise differences, while SSIM compares image structure.
 Both terms are computed on normalized RGB images. Multi-step fine-tuning

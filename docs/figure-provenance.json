@@ -44,6 +44,32 @@
       "sha256": "9e0a8c9def0d2e5ce401b35a109b276b833b9c37cb1376445e36b01e73ba77dc",
       "source": "Bundled simulation case 93203, C=5",
       "kind": "original dataset image"
+    },
+    {
+      "file": "assets/gifs/dataset-concentration.gif",
+      "sha256": "f700842c1ff40cdc4b267874b1ad9513592efbd3777fb46a9ffd27d539b65955",
+      "source": "Existing research-homepage asset: images/research/battery_concentration.gif",
+      "kind": "simulation reference animation",
+      "frame_count": 25,
+      "size": [
+        640,
+        480
+      ],
+      "frame_duration_ms": 100,
+      "case_identity": "Not recorded in the GIF or homepage caption; not asserted to be case 93203."
+    },
+    {
+      "file": "assets/gifs/dataset-stress.gif",
+      "sha256": "bfba4db7a8492fc8a267881ad9fa707a0eeb4c78c07eea82e54cc147fad4f780",
+      "source": "Existing research-homepage asset: images/research/battery_von_mises.gif",
+      "kind": "simulation reference animation",
+      "frame_count": 25,
+      "size": [
+        640,
+        480
+      ],
+      "frame_duration_ms": 100,
+      "case_identity": "Not recorded in the GIF or homepage caption; not asserted to be case 93203."
     }
   ]
 }
