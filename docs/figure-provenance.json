@@ -70,6 +70,62 @@
       ],
       "frame_duration_ms": 100,
       "case_identity": "Not recorded in the GIF or homepage caption; not asserted to be case 93203."
+    },
+    {
+      "file": "assets/sample-5c/01_Radius_Distribution.png",
+      "sha256": "c4fae6c40b4a012f728ceb8141d687e9414186a4e763d6c026d40bb14afcabee",
+      "source": "Original simulation export: export_images/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/3_Voronoi_Geometry/01_Radius_Distribution.png",
+      "kind": "original dataset geometry image",
+      "size": [
+        2027,
+        1221
+      ],
+      "mode": "RGB",
+      "byte_size": 80901,
+      "case_identity": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+      "description": "Particle-radius sample histogram (blue) and theoretical lognormal probability density (red); horizontal axis in micrometres."
+    },
+    {
+      "file": "assets/sample-5c/02_Initial_Placement.png",
+      "sha256": "571a15ed9b121e9d3f06e0e795ccd70af2391f69569d19fc13545be40cf5a929",
+      "source": "Original simulation export: export_images/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/3_Voronoi_Geometry/02_Initial_Placement.png",
+      "kind": "original dataset geometry image",
+      "size": [
+        2027,
+        1221
+      ],
+      "mode": "RGB",
+      "byte_size": 126746,
+      "case_identity": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+      "description": "Initial particle positions inside a circular boundary. Colours identify particles; overlapping discs are visible."
+    },
+    {
+      "file": "assets/sample-5c/03_Final_Placement.png",
+      "sha256": "31abe400bc5f9472fdc994710ab64c3b0d31a5030ab8aa6c710dc5fec04c1c3f",
+      "source": "Original simulation export: export_images/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/3_Voronoi_Geometry/03_Final_Placement.png",
+      "kind": "original dataset geometry image",
+      "size": [
+        2027,
+        1221
+      ],
+      "mode": "RGB",
+      "byte_size": 118254,
+      "case_identity": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+      "description": "Final particle packing inside the circular boundary. Colours identify particles."
+    },
+    {
+      "file": "assets/sample-5c/04_Voronoi_Uncolored.png",
+      "sha256": "8c123d10103cb34fa5a97ad7af5c2cf59026905aa2a17e3e48f1024cc99fc1e8",
+      "source": "Original simulation export: export_images/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203/3_Voronoi_Geometry/04_Voronoi_Uncolored.png",
+      "kind": "original dataset geometry image",
+      "size": [
+        2027,
+        1221
+      ],
+      "mode": "RGB",
+      "byte_size": 102540,
+      "case_identity": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+      "description": "Voronoi microstructure coloured by generating-particle radius, using the original fixed 1.2 to 2.6 micrometre colour scale (red to blue)."
     }
   ]
 }
