@@ -1,0 +1,17 @@
+{
+  "field": "concentration",
+  "case": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+  "checkpoint": "mse-ssim-pretrained.pth",
+  "architecture": "Conv3d + three ConvLSTM layers + RGB decoder",
+  "parameter_count": 636515,
+  "input_length": 5,
+  "start_index": 0,
+  "image_size": 512,
+  "predict_length": 10,
+  "metrics_domain": "RGB images normalized to [0,1]",
+  "checkpoint_contains_training_metadata": false,
+  "checkpoint_from_batch_limited_smoke_run": false,
+  "mean_mse_rgb": 0.0027184796501387607,
+  "mean_ssim_rgb": 0.9684591352939605,
+  "checkpoint_sha256": "2b60b7dd3b94efe4dd8530d018cf93d2391854096c41e76ad7b1a7113f5cce5b"
+}

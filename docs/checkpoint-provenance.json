@@ -1,0 +1,132 @@
+{
+  "checkpoint": {
+    "file": "checkpoints/mse-ssim-pretrained.pth",
+    "original_filename": "best_model_pytorch.pth",
+    "original_location": "research source root",
+    "bytes": 2550901,
+    "sha256": "2b60b7dd3b94efe4dd8530d018cf93d2391854096c41e76ad7b1a7113f5cce5b",
+    "format": "PyTorch tensor-only state_dict",
+    "parameter_count": 636515,
+    "contains_training_metadata": false
+  },
+  "architecture": {
+    "name": "Conv3d + three ConvLSTM layers + RGB decoder",
+    "input_channels": 9,
+    "conv3d_output_channels": 32,
+    "conv3d_kernel": [
+      3,
+      5,
+      5
+    ],
+    "convlstm_layers": 3,
+    "convlstm_hidden_channels": [
+      32,
+      32,
+      32
+    ],
+    "convlstm_kernels": [
+      [
+        5,
+        5
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "decoder": "1x1 Conv2d, 32 to 3 channels; sigmoid"
+  },
+  "source_code_linkage": {
+    "model_definition": "训练代码/单帧预测模型/train_pytorch.py:PaperModel",
+    "source_sha256": "4941f577527657dded5140a0178b228850420ad1bb7c94517c8568dc4aef0d1b",
+    "save_statement": "torch.save(model.state_dict(), \"best_model_pytorch.pth\")",
+    "loss_in_corresponding_code": "MSE + 0.05 * (1 - SSIM)",
+    "basis": "The source checkpoint tensor layout strictly matches the formal Conv3d model and its saved filename. The project owner selected this Conv3d version for release. The local code linkage does not independently establish the complete historical training lineage."
+  },
+  "verification": {
+    "strict_state_dict_loading": true,
+    "reference_model": "PaperModel extracted from the source training file, using the original convlstm.py",
+    "source_comparison_input_shape": [
+      1,
+      5,
+      9,
+      32,
+      32
+    ],
+    "source_comparison_seed": 42,
+    "source_comparison_device": "cpu",
+    "forward_outputs_exactly_equal": true,
+    "maximum_absolute_forward_difference": 0.0,
+    "torch_version": "2.10.0+cu130"
+  },
+  "showcase": {
+    "field": "concentration",
+    "case": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
+    "c_rate": 5,
+    "image_size": [
+      512,
+      512
+    ],
+    "input_times_seconds": [
+      0,
+      100,
+      200,
+      300,
+      400
+    ],
+    "forecast_times_seconds": [
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100,
+      1200,
+      1300,
+      1400
+    ],
+    "mode": "10-step autoregressive rollout with fixed grain-orientation and C-rate conditioning",
+    "device": "cuda",
+    "metrics_domain": "RGB images normalized to [0,1], including background",
+    "held_out_status": "Unknown: no historical train/validation split is stored in this checkpoint. These results are a reproducible example, not a held-out generalization benchmark.",
+    "evaluation_file": "assets/results/5c/evaluation.json"
+  },
+  "limitations": [
+    "Historical epoch, training split, random seed and optimizer state are not stored in the weight file.",
+    "The checkpoint does not establish whether scheduled-sampling fine-tuning was applied.",
+    "No training loss curve is reconstructed from missing logs.",
+    "The supplied checkpoint and reported predictions are for concentration; a stress checkpoint is not included."
+  ],
+  "result_artifacts": [
+    {
+      "file": "assets/results/5c/comparison.png",
+      "bytes": 840802,
+      "sha256": "9041070cb79b6afa3d3c00f503e2dd1962868623664d6d1c38683aecb318264a"
+    },
+    {
+      "file": "assets/results/5c/comparison.pdf",
+      "bytes": 365071,
+      "sha256": "e8c8a164b974a9b0e4a60d9f609df6e19e7bc5614bd55417a21cd7be0de15362"
+    },
+    {
+      "file": "assets/results/5c/rollout.gif",
+      "bytes": 1392485,
+      "sha256": "33d952b230483692162dedda9c9020c532f2af83f9d66cdb918c45f4475a6a67"
+    },
+    {
+      "file": "assets/results/5c/metrics.csv",
+      "bytes": 473,
+      "sha256": "b6c421d99f285070092a0b86e9854bc15221b7c6a93b1d5e059ed6a6388fa32f"
+    },
+    {
+      "file": "assets/results/5c/evaluation.json",
+      "bytes": 669,
+      "sha256": "ced61b736d1321b01a1c64998ee1a4fa35ff6bf7355761a5ffd8d1477e18adf9"
+    }
+  ]
+}

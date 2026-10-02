@@ -1,0 +1,49 @@
+{
+  "figures": [
+    {
+      "file": "assets/figures/battery_convlstm_cell_clean.png",
+      "sha256": "28f45822c564f76a8f9d972ac772bdb21a58c13ee6fd898343d53e444fc661b8",
+      "source": "Existing research-homepage asset: images/research/battery_convlstm_cell_clean.png",
+      "article_doi": "10.1016/j.ensm.2025.104581",
+      "kind": "literature illustration"
+    },
+    {
+      "file": "assets/figures/battery_convlstm_pipeline.png",
+      "sha256": "844e463c51ac1fa5a4ee8ae683e93e106f3a98eb5653a57d1ccc4f20d85b9d0f",
+      "source": "Existing research-homepage asset: images/research/battery_convlstm_pipeline.png",
+      "article_doi": "10.1016/j.ensm.2025.104581",
+      "kind": "literature illustration"
+    },
+    {
+      "file": "assets/figures/battery_scheduled_sampling.png",
+      "sha256": "cb18ea3ec9b8c69342bcb91de501876afb2ccca31c28eecf8ce914f9e76cd489",
+      "source": "Existing research-homepage asset: images/research/battery_scheduled_sampling.png",
+      "article_doi": "10.1016/j.ensm.2025.104581",
+      "kind": "literature illustration"
+    },
+    {
+      "file": "assets/figures/c-rate-5c.png",
+      "sha256": "db3c411e5c16b1c4a09717164241fa0bcab11445936c70983583652a8417dd14",
+      "source": "Bundled simulation case 93203, C=5",
+      "kind": "original dataset image"
+    },
+    {
+      "file": "assets/figures/concentration-reference.png",
+      "sha256": "8cb54196a765b49857ee0fcffb52a8e6384510e29180549b54b2517ca02b6ad1",
+      "source": "Bundled simulation case 93203, C=5",
+      "kind": "original dataset image"
+    },
+    {
+      "file": "assets/figures/orientation-input.png",
+      "sha256": "39884d9cb565c9219efd96cc529180f99f5b1053ae40cbf34c512568e69022c8",
+      "source": "Bundled simulation case 93203, C=5",
+      "kind": "original dataset image"
+    },
+    {
+      "file": "assets/figures/stress-reference.png",
+      "sha256": "9e0a8c9def0d2e5ce401b35a109b276b833b9c37cb1376445e36b01e73ba77dc",
+      "source": "Bundled simulation case 93203, C=5",
+      "kind": "original dataset image"
+    }
+  ]
+}

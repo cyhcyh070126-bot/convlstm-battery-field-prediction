@@ -90,11 +90,19 @@ when available. A newly generated split cannot establish that those weights
 have never seen the validation examples. A saved field mismatch is rejected.
 The weights themselves do not prove which training loss was used.
 
-No historical pretrained checkpoint or associated prediction figure is
-bundled in the initial release. The reference GIFs are simulation exports.
-The two included data cases are small execution examples, not a documented
-held-out test set. Image metrics cover normalized RGB pixels, including
-background, and must not be relabeled as physical-field error.
+The release includes `checkpoints/mse-ssim-pretrained.pth`, a tensor-only
+checkpoint matching the Conv3d + three-layer ConvLSTM implementation. The
+source filename, matching MSE + SSIM code, SHA-256, and loading/parity checks
+are recorded in [checkpoint-provenance.json](checkpoint-provenance.json).
+Its historical training logs, optimizer state, and case split are unavailable.
+
+The README's 5C result is a new 512-pixel, ten-step autoregressive evaluation
+of that checkpoint on case 93203. The model consumes frames at 0–400 seconds
+and predicts 500–1400 seconds. Average RGB MSE is 0.00271848 and SSIM is
+0.968459. This is a reproducible case demonstration; the case's membership
+in the historical training set is unknown. Image metrics include background
+and must not be relabeled as physical concentration error. The stress images
+are simulation references; no stress checkpoint is included.
 
 ## Preparation checks
 
@@ -114,6 +122,9 @@ Checked on 2026-10-02:
   producing PNG/PDF/GIF/CSV/JSON outputs. A separate small stress-route run
   also passed. These used reduced image sizes for execution checks only.
 - The README's 32-pixel CPU quick-start command was run successfully.
+- The included checkpoint loaded strictly, matched the source model's
+  forward output exactly, and completed the full-resolution 5C rollout.
+  Its comparison PNG/PDF, GIF, metrics CSV, and JSON report were inspected.
 - All 104 example PNG copies were checked against their source SHA-256
   hashes. The example manifest records these hashes and image metadata.
 - MATLAB R2025b checked all 11 `.m` files without detected syntax errors;
