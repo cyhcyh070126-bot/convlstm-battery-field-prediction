@@ -68,6 +68,10 @@ operate on images; they do not transform a physical orientation tensor.
 - Frame loading is lazy rather than keeping the entire collection in RAM.
   Images are sorted numerically, and malformed images or ambiguous static
   inputs raise an error rather than producing a silent black image.
+  Static maps use an eight-case LRU cache per dataset instance per worker
+  (about 48 MiB at 512 pixels). Training and validation have separate caches.
+  Patch training crops before stacking the temporal tensor; tests confirm
+  identical patch values for every field and static channel.
 - SSIM failures are reported instead of silently dropping that loss term.
 - Each run saves its configuration, case split, history, and checkpoint
   metadata. A batch-limited run is explicitly identifiable in its metadata.
@@ -77,6 +81,12 @@ operate on images; they do not transform a physical orientation tensor.
 - Evaluation writes labeled PNG, PDF, GIF, and image-metric files. These
   utilities are for generating new results with a chosen checkpoint; this
   release does not imply an already validated test benchmark.
+- Training and evaluation reject nonempty output directories. Nonfinite
+  learning-rate, SSIM-weight, and sampling-decay settings are rejected.
+- MATLAB checks the LiveLink connection before packing, uses a unique COMSOL
+  model tag, stops on packing nonconvergence, and checks all required image
+  exports before reporting success. These guards do not alter the model or
+  convergence thresholds.
 
 ## Checkpoints and evaluation
 
@@ -84,10 +94,16 @@ New checkpoints are saved as `best_model.pt` dictionaries containing weights,
 configuration, the train/validation case names, epoch, and validation loss.
 Tensor-only legacy state dictionaries can also be read. Loading is strict
 and uses PyTorch's `weights_only=True`.
+The optimizer, random states, and sampling-step counter are not saved. Loading
+a checkpoint starts a new optimization run; exact interrupted-run resumption
+is not implemented.
 
 For legacy weights, supply the actual pretraining split with `--split-file`
 when available. A newly generated split cannot establish that those weights
 have never seen the validation examples. A saved field mismatch is rejected.
+The published tensor-only checkpoint is recognized by its SHA-256 and also
+rejects a stress request, even after renaming. Unknown legacy weights without
+field metadata produce an explicit warning, not invented training metadata.
 The weights themselves do not prove which training loss was used.
 
 The release includes `checkpoints/mse-ssim-pretrained.pth`, a tensor-only
@@ -113,10 +129,10 @@ Checked on 2026-10-02:
   identical state dictionaries and a common seeded input. All state keys
   matched; the maximum output difference was zero (`torch.equal` passed).
   This is a forward-model check, not a claim of bitwise identical full training.
-- Five functional tests passed: recurrent rollout/backpropagation; dataset
-  field selection, frame order, and decoding errors; disjoint persisted case
-  splits; checkpoint compatibility/field checks; and rejection of stale
-  evaluation output directories.
+- Nine functional tests passed: recurrent rollout/backpropagation; dataset
+  fields, ordering, decoding, and static inputs; exact patch values and bounded
+  cache behavior; disjoint persisted case splits; checkpoint compatibility and
+  field checks; protected output directories; and finite loss/training settings.
 - Two real example cases completed a small, one-batch single-frame run,
   ten-step sequence fine-tuning, and ten-step autoregressive evaluation,
   producing PNG/PDF/GIF/CSV/JSON outputs. A separate small stress-route run
@@ -127,8 +143,42 @@ Checked on 2026-10-02:
   Its comparison PNG/PDF, GIF, metrics CSV, and JSON report were inspected.
 - All 104 example PNG copies were checked against their source SHA-256
   hashes. The example manifest records these hashes and image metadata.
-- MATLAB R2025b checked all 11 `.m` files without detected syntax errors;
-  small contact, force, and circular-boundary helper checks passed.
+- MATLAB R2025b checked all 13 `.m` files (including tests) without detected
+  syntax errors; small contact, force, and circular-boundary helper checks passed.
+  Six export-contract regression tests passed, as did the bundled real 5C case's
+  52 required PNG checks. No connected COMSOL call was executed in this audit.
+
+### Independent CPU installation audit
+
+A new GitHub clone and an isolated virtual environment were created on
+2026-10-02, with `include-system-site-packages = false`. PyTorch was installed
+from its CPU wheel index, followed by this repository's `requirements.txt`.
+`pip check` reported no broken requirements. This audit used Windows and an
+Intel Core i9-13900H; Linux/macOS execution was not checked in this session.
+
+| Dependency | Installed version |
+| --- | --- |
+| Python | 3.12.12 |
+| PyTorch | 2.10.0+cpu |
+| NumPy | 2.5.3 |
+| OpenCV headless | 4.14.0.94 |
+| pytorch-msssim | 1.0.0 |
+| Matplotlib | 3.11.2 |
+| Pillow | 12.3.0 |
+
+The clean interpreter also checked the usability fixes before publication:
+
+| Command path | Outcome | Approximate elapsed time |
+| --- | --- | ---: |
+| Functional regression suite | 9 tests passed | 9.0 s including first imports |
+| Supplied weights, 5C, 64-pixel/3-step CPU preview | PNG/PDF/GIF/CSV/JSON created | 3.2 s |
+| Initial CPU training, 32 pixels, 1 train/validation batch | Checkpoint, split, config, and history saved | 3.5 s |
+| Sequence CPU training, 32 pixels, 10 future steps, 1 batch | Saved split inherited and checkpoint saved | 4.1 s |
+| Reload sequence checkpoint and predict 10 steps | Prediction files and smoke-marked JSON created | 3.4 s |
+
+Timings include process startup, exclude installation, and are observations on
+one machine. They are not estimates for full training. The matching commands
+and output names are described in [getting started](getting-started.md).
 
 No full training campaign, full stochastic packing run, or COMSOL transient
 solve was performed during preparation. GPU availability is not a substitute

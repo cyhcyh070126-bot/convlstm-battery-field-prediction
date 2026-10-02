@@ -1,5 +1,7 @@
 """The supervised objective used in both original baseline training stages."""
 
+import math
+
 from torch import nn
 from pytorch_msssim import ssim
 
@@ -9,8 +11,8 @@ class HybridLoss(nn.Module):
 
     def __init__(self, alpha=0.05):
         super().__init__()
-        if alpha < 0:
-            raise ValueError("SSIM weight must be nonnegative.")
+        if not math.isfinite(alpha) or alpha < 0:
+            raise ValueError("SSIM weight must be finite and nonnegative.")
         self.alpha = alpha
         self.mse = nn.MSELoss()
 

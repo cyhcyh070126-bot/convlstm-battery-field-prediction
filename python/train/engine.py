@@ -3,6 +3,7 @@
 import argparse
 import csv
 import json
+import math
 import random
 from pathlib import Path
 
@@ -99,6 +100,13 @@ def sequence_loss(model, inputs, targets, criterion, epsilon=0.0):
     return loss / targets.shape[1]
 
 
+def require_fresh_training_output(path):
+    """Do not overwrite checkpoints even if an earlier run has no history file."""
+    path = Path(path)
+    if path.exists() and (not path.is_dir() or any(path.iterdir())):
+        raise FileExistsError("Training output must be a new or empty directory; select a new --output-dir.")
+
+
 def run(args):
     positive = ("epochs", "batch_size", "val_batch_size", "val_interval", "input_length",
                 "predict_length", "image_size", "patch_size")
@@ -108,10 +116,16 @@ def run(args):
         raise ValueError("num-workers must be nonnegative and max-batches must be positive.")
     if not 0 < args.train_fraction < 1 or not 0 <= args.epsilon_start <= 1:
         raise ValueError("train-fraction must be in (0, 1); epsilon-start must be in [0, 1].")
+    if not all(math.isfinite(value) for value in
+               (args.learning_rate, args.epsilon_decay, args.ssim_weight)):
+        raise ValueError("learning-rate, epsilon-decay, and ssim-weight must be finite.")
     if args.learning_rate <= 0 or args.epsilon_decay < 0:
         raise ValueError("learning-rate must be positive and epsilon-decay nonnegative.")
+    if args.ssim_weight < 0:
+        raise ValueError("ssim-weight must be nonnegative.")
     if min(args.patch_size, args.image_size) < 11:
         raise ValueError("Image and patch sizes must be at least 11 for SSIM.")
+    require_fresh_training_output(args.output_dir)
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -143,8 +157,6 @@ def run(args):
     criterion = HybridLoss(args.ssim_weight).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    if (args.output_dir / "history.csv").exists():
-        raise FileExistsError("Output directory already contains a run; select a new --output-dir.")
     config = {key: value for key, value in vars(args).items()
               if key not in {"data_dir", "output_dir", "checkpoint", "split_file"}}
     config.update(loss="MSE + alpha * (1 - SSIM)", torch_version=str(torch.__version__))

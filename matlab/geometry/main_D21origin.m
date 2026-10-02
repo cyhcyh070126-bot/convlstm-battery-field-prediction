@@ -307,6 +307,7 @@ close(gcf); % <-- 新增：保存后关闭，释放内存
 disp('开始粒子堆积迭代 ');
 k=1;Ps_save{k,1}=Ps;tempN=0;L_change=[];Overlapi_change=[]; % Save history values   i=1
 fetmp = [];imove = 0;FP=ones(N,1);F_tot=ones(N,1);ki=0;F_sum2=1;SerialNum=(1:N)';Di=1000*max(Rs);
+packing_converged = false;
 while 1
     Ps_Virc=Circle_Boundary(R0+1,ndm);
     N_Vir=size(Ps_Virc,1);
@@ -347,6 +348,7 @@ while 1
     if  max_force < ftol % 使用预先计算好的 max_force
         if  Overlapi<ttol
             Ps(:,1:ndm)=Ps(:,1:ndm)+deltat0*FP; %update Ps
+            packing_converged = true;
             disp('收敛条件满足，迭代正常结束。'); % 增加结束提示
             break;
         else
@@ -364,6 +366,20 @@ while 1
        disp('达到最大迭代次数，循环终止。'); % 增加结束提示
        break;
     end
+end
+
+if ~packing_converged
+    packing_diagnostic = struct('converged', false, 'iterations', min(k, Tk), ...
+        'iteration_limit', Tk, 'maximum_force', max_force, ...
+        'force_tolerance', ftol, 'mean_overlap', Overlapi, ...
+        'overlap_tolerance', ttol, 'seed', workflow_random_seed, ...
+        'particle_count', N, 'radius', R0);
+    diagnostic_path = fullfile(pwd, 'packing_failure.mat');
+    save(diagnostic_path, 'packing_diagnostic', 'Ps', 'Rs', 'Overlapi_change');
+    error('BatteryWorkflow:PackingDidNotConverge', ...
+        ['Packing did not satisfy its original force and overlap tolerances ' ...
+         'within %d iterations. COMSOL construction has not started. ' ...
+         'Inspect the saved diagnostic: %s'], Tk, diagnostic_path);
 end
 
 % ---------------------------- save data ----------------------------- %
@@ -646,8 +662,9 @@ try
     im_high = imread(save_path);
     im_512 = imresize(im_high, [512, 512]); % 简单缩放
     imwrite(im_512, save_path); % 覆盖保存
-catch
-    disp('警告：图像缩放失败，保留原图。');
+catch orientation_error
+    fprintf(2, 'Required 512-by-512 orientation export failed: %s\n', save_path);
+    rethrow(orientation_error);
 end
 
 % --- 【【【【 修改结束 】】】】 ---
