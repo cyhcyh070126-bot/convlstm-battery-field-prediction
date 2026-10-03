@@ -126,6 +126,14 @@
       "byte_size": 102540,
       "case_identity": "N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203",
       "description": "Voronoi microstructure coloured by generating-particle radius, using the original fixed 1.2 to 2.6 micrometre colour scale (red to blue)."
+    },
+    {
+      "file": "assets/figures/homepage-orientation-example.png",
+      "sha256": "02af94644e63cdfe3f7790d7c433c068f69225af693d174cd4d49b8441efb97f",
+      "source": "Existing research-homepage asset: images/research/battery_orientation_input.png",
+      "kind": "additional orientation-map illustration",
+      "case_identity": "Separate homepage example; the bundled 5C case 93203 uses assets/figures/orientation-input.png.",
+      "modification": "Unchanged byte-for-byte copy."
     }
   ]
 }

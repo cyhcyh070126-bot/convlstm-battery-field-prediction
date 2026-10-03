@@ -88,6 +88,9 @@ The C-rate image is spatially uniform: this case encodes 5C as RGB `(153, 0, 0)`
 Its three channels are carried alongside the three orientation channels at
 every time step as a conditioning input.
 
+The [conditioning guide](docs/simulation-sample.md#additional-orientation-map-example)
+also includes the additional grain-orientation image shown on the research homepage.
+
 | Concentration evolution | Von Mises stress evolution |
 | :---: | :---: |
 | ![Dataset concentration evolution from the research homepage](assets/gifs/dataset-concentration.gif) | ![Dataset von Mises stress evolution from the research homepage](assets/gifs/dataset-stress.gif) |
