@@ -81,6 +81,15 @@ one simulation case while the concentration and stress fields evolve.
 The [data-format guide](data-format.md#image-representation) describes image
 coordinates and normalization.
 
+### Additional orientation-map example
+
+<img src="../assets/figures/homepage-orientation-example.png" alt="Additional grain-orientation map from the research homepage" width="360" />
+
+This orientation map is also displayed on the research homepage. Each polygon
+represents a grain with a constant orientation color. It illustrates the spatial
+conditioning supplied alongside the evolving fields. The 5C case 93203 uses
+the orientation map in the table above; the two images are separate examples.
+
 ## 3. Field sequences
 
 Through LiveLink, MATLAB assigns grain-wise rotated coordinate systems in
