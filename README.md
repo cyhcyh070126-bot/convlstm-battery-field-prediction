@@ -1,10 +1,10 @@
-# ConvLSTM Forecasting of Battery Material Fields
+# ConvLSTM Prediction of Battery Material Fields
 
 **Yanghao Chen · Tongji University**
 
 [Research homepage](https://cyhcyh070126-bot.github.io/) · [A complete simulation sample](docs/simulation-sample.md) · [MATLAB workflow](docs/matlab-workflow.md) · [Data format](docs/data-format.md) · [Reproducibility](docs/reproducibility.md)
 
-MATLAB–COMSOL simulation and conditional ConvLSTM forecasting of concentration
+MATLAB–COMSOL simulation and conditional ConvLSTM prediction of concentration
 and stress images in polycrystalline battery materials. This release includes
 the **Conv3d + three-layer ConvLSTM model**, its **MSE + SSIM pretrained weights**,
 and a complete **5C concentration-prediction example**.
@@ -25,7 +25,7 @@ MATLAB and COMSOL generate each case together through LiveLink for MATLAB:
    COMSOL solves anisotropic transport and solid mechanics with concentration-driven swelling.
 3. **Export the learning data.** MATLAB controls the time-dependent solve and
    image export, pairing concentration and von Mises stress sequences with static
-   orientation and C-rate maps. Python then forms forecasting windows from these images.
+   orientation and C-rate maps. Python then forms prediction windows from these images.
 
 The simulation archive spans **262 cases** across 0.5C, 1C, 2C, 3C, 4C, and 5C.
 The repository provides **two complete example cases**, each with 25 concentration
@@ -99,7 +99,7 @@ These simulation-reference animations from the
 [research homepage](https://cyhcyh070126-bot.github.io/cv/) illustrate the two
 time-dependent fields. The [5C sample guide](docs/simulation-sample.md#3-field-sequences)
 shows concentration and stress snapshots from case 93203 at labeled physical times;
-Section 5 shows the pretrained concentration forecast for that same case.
+Section 5 shows the pretrained concentration prediction for that same case.
 
 ## 2. Model and ConvLSTM cell
 

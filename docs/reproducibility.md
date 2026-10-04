@@ -20,7 +20,7 @@ in [checkpoint-provenance.json](checkpoint-provenance.json).
 
 ## Model and objective
 
-The forecasting model has **636,515 parameters**:
+The prediction model has **636,515 parameters**:
 
 1. A `Conv3d` maps nine RGB channels to 32 features, with kernel `(3,5,5)`
    and padding `(1,2,2)`.

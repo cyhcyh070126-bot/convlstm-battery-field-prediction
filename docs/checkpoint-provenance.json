@@ -78,7 +78,7 @@
       300,
       400
     ],
-    "forecast_times_seconds": [
+    "prediction_times_seconds": [
       500,
       600,
       700,

@@ -117,7 +117,7 @@ File suffixes encode seconds: `concentration_t01000.png` is the concentration
 at **1000 s**. There are 25 concentration images and 25 stress images, with
 the same time list from 0 to 2400 s. The
 [pretrained prediction example](../README.md#5-pretrained-weights-and-5c-prediction-results)
-compares the concentration forecasts with these simulation references.
+compares the concentration predictions with these simulation references.
 
 ## 4. From one case to training examples
 
