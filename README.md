@@ -2,20 +2,115 @@
 
 **Yanghao Chen · Tongji University**
 
-[Research homepage](https://cyhcyh070126-bot.github.io/) · [A complete simulation sample](docs/simulation-sample.md) · [MATLAB workflow](docs/matlab-workflow.md) · [Data format](docs/data-format.md) · [Reproducibility](docs/reproducibility.md)
+Predict the evolution of concentration and stress images in polycrystalline
+battery materials with a conditional ConvLSTM. The workflow connects
+MATLAB–COMSOL data generation, MSE + SSIM training, and autoregressive prediction
+in PyTorch.
 
-MATLAB–COMSOL simulation and conditional ConvLSTM prediction of concentration
-and stress images in polycrystalline battery materials. This release includes
-the **Conv3d + three-layer ConvLSTM model**, its **MSE + SSIM pretrained weights**,
-and a complete **5C concentration-prediction example**.
+[Quick start](#quick-start) · [5C results](#5c-prediction-results) · [Dataset](#dataset-and-simulation-workflow) · [Model](#model-architecture) · [Training](#training-strategy) · [Documentation](#documentation) · [Research homepage](https://cyhcyh070126-bot.github.io/)
 
-**Start here:** [install and predict on CPU](#6-run-the-example) ·
-[check the training pipeline](#7-train-or-generate-new-data) ·
-[troubleshooting](docs/getting-started.md#troubleshooting).
-The bundled images and weights are enough to run Python prediction immediately;
-MATLAB and COMSOL are only needed to generate new simulation data.
+- **Model:** a Conv3d feature extractor followed by three ConvLSTM layers and an RGB decoder.
+- **Inputs:** five field-history images, a grain-orientation map, and a C-rate map.
+- **Included example:** MSE + SSIM pretrained weights and a complete 5C concentration rollout.
 
-## 1. Dataset and the 5C example
+The bundled data and checkpoint support prediction on CPU or GPU. MATLAB and
+COMSOL are required only to generate new simulation cases. Concentration and
+stress are separate prediction targets; the included checkpoint predicts concentration.
+
+<a id="5-pretrained-weights-and-5c-prediction-results"></a>
+
+## 5C prediction results
+
+The 5C example uses five reference frames from **0–400 s** to predict ten
+future frames at **500–1400 s**, at 512 × 512 resolution. Each predicted frame
+is fed back into the input window; future reference frames are used for evaluation.
+
+[Pretrained checkpoint](checkpoints/mse-ssim-pretrained.pth) · [Checkpoint provenance](docs/checkpoint-provenance.json)
+
+![5C concentration: simulation reference and autoregressive prediction](assets/results/5c/rollout.gif)
+
+![5C concentration prediction and absolute RGB error](assets/results/5c/comparison.png)
+
+In the GIF, the simulation reference is on the left and the autoregressive
+prediction is on the right; the labels identify physical time. In the static
+comparison, each column is a predicted time: reference above, prediction in the
+middle, and mean absolute RGB error below. Brighter error-map regions indicate
+larger differences on the normalized image scale.
+
+[Open the comparison PDF](assets/results/5c/comparison.pdf) ·
+[Per-frame metrics CSV](assets/results/5c/metrics.csv) ·
+[Evaluation settings and summary](assets/results/5c/evaluation.json)
+
+| Metric | Mean over 10 frames | Preferred direction |
+| :--- | ---: | :--- |
+| MSE | 0.00271848 | Lower |
+| SSIM | 0.968459 | Higher |
+
+Metrics are computed on normalized RGB images, including background pixels,
+for this **5C case study**. They quantify image agreement with the simulation
+reference. The CSV reports each predicted time separately; the
+[evaluation record](docs/checkpoint-provenance.json) identifies the checkpoint and settings.
+
+<a id="6-run-the-example"></a>
+
+## Quick start
+
+Use **Python 3.12** for the tested installation below. No GPU is needed for the
+quick preview. Run all commands from the repository root.
+
+```bash
+git clone https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction.git
+cd convlstm-battery-field-prediction
+python -m venv .venv
+```
+
+Activate with `.venv\Scripts\Activate.ps1` on Windows PowerShell, or
+`source .venv/bin/activate` on Linux/macOS. If PowerShell blocks activation,
+replace `python` in the remaining commands with `.venv\Scripts\python.exe`;
+no system policy change is needed. For the tested Windows CPU installation
+(the CPU index also provides Linux wheels):
+
+```bash
+python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+python -m pip check
+```
+
+For CUDA or macOS, choose the matching build using the
+[PyTorch installation selector](https://pytorch.org/get-started/locally/)
+before installing `requirements.txt`. The CPU build above cannot use CUDA.
+
+### Run a CPU preview
+
+This uses the supplied MSE + SSIM weights,
+resizes the images to 64 × 64, and predicts three steps:
+
+```bash
+python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-preview --field concentration --image-size 64 --predict-length 3 --device cpu
+```
+
+Open `outputs/5c-preview/rollout.gif` or `comparison.png`. Expect three predicted
+PNG frames, a comparison PNG/PDF, a GIF, `metrics.csv`, and `evaluation.json`.
+The preview uses a smaller spatial grid and shorter rollout. To reproduce the
+configuration of the [displayed results](#5c-prediction-results), use the next command.
+
+### Reproduce the 5C evaluation
+
+Use the full 512 × 512 images and predict ten steps:
+
+```bash
+python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-prediction --field concentration --predict-length 10
+```
+
+Use a new or empty output directory. The evaluator writes a comparison PNG/PDF,
+GIF, predicted PNG frames, per-frame CSV metrics, and a JSON report. The default
+device is CUDA when available, otherwise CPU. Full-resolution execution is much
+heavier than the preview; published figures were evaluated on a GPU.
+See [setup, expected files, and common errors](docs/getting-started.md).
+
+<a id="1-dataset-and-the-5c-example"></a>
+
+## Dataset and simulation workflow
 
 MATLAB and COMSOL generate each case together through LiveLink for MATLAB:
 
@@ -33,7 +128,7 @@ frames, 25 stress frames, and the associated conditioning maps, ready for
 prediction and training walkthroughs. The archive's C-rate distribution is:
 
 | C-rate | 0.5C | 1C | 2C | 3C | 4C | 5C |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Archived cases | 40 | 43 | 43 | 44 | 43 | 49 |
 
 The input maps and pretrained prediction example use **5C, case 93203**:
@@ -47,14 +142,17 @@ and [image-format documentation](docs/data-format.md).
 A **simulation case** describes one microstructure, its loading condition, and
 its field evolution. At the default export settings, its image collection is:
 
-| Component | Files per case | Contents and role |
-| --- | ---: | --- |
-| Concentration sequence | 25 PNGs | `1_Concentration/`: field at 0, 100, …, 2400 s |
-| von Mises stress sequence | 25 PNGs | `2_Stress/`: mechanical response at the same times |
-| Grain-orientation map | 1 PNG | `3_Voronoi_Geometry/05_*.png`: static crystal-orientation conditioning |
-| C-rate map | 1 PNG | `C-rate/5C.png` for this case: static loading-condition conditioning |
-| Geometry-construction plots | 4 PNGs | Radius distribution, initial packing, final packing, and radius-colored Voronoi grains |
-| **Image total** | **56 PNGs** | **52 learning images + 4 geometry-construction plots** |
+| Image group | PNGs per case | Role |
+| :--- | ---: | :--- |
+| Concentration | 25 | Field sequence at 0, 100, …, 2400 s |
+| Von Mises stress | 25 | Mechanical response at the same times |
+| Grain orientation | 1 | Static microstructure input |
+| C-rate | 1 | Static loading-condition input |
+| Geometry construction | 4 | Radius distribution, initial/final packing, and Voronoi grains |
+| **Total** | **56** | **52 learning images + 4 construction plots** |
+
+The learning images are organized in `1_Concentration/`, `2_Stress/`,
+`3_Voronoi_Geometry/05_*.png`, and `C-rate/5C.png` for this case.
 
 The 52 learning images are 512 × 512 RGB. The four original construction plots
 retain their 2027 × 1221 resolution. For case 93203, all 56 images are available:
@@ -99,15 +197,17 @@ These simulation-reference animations from the
 [research homepage](https://cyhcyh070126-bot.github.io/cv/) illustrate the two
 time-dependent fields. The [5C sample guide](docs/simulation-sample.md#3-field-sequences)
 shows concentration and stress snapshots from case 93203 at labeled physical times;
-Section 5 shows the pretrained concentration prediction for that same case.
+The [5C results](#5c-prediction-results) show the pretrained concentration prediction for that same case.
 
-## 2. Model and ConvLSTM cell
+<a id="2-model-and-convlstm-cell"></a>
+
+## Model architecture
 
 ![ConvLSTM architecture illustration used on the research homepage](assets/figures/battery_convlstm_pipeline.png)
 
-The illustration shows how field history, grain orientation, and C-rate condition
-the recurrent predictor. The implemented model also includes the Conv3d feature
-extractor specified below.
+Field history and static conditioning maps enter a recurrent predictor. In this
+implementation, a Conv3d feature extractor precedes the ConvLSTM layers, as
+specified in the configuration table below.
 Illustration source: Wang et al., Figure 5, [Energy Storage Materials 82 (2025),
 104581](https://doi.org/10.1016/j.ensm.2025.104581).
 
@@ -141,9 +241,10 @@ Here, $X_t$ denotes the input feature map, $H_t$ the hidden state, and $C_t$ the
 cell state. Convolutional input, forget, and output gates retain the spatial grid
 while updating information through time.
 Illustration source: Wang et al., Figure 4, [same article](https://doi.org/10.1016/j.ensm.2025.104581).
-Figures 4–6 from the cited article illustrate the recurrent model and training concepts.
 
-## 3. Training strategy
+<a id="3-training-strategy"></a>
+
+## Training strategy
 
 The code provides initial next-frame training and subsequent multi-step
 fine-tuning. The first stage learns local prediction from five previous frames.
@@ -159,22 +260,22 @@ regression with a sigmoid output. Illustration: Figure 6 in
 [Wang et al.](https://doi.org/10.1016/j.ensm.2025.104581), also used on the homepage.
 
 | Setting | Initial training | Sequence fine-tuning |
-| --- | --- | --- |
-| Past / future frames | 5 / 1 | 5 / 10 |
-| Image resolution | 512 × 512 | 512 × 512 |
-| Training patches | 128 × 128 | 128 × 128 |
-| Validation region | 128 × 128 patches | Full images |
+| :--- | :---: | :---: |
+| History → target frames | 5 → 1 | 5 → 10 |
+| Training patch | 128 × 128 | 128 × 128 |
+| Validation region | 128 × 128 patches | 512 × 512 images |
 | Batch size | 64 | 16 |
 | Epochs | 100 | 50 |
 | Adam learning rate | `1e-3` | `1e-5` |
-| Gradient norm clipping | 5 | 5 |
+
+Both stages use 512 × 512 source images and gradient-norm clipping at 5.
 
 Training uses joint spatial augmentation of field and static channels.
 Sequence teacher-forcing probability is `max(0, 1 - step * 1e-5)`.
 Case splitting occurs before temporal windows are formed. Checkpoints saved by
 the training commands retain their case split, and fine-tuning inherits it
 across the two stages.
-Section 5 presents a case study using the supplied pretrained weights.
+The [5C example](#5c-prediction-results) evaluates the supplied pretrained weights.
 
 A 25-frame case supplies **20 history/target windows** for initial training and
 **11 windows** for ten-step fine-tuning. A 512 × 512 image contains sixteen
@@ -187,7 +288,9 @@ Concentration and stress use separate models. The supplied pretrained weights
 and 5C predictions are for **concentration**. The dataset also includes stress
 images for training through `--field stress`.
 
-## 4. MSE + SSIM objective
+<a id="4-mse--ssim-objective"></a>
+
+## MSE + SSIM objective
 
 Both stages use the same supervised objective:
 
@@ -197,98 +300,13 @@ Both stages use the same supervised objective:
 
 MSE measures pixelwise differences, while SSIM compares image structure.
 Both terms are computed on normalized RGB images. Multi-step fine-tuning
-averages the objective over the predicted future frames. Both training entry
-points use this MSE + SSIM objective.
+averages this objective over the predicted future frames.
 
-## 5. Pretrained weights and 5C prediction results
+<a id="7-train-or-generate-new-data"></a>
 
-[Download the MSE + SSIM pretrained checkpoint](checkpoints/mse-ssim-pretrained.pth).
-The weights load strictly into the Conv3d + three-layer ConvLSTM architecture
-above. [Checkpoint provenance](docs/checkpoint-provenance.json) records the
-source identity, SHA-256, matching code, and verification scope.
+## Train and generate data
 
-This example was evaluated at **512 × 512 resolution**. The model receives
-reference frames from **0–400 s** and autoregressively predicts **500–1400 s**,
-with no future ground-truth frames fed back during the rollout.
-
-![5C concentration: simulation reference and autoregressive prediction](assets/results/5c/rollout.gif)
-
-![5C concentration prediction and absolute RGB error](assets/results/5c/comparison.png)
-
-In the GIF, the simulation reference is on the left and the autoregressive
-prediction is on the right; the labels identify physical time. In the static
-comparison, each column is a predicted time: reference above, prediction in the
-middle, and mean absolute RGB error below. Brighter error-map regions indicate
-larger differences on the normalized image scale.
-
-[Open the comparison PDF](assets/results/5c/comparison.pdf) ·
-[Per-frame metrics CSV](assets/results/5c/metrics.csv) ·
-[Evaluation settings and summary](assets/results/5c/evaluation.json)
-
-| RGB image metric | Mean over 10 predicted frames |
-| --- | ---: |
-| MSE | 0.00271848 |
-| SSIM | 0.968459 |
-
-The metrics describe this **5C case study** using the supplied checkpoint.
-MSE and SSIM measure agreement over normalized RGB images, including background
-pixels. The per-frame CSV and error maps show how image accuracy changes across
-the ten-step rollout. See the [evaluation record](docs/checkpoint-provenance.json)
-for checkpoint provenance and evaluation scope.
-
-## 6. Run the example
-
-Use **Python 3.12** for the tested installation below. No GPU is needed for the
-quick preview. Run all commands from the repository root.
-
-```bash
-git clone https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction.git
-cd convlstm-battery-field-prediction
-python -m venv .venv
-```
-
-Activate with `.venv\Scripts\Activate.ps1` on Windows PowerShell, or
-`source .venv/bin/activate` on Linux/macOS. If PowerShell blocks activation,
-replace `python` in the remaining commands with `.venv\Scripts\python.exe`;
-no system policy change is needed. For the tested Windows CPU installation
-(the CPU index also provides Linux wheels):
-
-```bash
-python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -r requirements.txt
-python -m pip check
-```
-
-For CUDA or macOS, choose the matching build using the
-[PyTorch installation selector](https://pytorch.org/get-started/locally/)
-before installing `requirements.txt`. The CPU build above cannot use CUDA.
-
-**First result: a small CPU preview.** This uses the supplied MSE + SSIM weights,
-resizes the images to 64 × 64, and predicts three steps:
-
-```bash
-python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-preview --field concentration --image-size 64 --predict-length 3 --device cpu
-```
-
-Open `outputs/5c-preview/rollout.gif` or `comparison.png`. Expect three predicted
-PNG frames, a comparison PNG/PDF, a GIF, `metrics.csv`, and `evaluation.json`.
-This preview took about 3 seconds on the audited i9-13900H laptop after installation;
-other machines will differ. This command produces a 64-pixel, three-step preview;
-the command below uses the 512-pixel, ten-step configuration of Section 5.
-
-**Reproduce the displayed 5C evaluation** at 512 × 512 and ten steps:
-
-```bash
-python -m python.evaluation.predict --case-dir "examples/data/N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203" --checkpoint checkpoints/mse-ssim-pretrained.pth --output-dir outputs/5c-prediction --field concentration --predict-length 10
-```
-
-Use a new or empty output directory. The evaluator writes a comparison PNG/PDF,
-GIF, predicted PNG frames, per-frame CSV metrics, and a JSON report. The default
-device is CUDA when available, otherwise CPU. Full-resolution execution is much
-heavier than the preview; published figures were evaluated on a GPU.
-See [setup, expected files, and common errors](docs/getting-started.md).
-
-## 7. Train or generate new data
+### Check the training pipeline
 
 For a short CPU execution check with the bundled cases:
 
@@ -302,7 +320,9 @@ installation and checkpoint saving. The
 [complete CPU walkthrough](docs/getting-started.md#check-both-training-stages)
 also tests sequence fine-tuning and reloading its saved weights.
 
-For full training, arrange your own cases as in the [data-format guide](docs/data-format.md):
+### Train on a case collection
+
+Arrange your cases as in the [data-format guide](docs/data-format.md), then run the two stages in order:
 
 ```bash
 python -m python.train.single_frame --data-dir data/export_images --output-dir outputs/concentration-initial --field concentration
@@ -321,7 +341,9 @@ per dataset instance per worker; `--num-workers 0` is the simplest starting poin
 `--checkpoint` initializes weights for a new fine-tuning run with a fresh
 optimizer and sampling schedule. Use a new or empty output directory for each run.
 
-To generate new simulations, use a MATLAB session connected to COMSOL LiveLink:
+### Generate new MATLAB–COMSOL cases
+
+Use a MATLAB session connected to COMSOL LiveLink:
 
 ```matlab
 addpath('matlab');
@@ -330,6 +352,18 @@ run_dir = run_workflow(fullfile(pwd, 'outputs', 'matlab'), '', 5, 42);
 
 The final arguments select 5C and random seed 42. The [MATLAB guide](docs/matlab-workflow.md)
 details dependencies and outputs. MATLAB is not needed to use the bundled images.
+
+## Documentation
+
+| Guide | What it covers |
+| :--- | :--- |
+| [Getting started](docs/getting-started.md) | Installation, expected outputs, and troubleshooting |
+| [A complete simulation sample](docs/simulation-sample.md) | Microstructure, field images, conditioning maps, and training windows |
+| [MATLAB workflow](docs/matlab-workflow.md) | Geometry generation, COMSOL setup, and image export |
+| [Data format](docs/data-format.md) | Folder layout and image conventions |
+| [Reproducibility](docs/reproducibility.md) | Verified environments, execution records, and checks |
+
+For common setup problems, see [troubleshooting](docs/getting-started.md#troubleshooting).
 
 ## Repository layout and checks
 
