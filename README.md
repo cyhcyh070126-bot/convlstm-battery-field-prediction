@@ -120,12 +120,87 @@ run_dir = run_workflow(fullfile(pwd, 'outputs', 'matlab'), '', 5, 42);
 The final arguments select 5C and random seed 42. The [MATLAB guide](docs/matlab-workflow.md)
 details dependencies and outputs. MATLAB is not needed to use the bundled images.
 
-The geometry entry exposes the original initial particle count `N` and
-radius-distribution controls. `command = 1`, `2`, or `3` selects Weibull,
-Lognormal, or Normal; `mu` and `sigma` select the distribution parameters.
-The default saved geometry uses `N=60`, Normal radii, `mu=2` and `sigma=0.35`.
-Pass `geometry_options` as the fifth argument of `run_workflow` to choose another
-ensemble; see the [parameter example](docs/matlab-workflow.md#original-settings).
+### Choose particle count and radius distribution
+
+Set the geometry options before calling `run_workflow`; these select the
+existing branches in [`main_D21origin.m`](matlab/geometry/main_D21origin.m).
+
+| Parameter | What to change | Saved-source default | Worked 5C case 93203 |
+| :--- | :--- | :--- | :--- |
+| `N` | Number of initial packing particles / Voronoi seeds; an integer ≥ 3 | `60` | `60` |
+| `command` | Radius distribution: `1` = Weibull, `2` = Lognormal, `3` = Normal | `3` (Normal) | `2` (Lognormal) |
+| `mu` | Radius mean parameter in µm; positive | `2` | `2` |
+| `sigma` | Radius standard-deviation parameter in µm; positive | `0.35` | `0.10` |
+
+For example, generate a new **80-particle Lognormal** case:
+
+```matlab
+addpath('matlab');
+geometry_options = struct();
+geometry_options.N = 80;        % Change to 40, 60, 80, ...
+geometry_options.command = 2;   % 1: Weibull; 2: Lognormal; 3: Normal
+geometry_options.mu = 2.00;     % Radius mean parameter, micrometres
+geometry_options.sigma = 0.15;  % Radius standard deviation, micrometres
+
+c_rate = 5;                     % Loading condition: 5C
+random_seed = 42;               % Use [] for randomly seeded geometry
+run_dir = run_workflow(fullfile(pwd, 'outputs', 'matlab'), ...
+    '', c_rate, random_seed, geometry_options);
+```
+
+Change `geometry_options.N` to choose the particle count. Change
+`geometry_options.command` to switch distributions; edit `mu` and `sigma` to
+change the radius statistics. For Lognormal radii, these are radius-space mean
+and standard deviation; the original code converts them to log-space parameters.
+For Weibull radii, the original code fits shape and scale from the same two
+parameters. All three branches retain the original binning and sample-count
+adjustment; their sampled statistics need not equal the requested parameters
+exactly.
+
+`N` counts the initial seeds, so the final number of polygons after boundary
+clipping can differ. The initial `R0` is calculated from the sampled radii and
+the original packing fraction, and the packing loop can expand it to reduce
+overlap; it is not an independent `geometry_options` field. Change
+`c_rate` for another loading condition and `random_seed` for another random
+realization. These settings generate a new case; they do not recreate archived
+case 93203, whose original seed is not supplied.
+
+Omitted geometry fields retain their saved-source defaults. The
+[MATLAB guide](docs/matlab-workflow.md#original-settings) describes the full
+setup and output files.
+
+### From simulated cases to network samples
+
+A simulation case contains the complete field evolution for one microstructure
+and loading condition. A training example is a history/target window drawn from
+that case. For the selected field, Python pairs each history frame with the
+same grain-orientation and C-rate maps, preserving their spatial alignment.
+
+| Training stage | History → target frames | Windows per 25-frame case | Training patches per case |
+| :--- | :---: | ---: | ---: |
+| Initial next-frame training | 5 → 1 | 20 | 320 |
+| Sequence fine-tuning | 5 → 10 | 11 | 176 |
+
+A 512 × 512 image supplies sixteen non-overlapping 128 × 128 patches.
+Sequence validation uses the 11 full-image windows. See
+[window construction](docs/simulation-sample.md#4-from-one-case-to-training-examples)
+for the tensor shapes.
+
+Case splitting occurs before temporal windows are formed. Checkpoints saved by
+the training commands retain their case split, and fine-tuning inherits it
+across the two stages. This keeps overlapping windows from the same simulation
+out of different training and validation partitions.
+
+The files connect the stages as follows:
+
+| File or folder | Produced by | Used next for |
+| :--- | :--- | :--- |
+| `geometry_for_comsol.mat` | Particle packing and Voronoi construction | COMSOL geometry and crystal-orientation assignment |
+| Solved `.mph` model | Coupled transient COMSOL solve | Concentration and stress image export |
+| `1_Concentration/`, `2_Stress/` | Time-aligned field export | Separate concentration or stress prediction windows |
+| `3_Voronoi_Geometry/05_*.png`, `C-rate/*.png` | Static conditioning export | Six conditioning channels alongside each RGB field frame |
+| `run_metadata.mat` | MATLAB workflow | Geometry options, seed, loading and packing diagnostics |
+| `split.json`, saved checkpoint | Python training | Case partitions, model weights and subsequent fine-tuning/evaluation |
 
 <a id="2-model-and-convlstm-cell"></a>
 
@@ -200,17 +275,7 @@ Both stages use 512 × 512 source images and gradient-norm clipping at 5.
 
 Training uses joint spatial augmentation of field and static channels.
 Sequence teacher-forcing probability is `max(0, 1 - step * 1e-5)`.
-Case splitting occurs before temporal windows are formed. Checkpoints saved by
-the training commands retain their case split, and fine-tuning inherits it
-across the two stages.
 The [5C example](#5c-prediction-results) evaluates the supplied pretrained weights.
-
-A 25-frame case supplies **20 history/target windows** for initial training and
-**11 windows** for ten-step fine-tuning. A 512 × 512 image contains sixteen
-non-overlapping 128 × 128 patches, giving **320** and **176** patch examples per
-case, respectively. Sequence validation uses the 11 full-image windows.
-See [window construction](docs/simulation-sample.md#4-from-one-case-to-training-examples)
-for tensor shapes and the distinction between a simulation case and a training example.
 
 Concentration and stress use separate models. The supplied pretrained weights
 and 5C predictions are for **concentration**. The dataset also includes stress

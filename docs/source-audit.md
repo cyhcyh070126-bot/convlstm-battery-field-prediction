@@ -12,7 +12,7 @@ The original directory contains 48 MATLAB/Python code files. The earlier selecte
 
 The selected single-frame original is `训练代码/单帧预测模型/train_pytorch.py`; the selected sequence original is `训练代码/连续预测模型/finetune_sequence.py`. The reviewed root `train_pytorch.py` is an exact alias of the reviewed normal single-frame script, solely to resolve the newer prediction script’s companion import. It is not presented as the original root file.
 
-Use `python.train.pretrain`, `python.train.finetune` and `python.evaluation.predict` for portable training and prediction. Use `matlab/run_workflow.m` for the original selected 2D MATLAB–COMSOL workflow. The old pure-ConvLSTM model and the two distinct FNO tasks are historical alternatives, with different weights and channel contracts.
+Use `python.train.single_frame`, `python.train.sequence` and `python.evaluation.predict` for portable training and prediction. Use `matlab/run_workflow.m` for the original selected 2D MATLAB–COMSOL workflow. The old pure-ConvLSTM model and the two distinct FNO tasks are historical alternatives, with different weights and channel contracts.
 
 ## Verified comparisons
 
