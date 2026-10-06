@@ -2,31 +2,27 @@
 
 **Yanghao Chen · Tongji University**
 
-Predict the evolution of concentration and stress images in polycrystalline
-battery materials with a conditional ConvLSTM. The workflow connects
-MATLAB–COMSOL data generation, MSE + SSIM training, and autoregressive prediction
-in PyTorch.
+This repository contains the MATLAB–COMSOL simulation workflow and PyTorch
+models used to predict concentration and von Mises stress image sequences in
+polycrystalline battery materials. Separate conditional ConvLSTM models use
+field histories, grain orientations, and C-rate maps to predict subsequent frames.
 
 [Sample](#what-one-simulation-case-contains) · [Dataset generation](#dataset-and-simulation-workflow) · [Model](#model-architecture) · [Training](#training-strategy) · [5C results](#5c-prediction-results) · [Run the workflow](#quick-start) · [Documentation](#documentation) · [Research homepage](https://cyhcyh070126-bot.github.io/)
 
-- **Model:** a Conv3d feature extractor followed by three ConvLSTM layers and an RGB decoder.
-- **Inputs:** five field-history images, a grain-orientation map, and a C-rate map.
-- **Learning task:** next-frame prediction followed by ten-step autoregressive fine-tuning with MSE + SSIM.
-
-The bundled data and checkpoint support prediction on CPU or GPU. MATLAB and
-COMSOL are required only to generate new simulation cases. Concentration and
-stress are separate prediction targets; the included checkpoint predicts concentration.
+The release includes two simulation cases and a concentration checkpoint for
+CPU or GPU inference. New simulation cases require MATLAB with COMSOL LiveLink.
+Stress images and training code are included; a pretrained stress model is not.
 
 ## What one simulation case contains
 
-The worked sample throughout this README is **5C, case 93203**:
+The example is **5C, case 93203**:
 `N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203`.
 It was generated from 60 initial packing particles and contains 512 × 512 RGB
 field exports at 100-second intervals from 0 to 2400 seconds. See the [dataset inventory](docs/dataset-inventory.json)
 and [image-format documentation](docs/data-format.md).
 
-A **simulation case** describes one microstructure, its loading condition, and
-its field evolution. At the default export settings, its image collection is:
+A case comprises one microstructure, its loading condition, and the resulting
+field histories. The default export produces the following images:
 
 | Image group | PNGs per case | Role |
 | :--- | ---: | :--- |
@@ -56,10 +52,7 @@ one case becomes many training windows.
 | ![5C case grain orientation](assets/figures/orientation-input.png) | ![5C conditioning image](assets/figures/c-rate-5c.png) |
 | Each polygon is one grain, colored by its folded crystal orientation. This is the structural input for case 93203. | The uniform dark-red image encodes 5C as RGB `(153, 0, 0)`. It is a loading-condition input, not a concentration or stress field. |
 
-The orientation map colors each grain by its folded crystal orientation.
-The C-rate image is spatially uniform: this case encodes 5C as RGB `(153, 0, 0)`.
-Its three channels are carried alongside the three orientation channels at
-every time step as a conditioning input.
+The two static maps supply six conditioning channels at every time step.
 
 The [conditioning guide](docs/simulation-sample.md#additional-orientation-map-example)
 also includes the additional grain-orientation image shown on the research homepage.
@@ -69,14 +62,11 @@ also includes the additional grain-orientation image shown on the research homep
 | ![Dataset concentration evolution from the research homepage](assets/gifs/dataset-concentration.gif) | ![Dataset von Mises stress evolution from the research homepage](assets/gifs/dataset-stress.gif) |
 | Simulation-reference concentration images evolving over physical time. The colors represent the exported concentration field. | Simulation-reference von Mises stress images evolving over physical time. Stress uses a different color encoding from concentration. |
 
-These simulation-reference animations from the
-[research homepage](https://cyhcyh070126-bot.github.io/cv/) illustrate the two
-time-dependent fields, rather than network predictions. Their original case IDs
-and physical-time labels are not recorded in the GIFs; they are general field
-examples, not identified as case 93203. The
-[5C sample guide](docs/simulation-sample.md#3-field-sequences)
-shows concentration and stress snapshots from case 93203 at labeled physical times.
-The [5C results](#5c-prediction-results) show the pretrained concentration prediction for that same case.
+These are simulation-reference animations from the
+[research homepage](https://cyhcyh070126-bot.github.io/cv/). Their case IDs and
+physical-time labels are not recorded. Labeled snapshots from case 93203 are
+provided in the [sample guide](docs/simulation-sample.md#3-field-sequences);
+its network predictions appear in [5C prediction results](#5c-prediction-results).
 
 <a id="1-dataset-and-the-5c-example"></a>
 
@@ -92,10 +82,9 @@ MATLAB and COMSOL generate each case together through LiveLink for MATLAB:
    image export, pairing concentration and von Mises stress sequences with static
    orientation and C-rate maps. Python then forms prediction windows from these images.
 
-The simulation archive spans **261 complete cases** across 0.5C, 1C, 2C, 3C, 4C, and 5C.
-The repository provides **two complete example cases**, each with 25 concentration
-frames, 25 stress frames, and the associated conditioning maps, ready for
-prediction and training walkthroughs. The archive's C-rate distribution is:
+The local simulation archive contains **261 complete cases** across six C-rates.
+The public repository includes two of these cases, with both field sequences
+and their conditioning maps. The full archive is not bundled. Its case counts are:
 
 | C-rate | 0.5C | 1C | 2C | 3C | 4C | 5C |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -108,11 +97,8 @@ prediction and training walkthroughs. The archive's C-rate distribution is:
 | ![Final particle packing for the 5C example](assets/sample-5c/03_Final_Placement.png) | ![Voronoi microstructure colored by seed-particle radius for the 5C example](assets/sample-5c/04_Voronoi_Uncolored.png) |
 | Relaxed seed-particle discs inside the circular packing boundary. Disc colors distinguish particles; they do not encode crystal orientation. | Voronoi grain outlines colored by their generating particle's radius. The colorbar spans 1.2–2.6 µm; this is a radius map, not the orientation input above. |
 
-The circles on the left show the relaxed particle positions used to construct
-the grains. Their colors distinguish particles. On the right, polygon colors
-encode the generating particles' radii using the displayed micrometre scale.
-The [full gallery](docs/simulation-sample.md#1-microstructure-construction) also
-shows the radius distribution and initial placement.
+The [construction gallery](docs/simulation-sample.md#1-microstructure-construction)
+also includes the sampled radius distribution and initial particle placement.
 
 ### Generate new MATLAB–COMSOL cases
 
@@ -154,14 +140,11 @@ run_dir = run_workflow(fullfile(pwd, 'outputs', 'matlab'), ...
     '', c_rate, random_seed, geometry_options);
 ```
 
-Change `geometry_options.N` to choose the particle count. Change
-`geometry_options.command` to switch distributions; edit `mu` and `sigma` to
-change the radius statistics. For Lognormal radii, these are radius-space mean
-and standard deviation; the original code converts them to log-space parameters.
-For Weibull radii, the original code fits shape and scale from the same two
-parameters. All three branches retain the original binning and sample-count
-adjustment; their sampled statistics need not equal the requested parameters
-exactly.
+For Lognormal radii, `mu` and `sigma` are the radius-space mean and standard
+deviation, converted internally to log-space parameters. For Weibull radii,
+the code fits shape and scale from these two moments. All three distributions
+use the original binning and sample-count adjustment, so the finite sample's
+statistics need not equal the prescribed moments exactly.
 
 `N` counts the initial seeds, so the final number of polygons after boundary
 clipping can differ. The initial `R0` is calculated from the sampled radii and
@@ -177,10 +160,9 @@ setup and output files.
 
 ### From simulated cases to network samples
 
-A simulation case contains the complete field evolution for one microstructure
-and loading condition. A training example is a history/target window drawn from
-that case. For the selected field, Python pairs each history frame with the
-same grain-orientation and C-rate maps, preserving their spatial alignment.
+Training examples are overlapping history/target windows within each case.
+Each history frame is paired with the same spatially aligned orientation and
+C-rate maps.
 
 | Training stage | History → target frames | Windows per 25-frame case | Training patches per case |
 | :--- | :---: | ---: | ---: |
@@ -197,7 +179,7 @@ the training commands retain their case split, and fine-tuning inherits it
 across the two stages. This keeps overlapping windows from the same simulation
 out of different training and validation partitions.
 
-The files connect the stages as follows:
+Files passed between stages:
 
 | File or folder | Produced by | Used next for |
 | :--- | :--- | :--- |
@@ -214,13 +196,10 @@ The files connect the stages as follows:
 
 ![ConvLSTM architecture illustration used on the research homepage](assets/figures/battery_convlstm_pipeline.png)
 
-Field history and static conditioning maps enter a recurrent predictor. In this
-implementation, a Conv3d feature extractor precedes the ConvLSTM layers, as
-specified in the configuration table below. Read the illustration from left
-to right: concentration, orientation, and C-rate inputs are stacked, passed
-through three ConvLSTM layers, and decoded into a future field. The Conv3d
-extractor used in this repository is not drawn in this literature schematic.
-Illustration source: Wang et al., Figure 5, [Energy Storage Materials 82 (2025),
+The schematic shows field and conditioning inputs, recurrent processing, and
+RGB decoding. This implementation also includes a Conv3d feature extractor
+before the recurrent layers, which is absent from the schematic. Source:
+Wang et al., Figure 5, [Energy Storage Materials 82 (2025),
 104581](https://doi.org/10.1016/j.ensm.2025.104581).
 
 Each training example takes a **five-frame history**, with nine channels per frame:
@@ -249,12 +228,10 @@ selected source implementation.
 
 ![ConvLSTM cell structure used on the research homepage](assets/figures/battery_convlstm_cell_clean.png)
 
-Here, $X_t$ denotes the input feature map, $H_t$ the hidden state, and $C_t$ the
-cell state. Convolutional input, forget, and output gates retain the spatial grid
-while updating information through time. The $\sigma$ blocks are sigmoid gates;
-the $\tanh$ blocks form and transform cell information. This is one recurrent
-cell, not the full three-layer predictor.
-Illustration source: Wang et al., Figure 4, [same article](https://doi.org/10.1016/j.ensm.2025.104581).
+Within each ConvLSTM cell, convolutional gates update the hidden state $H_t$
+and cell state $C_t$ from the input features $X_t$. The diagram depicts one
+cell; the model stacks three layers. Source: Wang et al., Figure 4,
+[same article](https://doi.org/10.1016/j.ensm.2025.104581).
 
 <a id="3-training-strategy"></a>
 
@@ -267,13 +244,11 @@ feedback with the model's own predictions through scheduled sampling.
 
 ![Scheduled sampling illustration used on the research homepage](assets/figures/battery_scheduled_sampling.png)
 
-Scheduled sampling chooses which field to feed into the next prediction window:
-the simulation reference with probability $\epsilon$, or the model prediction
-with probability $1-\epsilon$. The model applies this strategy to continuous RGB
-regression with a sigmoid output. The illustration's Softmax and Sample blocks
-depict a generic discrete-output example; this code feeds back RGB predictions
-directly rather than sampling a Softmax output. Illustration: Figure 6 in
-[Wang et al.](https://doi.org/10.1016/j.ensm.2025.104581), also used on the homepage.
+Scheduled sampling feeds back the simulation reference with probability
+$\epsilon$ and the prediction with probability $1-\epsilon$. This RGB regression
+model uses sigmoid outputs directly; the schematic's Softmax and Sample blocks
+describe a discrete-output example. Source: Wang et al., Figure 6,
+[same article](https://doi.org/10.1016/j.ensm.2025.104581).
 
 | Setting | Initial training | Sequence fine-tuning |
 | :--- | :---: | :---: |
@@ -284,15 +259,14 @@ directly rather than sampling a Softmax output. Illustration: Figure 6 in
 | Epochs | 100 | 50 |
 | Adam learning rate | `1e-3` | `1e-5` |
 
-Both stages use 512 × 512 source images and gradient-norm clipping at 5.
+Both stages use 512 × 512 source images, joint spatial augmentation of field
+and static channels, and gradient-norm clipping at 5. The sequence-stage
+teacher-forcing probability is `max(0, 1 - step * 1e-5)`, where `step` counts
+optimizer updates. Use `--field stress` to train the separate stress model.
 
-Training uses joint spatial augmentation of field and static channels.
-Sequence teacher-forcing probability is `max(0, 1 - step * 1e-5)`.
-The [5C example](#5c-prediction-results) evaluates the supplied pretrained weights.
-
-Concentration and stress use separate models. The supplied pretrained weights
-and 5C predictions are for **concentration**. The dataset also includes stress
-images for training through `--field stress`.
+These settings describe the training code. The supplied legacy checkpoint
+contains weights only, so its training epoch, case split, and use of sequence
+fine-tuning cannot be recovered from the file.
 
 <a id="4-mse--ssim-objective"></a>
 
@@ -320,34 +294,34 @@ is fed back into the input window; future reference frames are used for evaluati
 
 ![5C concentration: simulation reference and autoregressive prediction](assets/results/5c/rollout.gif)
 
-**Read the animation:** left is the COMSOL simulation export; right is the
-ConvLSTM concentration prediction for the same case 93203 and physical time.
-The ten frames cover **500, 600, …, 1400 s**. The filename label
-`concentration_t01000`, for example, means **1000 s**. Playback follows physical
-time using one fixed pretrained model.
+**Concentration rollout, case 93203.** Left: COMSOL reference. Right: prediction
+from the fixed pretrained model. The ten frames span 500–1400 s in 100 s steps;
+`concentration_t01000` denotes 1000 s.
 
 ![5C concentration prediction and absolute RGB error](assets/results/5c/comparison.png)
 
-**Read the static comparison:** its four columns show **500, 800, 1100, and
-1400 s**, selected from the ten-frame rollout. Rows show the simulation
-reference, prediction, and mean absolute RGB error, respectively. The bottom
-row averages the absolute difference over the three normalized RGB channels
-at each pixel. Its shared colorbar and brighter colors indicate larger image
-differences; it is not an error map in concentration units.
+**Selected rollout frames at 500, 800, 1100, and 1400 s.** Rows show the COMSOL
+reference, prediction, and mean absolute error over the three normalized RGB
+channels. The colorbar reports image-space error, not concentration units.
 
 [Open the comparison PDF](assets/results/5c/comparison.pdf) ·
 [Per-frame metrics CSV](assets/results/5c/metrics.csv) ·
 [Evaluation settings and summary](assets/results/5c/evaluation.json)
 
-| Metric | Mean over 10 frames | Preferred direction |
-| :--- | ---: | :--- |
-| MSE | 0.00271848 | Lower |
-| SSIM | 0.968459 | Higher |
+| Metric | Mean over 10 frames |
+| :--- | ---: |
+| RGB MSE | 0.00271848 |
+| RGB SSIM | 0.968459 |
 
-Metrics are computed on normalized RGB images, including background pixels,
-for this **5C case study**. They quantify image agreement with the simulation
-reference. The CSV reports each predicted time separately; the
-[evaluation record](docs/checkpoint-provenance.json) identifies the checkpoint and settings.
+Over the rollout, RGB MSE increases from `2.89e-5` at 500 s to `8.08e-3`
+at 1400 s, while SSIM decreases from `0.9991` to `0.9258`. The per-frame
+record therefore shows the accumulated prediction error that the mean values summarize.
+
+Metrics include background pixels. The historical training split is unavailable,
+so the held-out status of this case is unknown; this is a reproducible case
+evaluation, not a generalization benchmark. Checkpoint identity, missing metadata,
+and evaluation settings are recorded in
+[checkpoint provenance](docs/checkpoint-provenance.json).
 
 <a id="6-run-the-example"></a>
 
@@ -449,11 +423,10 @@ optimizer and sampling schedule. Use a new or empty output directory for each ru
 
 ## Documentation
 
-The [complete source audit](docs/source-audit.md) records every normal-workflow
-MATLAB/Python original, saved version, dependency and fix. Original bytes and
-separately reviewed copies are available in `source_archive/` and `research_scripts/`.
-The current quick start uses the selected normal model; historical versions
-remain distinct.
+The [source audit](docs/source-audit.md) records the supplied MATLAB/Python
+files, their roles, and changes made for execution. `source_archive/` preserves
+the originals; `research_scripts/` contains the reviewed historical versions.
+The commands above use the packaged implementation in `matlab/` and `python/`.
 
 | Guide | What it covers |
 | :--- | :--- |
