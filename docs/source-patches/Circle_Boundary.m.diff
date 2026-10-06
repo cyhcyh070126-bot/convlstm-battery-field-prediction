@@ -1,0 +1,12 @@
+--- source_archive/Circle_Boundary.m
++++ research_scripts/Circle_Boundary.m
+@@ -5,6 +5,9 @@
+ % ndm=3;
+ 
+ kn=floor(R0*pi/2);
++if ~isfinite(R0) || kn < 1
++    error("Boundary radius is too small for the original boundary discretization.");
++end
+ if ndm==3
+     phi=R0;
+     alpha=pi*(0:kn)/kn;

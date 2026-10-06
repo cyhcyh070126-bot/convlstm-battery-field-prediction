@@ -1,0 +1,11 @@
+--- source_archive/build_full_comsol_model.m
++++ research_scripts/build_full_comsol_model.m
+@@ -40,7 +40,7 @@
+     % --- 2. 创建模型和物理场（来自你的脚本） ---
+     disp('创建 COMSOL 模型、参数和物理场接口...');
+     model = ModelUtil.create('Model');
+-    model.modelPath('D:\File\Scientific_research\2D\5'); % 【请确保此路径有效】
++    model.modelPath(pwd); % 【请确保此路径有效】
+     model.component.create('comp1', true);
+     model.component('comp1').geom.create('geom1', 2);
+     model.component('comp1').geom('geom1').lengthUnit('um');

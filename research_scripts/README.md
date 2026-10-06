@@ -1,0 +1,5 @@
+# Reviewed original research scripts
+
+These are the author’s normal-workflow scripts with narrowly documented bug/import/path fixes. Source versions, scientific settings and rendering constants remain separate. See the [file-by-file review](../docs/source-audit.md), [manifest](../docs/complete-source-manifest.json) and [diffs](../docs/source-patches/).
+
+For portable training and prediction, use the repository README commands. Historical scripts retain local data/checkpoint paths, RAM-heavy loading and original worker/batch settings. Inspect each script’s configuration first. Additional original dependencies include matching Torch/torchvision builds, tqdm and torchinfo; FNO scripts additionally require neuraloperator. They are not required by the supported ConvLSTM quick start. Old and new prediction scripts need their matching model architecture/checkpoint; the newer companion alias is documented in the manifest. MATLAB scripts require their original toolbox/LiveLink dependencies. The periodic auxiliary renderer cannot execute without its missing original helpers.

@@ -106,9 +106,23 @@ and convergence diagnostics to support geometry-parameter selection.
 | Stress rendering | `solid.mises`, Prism color table, upper color limit `5E8` |
 | Field export size | 512 × 512 pixels |
 
-Edit the clearly named parameters near the start of
-`matlab/geometry/main_D21origin.m` to generate other particle ensembles. Its
-Weibull and lognormal branches are also retained. The export time vector and
+Select another initial particle count and one of the original distribution
+branches through the optional fifth argument:
+
+```matlab
+geometry_options = struct('N', 80, 'command', 2, 'mu', 2, 'sigma', 0.15);
+run_dir = run_workflow(output_dir, '', 5, 42, geometry_options);
+```
+
+`command = 1`, `2`, and `3` select the original Weibull, Lognormal, and Normal
+branches respectively. `mu` and `sigma` retain their original meanings; the
+Lognormal branch performs its original arithmetic-to-log-space conversion.
+Omitted fields keep the saved source defaults. `N` is the initial packing
+particle count; it is not a promise that every seed survives boundary clipping.
+Invalid option names and values are rejected before COMSOL construction.
+Nine original-versus-packaged radius comparisons passed with exact equality;
+see the [source audit](source-audit.md) for coverage and execution limits.
+The export time vector and
 COMSOL study list live together in `run_single_simulation.m`; keep them
 consistent if changing the temporal resolution.
 

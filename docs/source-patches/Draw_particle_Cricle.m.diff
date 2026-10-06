@@ -1,0 +1,11 @@
+--- source_archive/Draw_particle_Cricle.m
++++ research_scripts/Draw_particle_Cricle.m
+@@ -9,7 +9,7 @@
+ elseif ndm == 3
+     % 这里为你未来的3D绘图函数留出接口
+     % Draw_particle_Cricle_3D(Ps, N, R0);
+-    disp('3D plotting function is not yet implemented.');
++    error('The original circular dispatcher has no implemented 3D branch.');
+     
+ end
+ 

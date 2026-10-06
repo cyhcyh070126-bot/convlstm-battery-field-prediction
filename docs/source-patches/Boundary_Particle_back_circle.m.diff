@@ -1,0 +1,28 @@
+--- source_archive/Boundary_Particle_back_circle.m
++++ research_scripts/Boundary_Particle_back_circle.m
+@@ -3,8 +3,9 @@
+ if ndm==2
+     ifout_low =sqrt(Ps(:,1).^2+Ps(:,2).^2)> R0+Ps(:,3);
+     while any(ifout_low,'all')
+-        Ps(:,1) = Ps(:,1) - 2*R0.*ifout_low.*Ps(:,1)./sqrt(Ps(:,1).^2+Ps(:,2).^2);
+-        Ps(:,2) = Ps(:,2) - 2*R0.*ifout_low.*Ps(:,2)./sqrt(Ps(:,1).^2+Ps(:,2).^2);
++        radial_norm = sqrt(Ps(:,1).^2+Ps(:,2).^2);
++        Ps(:,1) = Ps(:,1) - 2*R0.*ifout_low.*Ps(:,1)./max(radial_norm, realmin);
++        Ps(:,2) = Ps(:,2) - 2*R0.*ifout_low.*Ps(:,2)./max(radial_norm, realmin);
+         ifout_low=sqrt(Ps(:,1).^2+Ps(:,2).^2)> R0+Ps(:,3);
+     end
+ end
+@@ -12,9 +13,10 @@
+ if ndm==3
+     ifout_low =sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2)> R0+Ps(:,4);
+     while any(ifout_low,'all')
+-        Ps(:,1) = Ps(:,1) - 2*R0.*ifout_low.*Ps(:,1)./sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2);
+-        Ps(:,2) = Ps(:,2) - 2*R0.*ifout_low.*Ps(:,2)./sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2);
+-        Ps(:,3) = Ps(:,3) - 2*R0.*ifout_low.*Ps(:,3)./sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2);
++        radial_norm = sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2);
++        Ps(:,1) = Ps(:,1) - 2*R0.*ifout_low.*Ps(:,1)./max(radial_norm, realmin);
++        Ps(:,2) = Ps(:,2) - 2*R0.*ifout_low.*Ps(:,2)./max(radial_norm, realmin);
++        Ps(:,3) = Ps(:,3) - 2*R0.*ifout_low.*Ps(:,3)./max(radial_norm, realmin);
+         ifout_low=sqrt(Ps(:,1).^2+Ps(:,2).^2+Ps(:,3).^2)> R0+Ps(:,4);
+     end
+ end

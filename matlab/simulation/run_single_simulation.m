@@ -1,7 +1,11 @@
-function result_dir = run_single_simulation(workflow_output_root, workflow_c_rate, workflow_random_seed)
+function result_dir = run_single_simulation(workflow_output_root, workflow_c_rate, workflow_random_seed, workflow_geometry_options)
 %RUN_SINGLE_SIMULATION Portable orchestration of the original MATLAB scripts.
 % Use run_workflow from matlab/ to configure paths and check prerequisites.
 % Scientific parameters and image rendering are retained from the source.
+if nargin < 4
+    workflow_geometry_options = struct();
+end
+workflow_geometry_options = validate_geometry_options(workflow_geometry_options);
 
 original_directory = pwd;
 directory_cleanup = onCleanup(@() cd(original_directory)); %#ok<NASGU>
@@ -42,7 +46,7 @@ export_simulation_images;
 result_dir = fullfile(base_output_folder, run_folder_name);
 % Retain the geometry and configuration with each exported image sequence.
 copyfile(fullfile(work_directory, 'geometry_for_comsol.mat'), result_dir);
-save(fullfile(result_dir, 'run_metadata.mat'), 'workflow_random_seed', ...
+save(fullfile(result_dir, 'run_metadata.mat'), 'workflow_random_seed', 'workflow_geometry_options', ...
     'C_RATE_TO_RUN', 'workflow_time_values', 'N_val', 'R0_val', ...
     'dist_name_simple', 'mu', 'sigma', 'packing_converged', ...
     'k', 'max_force', 'Overlapi', 'ftol', 'ttol');

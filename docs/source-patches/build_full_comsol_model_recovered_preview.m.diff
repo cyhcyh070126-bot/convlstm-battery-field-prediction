@@ -1,0 +1,173 @@
+--- source_archive/build_full_comsol_model_recovered_preview.m
++++ research_scripts/build_full_comsol_model_recovered_preview.m
+@@ -14,7 +14,7 @@
+ %clc;
+ clear model; 
+ %close all; % 关闭�?有旧�?figure 窗口
+-disp('--- COMSOL 建模脚本已启�?);
++disp('--- COMSOL 建模脚本已启动 ---');
+ 
+ % --- 0. 清理 COMSOL 服务�?---
+ import com.comsol.model.*
+@@ -22,7 +22,7 @@
+ try
+     ModelUtil.remove('Model');
+ catch
+-    disp('... 正在创建新模�?...');
++    disp('... 正在创建新模型 ...');
+ end
+ 
+ try
+@@ -33,21 +33,21 @@
+     N_finite = length(polygons); % 获取晶粒�?
+     r0_value = R0; % 获取外径
+     
+-    fprintf('成功加载 %d �?��粒的数据。\n', N_finite);
+-
+-
+-
+-
+-
+-
+-
+-
+- fprintf('------------------------------------------------\n');
++    fprintf('成功加载 %d 个晶粒的数据。\n', N_finite);
++
++
++
++
++
++
++
++
++    fprintf('------------------------------------------------\n');
+ 
+     % --- 2. 创建模型和物理场 (来自你的脚本) ---
+-    disp('创建 COMSOL 模型、参数和物理场接�?..');
++    disp('创建 COMSOL 模型、参数和物理场接口...');
+     model = ModelUtil.create('Model');
+-    model.modelPath('D:\File\Scientific_research\2D\5'); % 【�?�?��此路径有效�??
++    model.modelPath(pwd); % 【�?�?��此路径有效�??
+     model.component.create('comp1', true);
+     model.component('comp1').geom.create('geom1', 2);
+     model.component('comp1').geom('geom1').lengthUnit('um');
+@@ -129,18 +129,18 @@
+ 
+ 
+ 
+- fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
+ 
+     % --- 3. 【�? 1 �?���?(�?��建几�?�?(来自你的脚本) ---
+-    fprintf('正在�?%d �?��粒构建几�?..\n', N_finite);
++    fprintf('正在为 %d 个晶粒构建几何...\n', N_finite);
+     polygon_tags = {};
+     domain_indices = [];
+     
+     for i = 1:N_finite
+         vertices = polygons{i};
+         if size(vertices, 1) < 3
+-            fprintf('警告：�? %d �??边形顶点数少�?，已跳过。\n', i);
+-            fprintf('------------------------------------------------\n');      
++            fprintf('警告：第 %d 个多边形顶点数过少，已跳过。\n', i);
++            fprintf('------------------------------------------------\n');
+             continue; 
+         end
+    
+@@ -160,7 +160,7 @@
+ 
+ 
+     % --- 4. 【构建并敲定几何�?(来自你的脚本) ---
+-    disp('正在合并晶粒并进行圆形�?�?..');
++    disp('正在合并晶粒并进行圆形裁剪...');
+     model.component('comp1').geom('geom1').feature.create('union1', 'Union');
+     model.component('comp1').geom('geom1').feature('union1').selection('input').set(polygon_tags);
+     model.component('comp1').geom('geom1').feature('union1').set('intbnd', 'on');
+@@ -172,8 +172,8 @@
+     model.component('comp1').geom('geom1').feature('int1').selection('input').set({'union1', 'circ1'});
+     
+ 
+-     fprintf('------------------------------------------------\n');
+-    disp(' 已构建最终几�?(Geom1.run()) ---');
++    fprintf('------------------------------------------------\n');
++    disp('已构建最终几何，正在执行 Geom1.run() ...');
+     model.component('comp1').geom('geom1').run();
+ 
+ 
+@@ -181,7 +181,7 @@
+ 
+ 
+     % --- 5. 【�? 2 �?���?(分配物理�?�?(来自你的脚本) ---
+-    fprintf('正在�?%d �?��效晶粒分配�?��?学�?�物理属�?..\n', length(domain_indices));
++    fprintf('正在为 %d 个有效晶粒分配晶体力学与物理场属性...\n', length(domain_indices));
+     Omega11_val = 7.3098e-7; 
+     Omega33_val = -1.1049e-6;
+     Mm_val = 0.09728;        
+@@ -253,25 +253,25 @@
+         domain_counter = domain_counter + 1;
+     end
+     
+-    fprintf(' %d �?��粒的物理场分配完毕�?�\n', length(domain_indices));
+-
+-
+- fprintf('------------------------------------------------\n');
+- fprintf('------------------------------------------------\n');
++    fprintf('%d 个晶粒的物理场分配完毕。\n', length(domain_indices));
++
++
++    fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
+ 
+     % --- 6. 设置全局物理�?(来自你的脚本) ---
+-    disp('设置全局边界条件和初始�??..');
++    disp('设置全局边界条件和初始值...');
+     model.component('comp1').physics('tds').create('fl1', 'FluxBoundary', 1);
+     model.component('comp1').physics('tds').feature('fl1').selection.all;
+     model.component('comp1').physics('tds').feature('fl1').set('species', true);
+     model.component('comp1').physics('tds').feature('fl1').set('J0', '-J');
+     model.component('comp1').physics('tds').feature('init1').set('initc', 'cs_0');
+ 
+-     fprintf('------------------------------------------------\n');
+-      fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
+    
+     % =====================================================================
+-    disp('正在划分 "超细" 网格...');
++    disp('正在划分“超细”网格...');
+     % 'autoMeshSize(2)' 对应 "超细" (Extra fine)
+     model.component('comp1').mesh('mesh1').autoMeshSize(2);
+ 
+@@ -282,7 +282,7 @@
+ 
+ 
+ 
+- fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
+ 
+ 
+     % --- 7. 【�?��?��??先保存，再打�? 】�?��?��??(来自你的脚本) ---
+@@ -290,7 +290,7 @@
+ 
+     output_model_file = 'comsol_MERGED_SCIENTIFIC_model.mph'; % 新文件名
+     disp('正在保存模型...');
+-     fprintf('------------------------------------------------\n');
++    fprintf('------------------------------------------------\n');
+ 
+     mphsave(model, output_model_file); % <-- 1. 先保�?
+ 
+@@ -301,10 +301,10 @@
+            % disp('这是�?�?���??�完整几何和物理场�?�的模型，已进�?网格划分，现在进行�?算即�???);
+ 
+ catch e
+-    disp('--- 发生错�? ---');
++    disp('--- 发生错误 ---');
+     disp(e.message);
+     if ~isempty(e.stack)
+-        fprintf('错�?发生在文�?%s 的�? %d 行\n', e.stack(1).file, e.stack(1).line);
++        fprintf('错误发生在文件 %s 的第 %d 行\n', e.stack(1).file, e.stack(1).line);
+     end
+-    disp('请确�?COMSOL Livelink 已启�?��且所有路径�?�???);
++    disp('请确认 COMSOL Livelink 已启动，并且所有路径都正确。');
+ end

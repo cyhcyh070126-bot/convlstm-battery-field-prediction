@@ -1,0 +1,884 @@
+{
+  "reviewed_on": "2026-10-06",
+  "files": [
+    {
+      "path": "Boundary_Particle_back.m",
+      "role": "Periodic Cartesian box boundary relocation; retained auxiliary, not the selected circular workflow.",
+      "selected_before_audit": false,
+      "sha256": "5c63e7c704129c8f3e93d9e8a47051638de77d84dcbec0c8807dc76ebf0bcb0a",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Boundary_Particle_back_circle.m",
+      "role": "Circular/spherical radial wrapping helper; fix coordinate-update denominator; checked in 2D and 3D.",
+      "selected_before_audit": false,
+      "sha256": "7f172e8a95d7586e6330ff9858533b6cb2fda09fd067dfb5071411d874f392fb",
+      "fixes": [
+        "Compute all radial-correction components from the same pre-update norm; reject impossible inner-boundary radii and allow rounding tolerance."
+      ],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Boundary_Particle_back_circle_2.m",
+      "role": "Inner circular/spherical projection helper; fix denominator and rounding termination; reject impossible particle radius.",
+      "selected_before_audit": false,
+      "sha256": "e5b4dade6a82eb7dc25273b8eef53a5ee4ea17fe07bae9fe779edf86acace97d",
+      "fixes": [
+        "Compute all radial-correction components from the same pre-update norm; reject impossible inner-boundary radii and allow rounding tolerance."
+      ],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "build_full_comsol_model.m",
+      "role": "Selected COMSOL geometry, crystal angles, anisotropic transport/elasticity, swelling, mesh, transient-study setup.",
+      "selected_before_audit": true,
+      "sha256": "ea30637ebf8f5c251a8b7b61deac4675392e56cbf51da970dc9f27579785c63f",
+      "fixes": [
+        "Use the current COMSOL output directory rather than an absent drive."
+      ],
+      "matlab_analyzer": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 118,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 119,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "build_full_comsol_model_recovered_preview.m",
+      "role": "Alternative recovered COMSOL builder. Restore corrupted display strings from the valid original companion; do not merge alternative model assignments.",
+      "selected_before_audit": false,
+      "sha256": "d248aac9c1943b6078852556ac5bff34f9a7183697c50fe5d6a5c0aa0d03755b",
+      "fixes": [
+        "Restore corrupted display strings from the valid original companion model builder; model assignments unchanged.",
+        "Use the current COMSOL output directory rather than an absent drive."
+      ],
+      "matlab_analyzer": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 148,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 149,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "calculate_force.m",
+      "role": "Contact force aggregation and particle force norms; selected packing helper.",
+      "selected_before_audit": true,
+      "sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "check_fno_structure.py",
+      "role": "Historical FNO shape check: 21 input channels to 60 output channels; distinct task from train_fno_emoji.py. neuraloperator/torchinfo required; full FNO execution not verified.",
+      "selected_before_audit": false,
+      "sha256": "aded59a421597d5d2970f5a4fb57b6c1f2b903179fe3db7a6c0351ee02f0ea67",
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [],
+      "literal_settings": {
+        "INPUT_FRAMES": 5,
+        "OUTPUT_FRAMES": 20
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "check_patching.py",
+      "role": "Original patch-data inspection; resolve missing dataset name to the existing normal RAMBatteryDataset and calculate expected sample count from actual frames.",
+      "selected_before_audit": false,
+      "sha256": "509a1b5064bbe7ae8d7715c705ca3d37d59c6346fe6cedb30df4b1c2e606b7e0",
+      "fixes": [
+        "Use the existing single-frame patch dataset; derive expected windows from actual frame count; disable augmentation for inspection.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "check_dataset_health",
+          "line": 10,
+          "ast_sha256": "9d0e6f99ee224d39bffc8b5efd7db110c0e262d7886c9fff76ea690d67af18cb"
+        }
+      ],
+      "literal_settings": {},
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "Circle_Boundary.m",
+      "role": "Virtual boundary particles for circular packing; used by selected geometry; preserve discretization for valid radii.",
+      "selected_before_audit": true,
+      "sha256": "46cafb91b0ca8f909450a393f997bc262d0ed1fbe6225ddfaadbf4a62514eee0",
+      "fixes": [
+        "Reject radii for which the original boundary discretization divides by zero; valid-radius discretization unchanged."
+      ],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Contact_Detection_1.m",
+      "role": "Pairwise particle contact detection; historical alternative to the bounding-box detector.",
+      "selected_before_audit": false,
+      "sha256": "911d255f895c974506d60fac4324b45b067dc78dbead63c7298d7d7cea9ccc5a",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Contact_Detection_By_Boundary_Box1.m",
+      "role": "Bounding-box filtered particle contacts and overlap information; selected packing detector.",
+      "selected_before_audit": true,
+      "sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "convlstm.py",
+      "role": "Actual ConvLSTM recurrent cell, gates and stacked recurrence. Fix advertised scalar/tuple constructor and dtype only; verified original forward/backward equality for the selected model.",
+      "selected_before_audit": true,
+      "sha256": "a80edab78d8cbd917a44c677352e0fffe326a5ff8b99b4baabc8dc52c0d2e82f",
+      "fixes": [
+        "Normalize the advertised scalar/tuple constructor options and initialize states in the model dtype; recurrent formulas unchanged.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "ConvLSTMCell",
+          "line": 4,
+          "ast_sha256": "7a628853454570a22628487021034d665ed92be3b1e9956b3067541ef937eee4"
+        },
+        {
+          "name": "ConvLSTM",
+          "line": 45,
+          "ast_sha256": "5ba12bec1066a30bc8b7ac243e2f637b19784a88c174a3cf456930250ea7b31a"
+        }
+      ],
+      "literal_settings": {},
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "create_comsol_geometry.m",
+      "role": "Geometry-only COMSOL polygon builder; historical alternative, not the coupled model driver.",
+      "selected_before_audit": false,
+      "sha256": "626c22b600fe9d68f7d75b5f72a1f45427cc60a3267ded1607001be5867e7408",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "SAGROW",
+        "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+        "fix": 0,
+        "line": 55,
+        "column": [
+          9,
+          20
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "data_loader.py",
+      "role": "RGB field/static-map loader; concentration, stress and both modes. Fix stress-only frame count and Unicode paths; reject inconsistent frame counts.",
+      "selected_before_audit": true,
+      "sha256": "310a59df6a8ba0fbf17760a99eb634bb2039e897929d0a0b240b83cdf2851903",
+      "fixes": [
+        "Use actual stress frame count for stress-only loading and reject mismatched both-field sequences/unknown modes.",
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "load_simulation_data",
+          "line": 6,
+          "ast_sha256": "61b34082a14368d205b98bfd3114d7a40d6c6a049525dafbbf8892fe48223cb3"
+        }
+      ],
+      "literal_settings": {},
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "Draw_particle_1.m",
+      "role": "Cartesian particle plotting dispatcher to supplied 2D/3D _1 helpers; auxiliary.",
+      "selected_before_audit": false,
+      "sha256": "76db138afff5dd009b18b744e14d821be8375adb1f6d79f9649cf36d13899003",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          33,
+          34
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_2D_1.m",
+      "role": "2D Cartesian particle/box plot; original geometry and plotting constants retained.",
+      "selected_before_audit": false,
+      "sha256": "9792695087c36b4e65969c160de400ae926a596d01bed37618b5158ab49ceb8c",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_3D_1.m",
+      "role": "3D Cartesian particle plot; auxiliary, not a 3D COMSOL workflow.",
+      "selected_before_audit": false,
+      "sha256": "4ac24ec4702ca7cbc9523f0055baad3dc3821d04ab3a40f293f3df11a540ac58",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_Cricle.m",
+      "role": "Selected circular dispatcher supports 2D only; original 3D branch is unimplemented and now raises an explicit error.",
+      "selected_before_audit": true,
+      "sha256": "4a498e31a13e02d1068200bcb400591373acb91af0e731092dca473a47c9cfd4",
+      "fixes": [
+        "Report the original unsupported 3D dispatcher explicitly instead of claiming a successful plot; supported 2D drawing unchanged."
+      ],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_Cricle_2D.m",
+      "role": "Selected 2D circular particle plot and original axes limits.",
+      "selected_before_audit": true,
+      "sha256": "9e2a53d486c9b16336a00dc2309fef140b8054517e4f80f1ef2838551a370242",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_Cricle_3D.m",
+      "role": "Separate historical 3D circle/sphere renderer with its own signature; not wired into the 2D driver.",
+      "selected_before_audit": false,
+      "sha256": "6a11b345f85cb05c5ebd37fb64fed6dad2a28817e224d4f01d2f1f6b8f0f32f7",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_particle_period.m",
+      "role": "Historical periodic plotting requires absent Draw_particle_2D/Draw_particle_3D helpers. Source reviewed; execution remains unavailable without those originals. Not called by the selected workflow.",
+      "selected_before_audit": false,
+      "sha256": "e2a0831a3e75461da2ae555b9450705d0fb9a0f471b8b81ab9b1c4ddb0f2ec5f",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "Draw_Polycrystal.m",
+      "role": "Selected clipped Voronoi construction and radius-colored polygon plot; save geometry and original rendering.",
+      "selected_before_audit": true,
+      "sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "finetune_sequence.py",
+      "role": "Normal 5-frame input / 10-step scheduled-sampling fine-tuning; byte-identical duplicate of the selected nested sequence script.",
+      "selected_before_audit": false,
+      "sha256": "328b3e75e05982516365ee9ebf66b0341247ab617a395b0685a4034b6dd29dbc",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "LazySeqBatteryDataset",
+          "line": 48,
+          "ast_sha256": "158fdbadeb4518f7bdfad3a26c8dd90955eedc46b72e11f8b18b5fd53fdd37d6"
+        },
+        {
+          "name": "PaperModel",
+          "line": 158,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 180,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "TRAIN_BATCH_SIZE": 16,
+        "VAL_BATCH_SIZE": 4,
+        "LEARNING_RATE": 1e-05,
+        "EPOCHS": 50,
+        "INPUT_SEQ_LENGTH": 5,
+        "SEQUENCE_PREDICT_LEN": 10,
+        "PATCH_SIZE": 128,
+        "EPSILON_START": 1.0,
+        "EPSILON_DECAY": 1e-05
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "fix_all_crate_colors.m",
+      "role": "Original batch C-rate RGB correction over export_images; inspect paths before invoking because it rewrites existing conditioning images.",
+      "selected_before_audit": false,
+      "sha256": "4d471d5d25a11ba6864a6ba8398151e09de32e7fa73c277c6f80cf5dd63aef43",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "main_D21origin.m",
+      "role": "Selected radius distributions, contact-force relaxation, virtual boundary, Voronoi geometry and orientation export. N and distribution controls exposed in matlab/run_workflow.m.",
+      "selected_before_audit": true,
+      "sha256": "08d77af44444c1a0acceb64a71b16f03af2fbd7698ee064f4f32bc662dca5f8b",
+      "fixes": [
+        "Resolve temporary images relative to the actual working directory."
+      ],
+      "matlab_analyzer": [
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 84,
+          "column": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 166,
+          "column": [
+            14,
+            15
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 244,
+          "column": [
+            12,
+            13
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 390,
+          "column": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 416,
+          "column": [
+            5,
+            19
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 447,
+          "column": [
+            5,
+            9
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 490,
+          "column": [
+            9,
+            26
+          ]
+        },
+        {
+          "id": "CAXIS",
+          "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+          "fix": 1,
+          "line": 767,
+          "column": [
+            1,
+            5
+          ]
+        }
+      ],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "run_single_simulation.m",
+      "role": "Original COMSOL orchestration, C-rate/time selection and field exports. Portable selected entry is matlab/run_workflow.m; original script preserves its workspace behavior.",
+      "selected_before_audit": true,
+      "sha256": "7c8c2b9b5b04e3e896d6db06ce2f1aa74b95fccb54b30157edc511b5fb9e0a2b",
+      "fixes": [
+        "Resolve workflow directory from the copied original script, not the author Desktop."
+      ],
+      "matlab_analyzer": {
+        "id": "CLALL",
+        "message": "将 'clear' 与 'all' 选项结合使用通常会降低代码性能，一般无需执行此操作。",
+        "fix": 0,
+        "line": 9,
+        "column": [
+          7,
+          9
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "train_fno_emoji.py",
+      "role": "Historical FNO concentration-to-stress task: 25 concentration frames plus static maps (81 channels) to 25 stress frames (75 channels), MSE. Separate from ConvLSTM; not a matched checkpoint for the 21-to-60 shape check.",
+      "selected_before_audit": false,
+      "sha256": "1dd5ce03979e8543372347abe0d8e9bb1948fbf3a2211d7456e24502fc0a5671",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Reject missing C-rate conditioning rather than synthesize a black input.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "Battery512Dataset",
+          "line": 41,
+          "ast_sha256": "9a3f0b88315881e4e321ac90e470d53687e7dba165bb325e3609a20d757d1673"
+        },
+        {
+          "name": "save_visual_check",
+          "line": 115,
+          "ast_sha256": "db63752911b8df7796ae08be5853f3518e63c286ea6f4596a136817f9f999055"
+        }
+      ],
+      "literal_settings": {
+        "DATA_ROOT": "export_images",
+        "RESULT_DIR": "training_results",
+        "TRAIN_SIZE": 128,
+        "TARGET_SIZE": 512,
+        "BATCH_SIZE": 4,
+        "EPOCHS": 200,
+        "LEARNING_RATE": 0.001
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "保存新代码/Draw_Polycrystal.m",
+      "role": "Saved-new Voronoi plotting version; distinct source retained separately, not substituted into the selected geometry entry.",
+      "selected_before_audit": false,
+      "sha256": "a8ffb3f99a0357ded9ac38e02f9a7fa96f3a3b4abd6a391ae6f278c3abaf2052",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "保存新代码/predict_pytorch.py",
+      "role": "Normal newer-model autoregressive prediction; companion import points to the selected Conv3d + ConvLSTM single-frame model, not another root experiment.",
+      "selected_before_audit": false,
+      "sha256": "9d78b0e364e89fbb16e5151d40d5a13d13987509f939142b5fcab5234dc21eae",
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "visualize_prediction",
+          "line": 20,
+          "ast_sha256": "fb3e95a8a0f204ec717e3033c8fb6485c6c342a8504ef0cd1a11577ba3c8ccf2"
+        }
+      ],
+      "literal_settings": {
+        "MODEL_PATH": "best_model_pytorch.pth",
+        "TARGET_FOLDER_NAME": "N=60_Lognormal_mu=2.00_sigma=0.15_R0=17.248_C=0.5_ID=69550"
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "保存旧代码/Draw_Polycrystal.m",
+      "role": "Saved-old Voronoi plotting version; original plotting choices remain separate.",
+      "selected_before_audit": false,
+      "sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "保存旧代码/predict_pytorch.py",
+      "role": "Old-model autoregressive prediction; local companion import uses 保存旧代码/train_pytorch.py. Old and new model weights are not interchangeable.",
+      "selected_before_audit": false,
+      "sha256": "c6c2db8ea21e4eada689ffa263d94b5e3544f15cc6b92e664145758bf9354f98",
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "visualize_prediction",
+          "line": 16,
+          "ast_sha256": "72ab2349877dee6bdaea646268798d63ee7ae3ee2dfc6e506995da84647ef61f"
+        }
+      ],
+      "literal_settings": {
+        "MODEL_PATH": "best_model_pytorch.pth"
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "保存旧代码/train_pytorch.py",
+      "role": "Historical pure ConvLSTM single-frame trainer, 50 epochs; different architecture from the selected Conv3d + ConvLSTM model. MSE + SSIM retained.",
+      "selected_before_audit": false,
+      "sha256": "de91a545b7449faade9bddcc0d0534c85c7fd851b119786efaaab413840a17b1",
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "BatteryDataset",
+          "line": 26,
+          "ast_sha256": "6e3003541eaa0e9f476ff6016a51ffaa54cbf4f76ebc05763216e5da5bf81537"
+        },
+        {
+          "name": "PaperModel",
+          "line": 73,
+          "ast_sha256": "84c16ee5ebb6f7fd1a183bd718a60572bf0ecd047407690f7aeb4c62d6fb42e4"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 108,
+          "ast_sha256": "91ace94422ed8df436c35af4904711b767e2ad8de76a09f4eb62b3452fbefa9e"
+        }
+      ],
+      "literal_settings": {
+        "BATCH_SIZE": 1,
+        "LEARNING_RATE": 0.001,
+        "EPOCHS": 50,
+        "INPUT_SEQ_LENGTH": 5
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "新版/calculate_force.m",
+      "role": "Saved-new force helper; independent file hash checked against the selected helper, preserved as its own original.",
+      "selected_before_audit": false,
+      "sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "fixes": [],
+      "matlab_analyzer": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "新版/Contact_Detection_By_Boundary_Box1.m",
+      "role": "Saved-new bounding-box contact helper; independent file retained with its original implementation.",
+      "selected_before_audit": false,
+      "sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "fixes": [],
+      "matlab_analyzer": [],
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "新版/Draw_Polycrystal.m",
+      "role": "Alternative Voronoi renderer; bind the previously undefined ax to the existing axes. Real MATLAB render passed; layout constants unchanged.",
+      "selected_before_audit": false,
+      "sha256": "2493f2cd6b084ab4f8a6a934ea06d3935e42221bea6ee25c06a38fd1bc51ad74",
+      "fixes": [
+        "Bind ax to the existing figure; preserve every plotting parameter."
+      ],
+      "matlab_analyzer": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 52,
+        "column": [
+          1,
+          5
+        ]
+      },
+      "validation": "MATLAB analyzer checked; COMSOL-dependent execution not verified. Specific numerical/rendering checks recorded below."
+    },
+    {
+      "path": "训练代码/单帧预测模型/train_pytorch.py",
+      "role": "Selected normal single-frame training: Conv3d + three ConvLSTM layers, 5-frame history, 128-pixel patches, MSE + SSIM. Model/loss/gradient and real-case patch parity verified.",
+      "selected_before_audit": true,
+      "sha256": "4941f577527657dded5140a0178b228850420ad1bb7c94517c8568dc4aef0d1b",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "RAMBatteryDataset",
+          "line": 35,
+          "ast_sha256": "f5d84251373519f8b68e405a01a69104281872da119db9a6384402eabaac062b"
+        },
+        {
+          "name": "PaperModel",
+          "line": 136,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 186,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "BATCH_SIZE": 64,
+        "LEARNING_RATE": 0.001,
+        "EPOCHS": 100,
+        "INPUT_SEQ_LENGTH": 5,
+        "PATCH_SIZE": 128,
+        "VAL_INTERVAL": 5
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "训练代码/单帧预测模型/基于权重再训练/train_refined_single_frame.py",
+      "role": "Normal single-frame checkpoint refinement with its original learning-rate schedule; not silently merged into the initial training stage.",
+      "selected_before_audit": false,
+      "sha256": "c2de75e52d841aa8027eab06afdba428a0f3fb554c08e312665f80a081ae5f3c",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "RAMBatteryDataset",
+          "line": 36,
+          "ast_sha256": "f5d84251373519f8b68e405a01a69104281872da119db9a6384402eabaac062b"
+        },
+        {
+          "name": "PaperModel",
+          "line": 129,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 152,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "BATCH_SIZE": 64,
+        "LEARNING_RATE": 1e-05,
+        "EPOCHS": 100,
+        "INPUT_SEQ_LENGTH": 5,
+        "PATCH_SIZE": 128,
+        "VAL_INTERVAL": 5
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "训练代码/连续预测模型/finetune_sequence.py",
+      "role": "Selected normal sequence fine-tuning: 5-frame history to 10 future frames, original scheduled sampling and per-step detach behavior retained.",
+      "selected_before_audit": true,
+      "sha256": "328b3e75e05982516365ee9ebf66b0341247ab617a395b0685a4034b6dd29dbc",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "LazySeqBatteryDataset",
+          "line": 48,
+          "ast_sha256": "158fdbadeb4518f7bdfad3a26c8dd90955eedc46b72e11f8b18b5fd53fdd37d6"
+        },
+        {
+          "name": "PaperModel",
+          "line": 158,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 180,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "TRAIN_BATCH_SIZE": 16,
+        "VAL_BATCH_SIZE": 4,
+        "LEARNING_RATE": 1e-05,
+        "EPOCHS": 50,
+        "INPUT_SEQ_LENGTH": 5,
+        "SEQUENCE_PREDICT_LEN": 10,
+        "PATCH_SIZE": 128,
+        "EPSILON_START": 1.0,
+        "EPSILON_DECAY": 1e-05
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "训练代码/连续预测模型/继续训练/train_half_start.py",
+      "role": "Normal continued sequence training with its own epsilon start/decay, learning rate and checkpoint; retained as a separate version.",
+      "selected_before_audit": false,
+      "sha256": "855a05157dd9363095580d9951bc4b122a9ca3d3db7a7df2f8fbe4e4b9c985ee",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "LazySeqBatteryDataset",
+          "line": 49,
+          "ast_sha256": "00a2445422b8fc8e88c1b2af8cf99295fba7b7096bb2a362cd90c554b0f32437"
+        },
+        {
+          "name": "PaperModel",
+          "line": 148,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 170,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "TRAIN_BATCH_SIZE": 8,
+        "VAL_BATCH_SIZE": 4,
+        "LEARNING_RATE": 5e-05,
+        "EPOCHS": 150,
+        "INPUT_SEQ_LENGTH": 5,
+        "SEQUENCE_PREDICT_LEN": 10,
+        "PATCH_SIZE": 128,
+        "EPSILON_START": 0.35,
+        "EPSILON_DECAY": 5e-06
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    },
+    {
+      "path": "训练代码/连续预测模型/继续训练/极致微调/train_phase2_deep_refine.py",
+      "role": "Normal second-phase sequence refinement with its own 100-epoch/StepLR configuration; retained separately.",
+      "selected_before_audit": false,
+      "sha256": "c2e7c77e9ae7ca267b199937c2d6bccaa936c0c7bb25603e7438af43f74deb37",
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ],
+      "definitions": [
+        {
+          "name": "LazySeqBatteryDataset",
+          "line": 50,
+          "ast_sha256": "f7b95da44d1b6c598a36db7c0039fafa024016f6eb4384a577c2e99f474e2475"
+        },
+        {
+          "name": "PaperModel",
+          "line": 149,
+          "ast_sha256": "f7c6f2f20cb57413ec0ae86ca4c990c9571cad402b218dfd40bb5ad3bdb5ddca"
+        },
+        {
+          "name": "HybridLoss",
+          "line": 171,
+          "ast_sha256": "eb24e79fb254819bcfc9b7d265c8d584b61b7a170e6aca4726ab6d83e65e2341"
+        }
+      ],
+      "literal_settings": {
+        "TRAIN_BATCH_SIZE": 8,
+        "VAL_BATCH_SIZE": 4,
+        "LEARNING_RATE": 5e-05,
+        "EPOCHS": 100,
+        "INPUT_SEQ_LENGTH": 5,
+        "SEQUENCE_PREDICT_LEN": 10,
+        "PATCH_SIZE": 128,
+        "EPSILON_START": 0.1,
+        "EPSILON_DECAY": 2e-05
+      },
+      "validation": "Original and patched Python syntax checked; numerical regression only where explicitly recorded below."
+    }
+  ]
+}

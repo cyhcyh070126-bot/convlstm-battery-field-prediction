@@ -23,7 +23,10 @@ def natural_key(path):
 def load_rgb(path, image_size=512):
     """Read, resize with OpenCV's original bilinear default, scale to [0, 1]."""
     # imdecode also handles Unicode paths on Windows.
-    image = cv2.imdecode(np.fromfile(path, dtype=np.uint8), cv2.IMREAD_COLOR)
+    encoded = np.fromfile(path, dtype=np.uint8)
+    if encoded.size == 0:
+        raise ValueError(f"Empty source image: {path}")
+    image = cv2.imdecode(encoded, cv2.IMREAD_COLOR)
     if image is None:
         raise ValueError(f"Unable to decode image: {path}")
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)

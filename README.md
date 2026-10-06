@@ -122,14 +122,14 @@ MATLAB and COMSOL generate each case together through LiveLink for MATLAB:
    image export, pairing concentration and von Mises stress sequences with static
    orientation and C-rate maps. Python then forms prediction windows from these images.
 
-The simulation archive spans **262 cases** across 0.5C, 1C, 2C, 3C, 4C, and 5C.
+The simulation archive spans **261 complete cases** across 0.5C, 1C, 2C, 3C, 4C, and 5C.
 The repository provides **two complete example cases**, each with 25 concentration
 frames, 25 stress frames, and the associated conditioning maps, ready for
 prediction and training walkthroughs. The archive's C-rate distribution is:
 
 | C-rate | 0.5C | 1C | 2C | 3C | 4C | 5C |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Archived cases | 40 | 43 | 43 | 44 | 43 | 49 |
+| Archived cases | 40 | 43 | 43 | 43 | 43 | 49 |
 
 The input maps and pretrained prediction example use **5C, case 93203**:
 `N=60_Lognormal_mu=2.00_sigma=0.10_R0=17.288_C=5_ID=93203`.
@@ -355,6 +355,12 @@ details dependencies and outputs. MATLAB is not needed to use the bundled images
 
 ## Documentation
 
+The [complete source audit](docs/source-audit.md) records every normal-workflow
+MATLAB/Python original, saved version, dependency and fix. Original bytes and
+separately reviewed copies are available in `source_archive/` and `research_scripts/`.
+The current quick start uses the selected normal model; historical versions
+remain distinct.
+
 | Guide | What it covers |
 | :--- | :--- |
 | [Getting started](docs/getting-started.md) | Installation, expected outputs, and troubleshooting |
@@ -370,6 +376,8 @@ For common setup problems, see [troubleshooting](docs/getting-started.md#trouble
 ```text
 matlab/        Geometry, COMSOL model construction, and image export
 python/        Models, image loading, training, and evaluation
+source_archive/ Exact original source snapshots, for provenance
+research_scripts/ Reviewed original versions, with explicit patch records
 checkpoints/   Included MSE + SSIM pretrained weights
 examples/      Two complete sample cases and source hashes
 assets/        Existing architecture illustrations, 5C inputs, and prediction figures
@@ -377,8 +385,9 @@ docs/          Data format, simulation setup, source provenance, and reproducibi
 tests/         Functional model/data/checkpoint checks
 ```
 
-Run `python -m unittest discover -s tests -v`. The nine Python tests cover
-model execution, data loading, checkpoints, and output protection. Additional
+Run `python -m unittest discover -s tests -v`. The 15 Python tests cover
+model execution, data loading, checkpoints, output protection and original-source
+numerical parity. Additional
 checks cover the two-stage training walkthrough, 5C prediction, MATLAB syntax,
 and six image-export tests. See [reproducibility notes](docs/reproducibility.md)
 for environments and execution records.

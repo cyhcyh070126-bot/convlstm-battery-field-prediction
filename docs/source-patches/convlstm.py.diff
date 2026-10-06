@@ -1,0 +1,39 @@
+--- source_archive/convlstm.py
++++ research_scripts/convlstm.py
+@@ -1,3 +1,12 @@
++
++# Resolve companion modules when this historical script is invoked directly.
++import sys as _sys
++from pathlib import Path as _Path
++if hasattr(_sys.stdout, "reconfigure"):
++    _sys.stdout.reconfigure(encoding="utf-8")
++_research_root = next(p for p in _Path(__file__).resolve().parents if p.name == "research_scripts")
++_sys.path.append(str(_research_root))
++_sys.path.append(str(_research_root.parent))
+ import torch
+ import torch.nn as nn
+ 
+@@ -38,8 +47,8 @@
+ 
+     def init_hidden(self, batch_size, image_size):
+         height, width = image_size
+-        return (torch.zeros(batch_size, self.hidden_dim, height, width, device=self.conv.weight.device),
+-                torch.zeros(batch_size, self.hidden_dim, height, width, device=self.conv.weight.device))
++        return (torch.zeros(batch_size, self.hidden_dim, height, width, device=self.conv.weight.device, dtype=self.conv.weight.dtype),
++                torch.zeros(batch_size, self.hidden_dim, height, width, device=self.conv.weight.device, dtype=self.conv.weight.dtype))
+ 
+ 
+ class ConvLSTM(nn.Module):
+@@ -48,6 +57,12 @@
+         super(ConvLSTM, self).__init__()
+ 
+         self._check_kernel_size_consistency(kernel_size)
++        if isinstance(hidden_dim, int):
++            hidden_dim = [hidden_dim] * num_layers
++        if isinstance(kernel_size, tuple):
++            kernel_size = [kernel_size] * num_layers
++        if len(hidden_dim) != num_layers or len(kernel_size) != num_layers:
++            raise ValueError("Provide one hidden dimension and kernel per layer.")
+ 
+         self.input_dim = input_dim
+         self.hidden_dim = hidden_dim

@@ -1,0 +1,524 @@
+{
+  "audited_on": "2026-10-06",
+  "description": "All in-scope original code files; original bytes and separately patched research copies. Excluded experiment files are inventoried without publishing their code.",
+  "files": [
+    {
+      "path": "Boundary_Particle_back.m",
+      "bytes": 558,
+      "sha256": "5c63e7c704129c8f3e93d9e8a47051638de77d84dcbec0c8807dc76ebf0bcb0a",
+      "archive": "source_archive/Boundary_Particle_back.m",
+      "research_copy": "research_scripts/Boundary_Particle_back.m",
+      "research_sha256": "5c63e7c704129c8f3e93d9e8a47051638de77d84dcbec0c8807dc76ebf0bcb0a",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Boundary_Particle_back_circle.m",
+      "bytes": 900,
+      "sha256": "7f172e8a95d7586e6330ff9858533b6cb2fda09fd067dfb5071411d874f392fb",
+      "archive": "source_archive/Boundary_Particle_back_circle.m",
+      "research_copy": "research_scripts/Boundary_Particle_back_circle.m",
+      "research_sha256": "f883af49a7cfe8b2d94ff62e5ba131e466adbd5dc246d8b4159cd2f6fb7c5e42",
+      "selected_main_source": false,
+      "fixes": [
+        "Compute all radial-correction components from the same pre-update norm; reject impossible inner-boundary radii and allow rounding tolerance."
+      ]
+    },
+    {
+      "path": "Boundary_Particle_back_circle_2.m",
+      "bytes": 1010,
+      "sha256": "e5b4dade6a82eb7dc25273b8eef53a5ee4ea17fe07bae9fe779edf86acace97d",
+      "archive": "source_archive/Boundary_Particle_back_circle_2.m",
+      "research_copy": "research_scripts/Boundary_Particle_back_circle_2.m",
+      "research_sha256": "29e35f5d02f7e37074a6f0e9639c3f21c76b0b90bc43901d7b281571e8607c9e",
+      "selected_main_source": false,
+      "fixes": [
+        "Compute all radial-correction components from the same pre-update norm; reject impossible inner-boundary radii and allow rounding tolerance."
+      ]
+    },
+    {
+      "path": "build_full_comsol_model.m",
+      "bytes": 12897,
+      "sha256": "ea30637ebf8f5c251a8b7b61deac4675392e56cbf51da970dc9f27579785c63f",
+      "archive": "source_archive/build_full_comsol_model.m",
+      "research_copy": "research_scripts/build_full_comsol_model.m",
+      "research_sha256": "a28d2b545ba6c4c35823dfe7a261a5829574f026bc9aebf596f5cf4875407a76",
+      "selected_main_source": true,
+      "fixes": [
+        "Use the current COMSOL output directory rather than an absent drive."
+      ]
+    },
+    {
+      "path": "build_full_comsol_model_recovered_preview.m",
+      "bytes": 13566,
+      "sha256": "d248aac9c1943b6078852556ac5bff34f9a7183697c50fe5d6a5c0aa0d03755b",
+      "archive": "source_archive/build_full_comsol_model_recovered_preview.m",
+      "research_copy": "research_scripts/build_full_comsol_model_recovered_preview.m",
+      "research_sha256": "cbdd32fe40ebee7faa533b9703d1a78c7b7ae2379b24368d8d5c11b59a547eb6",
+      "selected_main_source": false,
+      "fixes": [
+        "Restore corrupted display strings from the valid original companion model builder; model assignments unchanged.",
+        "Use the current COMSOL output directory rather than an absent drive."
+      ]
+    },
+    {
+      "path": "calculate_force.m",
+      "bytes": 1327,
+      "sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "archive": "source_archive/calculate_force.m",
+      "research_copy": "research_scripts/calculate_force.m",
+      "research_sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "selected_main_source": true,
+      "fixes": []
+    },
+    {
+      "path": "check_fno_structure.py",
+      "bytes": 4665,
+      "sha256": "aded59a421597d5d2970f5a4fb57b6c1f2b903179fe3db7a6c0351ee02f0ea67",
+      "archive": "source_archive/check_fno_structure.py",
+      "research_copy": "research_scripts/check_fno_structure.py",
+      "research_sha256": "354223d26a76d239135027874da48afc7df4591011a8fc8ac542d57de5d1a74d",
+      "selected_main_source": false,
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "check_patching.py",
+      "bytes": 3363,
+      "sha256": "509a1b5064bbe7ae8d7715c705ca3d37d59c6346fe6cedb30df4b1c2e606b7e0",
+      "archive": "source_archive/check_patching.py",
+      "research_copy": "research_scripts/check_patching.py",
+      "research_sha256": "d19a89b3368500314ad82de055584df86aa76ca5c34a2a588caad9832cf3faae",
+      "selected_main_source": false,
+      "fixes": [
+        "Use the existing single-frame patch dataset; derive expected windows from actual frame count; disable augmentation for inspection.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "Circle_Boundary.m",
+      "bytes": 892,
+      "sha256": "46cafb91b0ca8f909450a393f997bc262d0ed1fbe6225ddfaadbf4a62514eee0",
+      "archive": "source_archive/Circle_Boundary.m",
+      "research_copy": "research_scripts/Circle_Boundary.m",
+      "research_sha256": "49b6dc43ee39a6920ec08abc656e836d11dcca8b9c4ff259c10a654dc17d0a46",
+      "selected_main_source": true,
+      "fixes": [
+        "Reject radii for which the original boundary discretization divides by zero; valid-radius discretization unchanged."
+      ]
+    },
+    {
+      "path": "Contact_Detection_1.m",
+      "bytes": 2981,
+      "sha256": "911d255f895c974506d60fac4324b45b067dc78dbead63c7298d7d7cea9ccc5a",
+      "archive": "source_archive/Contact_Detection_1.m",
+      "research_copy": "research_scripts/Contact_Detection_1.m",
+      "research_sha256": "911d255f895c974506d60fac4324b45b067dc78dbead63c7298d7d7cea9ccc5a",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Contact_Detection_By_Boundary_Box1.m",
+      "bytes": 2787,
+      "sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "archive": "source_archive/Contact_Detection_By_Boundary_Box1.m",
+      "research_copy": "research_scripts/Contact_Detection_By_Boundary_Box1.m",
+      "research_sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "selected_main_source": true,
+      "fixes": []
+    },
+    {
+      "path": "convlstm.py",
+      "bytes": 4543,
+      "sha256": "a80edab78d8cbd917a44c677352e0fffe326a5ff8b99b4baabc8dc52c0d2e82f",
+      "archive": "source_archive/convlstm.py",
+      "research_copy": "research_scripts/convlstm.py",
+      "research_sha256": "7e5cedaf1c9084840c6b0dbf4063724e5d0f792cd2b9b83b1fc41d7b43f76303",
+      "selected_main_source": true,
+      "fixes": [
+        "Normalize the advertised scalar/tuple constructor options and initialize states in the model dtype; recurrent formulas unchanged.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "create_comsol_geometry.m",
+      "bytes": 3480,
+      "sha256": "626c22b600fe9d68f7d75b5f72a1f45427cc60a3267ded1607001be5867e7408",
+      "archive": "source_archive/create_comsol_geometry.m",
+      "research_copy": "research_scripts/create_comsol_geometry.m",
+      "research_sha256": "626c22b600fe9d68f7d75b5f72a1f45427cc60a3267ded1607001be5867e7408",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "data_loader.py",
+      "bytes": 3304,
+      "sha256": "310a59df6a8ba0fbf17760a99eb634bb2039e897929d0a0b240b83cdf2851903",
+      "archive": "source_archive/data_loader.py",
+      "research_copy": "research_scripts/data_loader.py",
+      "research_sha256": "e1b68d0f4563421bd5581627c9303e6668fc5741b2c89177b49d28efe18065b1",
+      "selected_main_source": true,
+      "fixes": [
+        "Use actual stress frame count for stress-only loading and reject mismatched both-field sequences/unknown modes.",
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "Draw_particle_1.m",
+      "bytes": 190,
+      "sha256": "76db138afff5dd009b18b744e14d821be8375adb1f6d79f9649cf36d13899003",
+      "archive": "source_archive/Draw_particle_1.m",
+      "research_copy": "research_scripts/Draw_particle_1.m",
+      "research_sha256": "76db138afff5dd009b18b744e14d821be8375adb1f6d79f9649cf36d13899003",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Draw_particle_2D_1.m",
+      "bytes": 435,
+      "sha256": "9792695087c36b4e65969c160de400ae926a596d01bed37618b5158ab49ceb8c",
+      "archive": "source_archive/Draw_particle_2D_1.m",
+      "research_copy": "research_scripts/Draw_particle_2D_1.m",
+      "research_sha256": "9792695087c36b4e65969c160de400ae926a596d01bed37618b5158ab49ceb8c",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Draw_particle_3D_1.m",
+      "bytes": 1484,
+      "sha256": "4ac24ec4702ca7cbc9523f0055baad3dc3821d04ab3a40f293f3df11a540ac58",
+      "archive": "source_archive/Draw_particle_3D_1.m",
+      "research_copy": "research_scripts/Draw_particle_3D_1.m",
+      "research_sha256": "4ac24ec4702ca7cbc9523f0055baad3dc3821d04ab3a40f293f3df11a540ac58",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Draw_particle_Cricle.m",
+      "bytes": 469,
+      "sha256": "4a498e31a13e02d1068200bcb400591373acb91af0e731092dca473a47c9cfd4",
+      "archive": "source_archive/Draw_particle_Cricle.m",
+      "research_copy": "research_scripts/Draw_particle_Cricle.m",
+      "research_sha256": "c0643e13335d5167816ffa6d9747e4b43b7bb08b1c17e985f0695bece7c13a82",
+      "selected_main_source": true,
+      "fixes": [
+        "Report the original unsupported 3D dispatcher explicitly instead of claiming a successful plot; supported 2D drawing unchanged."
+      ]
+    },
+    {
+      "path": "Draw_particle_Cricle_2D.m",
+      "bytes": 1244,
+      "sha256": "9e2a53d486c9b16336a00dc2309fef140b8054517e4f80f1ef2838551a370242",
+      "archive": "source_archive/Draw_particle_Cricle_2D.m",
+      "research_copy": "research_scripts/Draw_particle_Cricle_2D.m",
+      "research_sha256": "9e2a53d486c9b16336a00dc2309fef140b8054517e4f80f1ef2838551a370242",
+      "selected_main_source": true,
+      "fixes": []
+    },
+    {
+      "path": "Draw_particle_Cricle_3D.m",
+      "bytes": 1033,
+      "sha256": "6a11b345f85cb05c5ebd37fb64fed6dad2a28817e224d4f01d2f1f6b8f0f32f7",
+      "archive": "source_archive/Draw_particle_Cricle_3D.m",
+      "research_copy": "research_scripts/Draw_particle_Cricle_3D.m",
+      "research_sha256": "6a11b345f85cb05c5ebd37fb64fed6dad2a28817e224d4f01d2f1f6b8f0f32f7",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Draw_particle_period.m",
+      "bytes": 698,
+      "sha256": "e2a0831a3e75461da2ae555b9450705d0fb9a0f471b8b81ab9b1c4ddb0f2ec5f",
+      "archive": "source_archive/Draw_particle_period.m",
+      "research_copy": "research_scripts/Draw_particle_period.m",
+      "research_sha256": "e2a0831a3e75461da2ae555b9450705d0fb9a0f471b8b81ab9b1c4ddb0f2ec5f",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "Draw_Polycrystal.m",
+      "bytes": 3479,
+      "sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "archive": "source_archive/Draw_Polycrystal.m",
+      "research_copy": "research_scripts/Draw_Polycrystal.m",
+      "research_sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "selected_main_source": true,
+      "fixes": []
+    },
+    {
+      "path": "finetune_sequence.py",
+      "bytes": 13884,
+      "sha256": "328b3e75e05982516365ee9ebf66b0341247ab617a395b0685a4034b6dd29dbc",
+      "archive": "source_archive/finetune_sequence.py",
+      "research_copy": "research_scripts/finetune_sequence.py",
+      "research_sha256": "e35066c42edbe2084a2448f8523f6296ae00ad948a822142395134fbf49392c6",
+      "selected_main_source": false,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "fix_all_crate_colors.m",
+      "bytes": 3099,
+      "sha256": "4d471d5d25a11ba6864a6ba8398151e09de32e7fa73c277c6f80cf5dd63aef43",
+      "archive": "source_archive/fix_all_crate_colors.m",
+      "research_copy": "research_scripts/fix_all_crate_colors.m",
+      "research_sha256": "4d471d5d25a11ba6864a6ba8398151e09de32e7fa73c277c6f80cf5dd63aef43",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "main_D21origin.m",
+      "bytes": 25759,
+      "sha256": "08d77af44444c1a0acceb64a71b16f03af2fbd7698ee064f4f32bc662dca5f8b",
+      "archive": "source_archive/main_D21origin.m",
+      "research_copy": "research_scripts/main_D21origin.m",
+      "research_sha256": "77df76d598679f5498fa9abf4c87d6a0f733cb4438ba85dba1b8e89597724cb2",
+      "selected_main_source": true,
+      "fixes": [
+        "Resolve temporary images relative to the actual working directory."
+      ]
+    },
+    {
+      "path": "run_single_simulation.m",
+      "bytes": 19250,
+      "sha256": "7c8c2b9b5b04e3e896d6db06ce2f1aa74b95fccb54b30157edc511b5fb9e0a2b",
+      "archive": "source_archive/run_single_simulation.m",
+      "research_copy": "research_scripts/run_single_simulation.m",
+      "research_sha256": "c59c0f1520f3b83f6f8dd84686f9a58f58f6931bc740bf36b4176a9e4e9b71e6",
+      "selected_main_source": true,
+      "fixes": [
+        "Resolve workflow directory from the copied original script, not the author Desktop."
+      ]
+    },
+    {
+      "path": "train_fno_emoji.py",
+      "bytes": 8651,
+      "sha256": "1dd5ce03979e8543372347abe0d8e9bb1948fbf3a2211d7456e24502fc0a5671",
+      "archive": "source_archive/train_fno_emoji.py",
+      "research_copy": "research_scripts/train_fno_emoji.py",
+      "research_sha256": "fe9ceea0c76d6d7bbe6f1c1c2e711f81065408e3fa8388d15597db0c3a8c2837",
+      "selected_main_source": false,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Reject missing C-rate conditioning rather than synthesize a black input.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "保存新代码/Draw_Polycrystal.m",
+      "bytes": 2736,
+      "sha256": "a8ffb3f99a0357ded9ac38e02f9a7fa96f3a3b4abd6a391ae6f278c3abaf2052",
+      "archive": "source_archive/保存新代码/Draw_Polycrystal.m",
+      "research_copy": "research_scripts/保存新代码/Draw_Polycrystal.m",
+      "research_sha256": "a8ffb3f99a0357ded9ac38e02f9a7fa96f3a3b4abd6a391ae6f278c3abaf2052",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "保存新代码/predict_pytorch.py",
+      "bytes": 3084,
+      "sha256": "9d78b0e364e89fbb16e5151d40d5a13d13987509f939142b5fcab5234dc21eae",
+      "archive": "source_archive/保存新代码/predict_pytorch.py",
+      "research_copy": "research_scripts/保存新代码/predict_pytorch.py",
+      "research_sha256": "cbe3b00a31d14bc9041b83870b1a298d181c3324031c5b5c1217fcf7e852f11d",
+      "selected_main_source": false,
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "保存旧代码/Draw_Polycrystal.m",
+      "bytes": 3479,
+      "sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "archive": "source_archive/保存旧代码/Draw_Polycrystal.m",
+      "research_copy": "research_scripts/保存旧代码/Draw_Polycrystal.m",
+      "research_sha256": "ccf734e115c2b075d5a79f2d73557758d241f20c70ea36e1c0f6585f0472838d",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "保存旧代码/predict_pytorch.py",
+      "bytes": 3798,
+      "sha256": "c6c2db8ea21e4eada689ffa263d94b5e3544f15cc6b92e664145758bf9354f98",
+      "archive": "source_archive/保存旧代码/predict_pytorch.py",
+      "research_copy": "research_scripts/保存旧代码/predict_pytorch.py",
+      "research_sha256": "26e546868d5c415a45fed547e5d60f5a972a732fe26928ce85f0405b40d4fdde",
+      "selected_main_source": false,
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "保存旧代码/train_pytorch.py",
+      "bytes": 6901,
+      "sha256": "de91a545b7449faade9bddcc0d0534c85c7fd851b119786efaaab413840a17b1",
+      "archive": "source_archive/保存旧代码/train_pytorch.py",
+      "research_copy": "research_scripts/保存旧代码/train_pytorch.py",
+      "research_sha256": "e6779255e255ac7f88de51e7c78479773ec11dbf16c9e46648d61cb516c6dde9",
+      "selected_main_source": false,
+      "fixes": [
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "新版/calculate_force.m",
+      "bytes": 1327,
+      "sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "archive": "source_archive/新版/calculate_force.m",
+      "research_copy": "research_scripts/新版/calculate_force.m",
+      "research_sha256": "68b4447542fcf589b09ad9c8784b4f7ad2dd79f52a01d3b3535873065c6b1475",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "新版/Contact_Detection_By_Boundary_Box1.m",
+      "bytes": 2787,
+      "sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "archive": "source_archive/新版/Contact_Detection_By_Boundary_Box1.m",
+      "research_copy": "research_scripts/新版/Contact_Detection_By_Boundary_Box1.m",
+      "research_sha256": "43eab96f41188d7dc92c663afc096bbbaf5e8a84857d2f4a90ceaf5270cf9ef6",
+      "selected_main_source": false,
+      "fixes": []
+    },
+    {
+      "path": "新版/Draw_Polycrystal.m",
+      "bytes": 1993,
+      "sha256": "2493f2cd6b084ab4f8a6a934ea06d3935e42221bea6ee25c06a38fd1bc51ad74",
+      "archive": "source_archive/新版/Draw_Polycrystal.m",
+      "research_copy": "research_scripts/新版/Draw_Polycrystal.m",
+      "research_sha256": "c24c7f3044442d9818f9ca76bc478c237c63583f246ff95adfa0508b56963567",
+      "selected_main_source": false,
+      "fixes": [
+        "Bind ax to the existing figure; preserve every plotting parameter."
+      ]
+    },
+    {
+      "path": "训练代码/单帧预测模型/train_pytorch.py",
+      "bytes": 11289,
+      "sha256": "4941f577527657dded5140a0178b228850420ad1bb7c94517c8568dc4aef0d1b",
+      "archive": "source_archive/训练代码/单帧预测模型/train_pytorch.py",
+      "research_copy": "research_scripts/训练代码/单帧预测模型/train_pytorch.py",
+      "research_sha256": "295d9e0e132c13000345a34f97827618a10371ac1b60df60ba743b46ee4c7d0e",
+      "selected_main_source": true,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "训练代码/单帧预测模型/基于权重再训练/train_refined_single_frame.py",
+      "bytes": 11069,
+      "sha256": "c2de75e52d841aa8027eab06afdba428a0f3fb554c08e312665f80a081ae5f3c",
+      "archive": "source_archive/训练代码/单帧预测模型/基于权重再训练/train_refined_single_frame.py",
+      "research_copy": "research_scripts/训练代码/单帧预测模型/基于权重再训练/train_refined_single_frame.py",
+      "research_sha256": "046ae8ecf6063ff29923b5f6e5304c40675296a87eb99e473066e956b6998be3",
+      "selected_main_source": false,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Reject missing/unreadable images instead of inventing black data.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "训练代码/连续预测模型/finetune_sequence.py",
+      "bytes": 13884,
+      "sha256": "328b3e75e05982516365ee9ebf66b0341247ab617a395b0685a4034b6dd29dbc",
+      "archive": "source_archive/训练代码/连续预测模型/finetune_sequence.py",
+      "research_copy": "research_scripts/训练代码/连续预测模型/finetune_sequence.py",
+      "research_sha256": "e35066c42edbe2084a2448f8523f6296ae00ad948a822142395134fbf49392c6",
+      "selected_main_source": true,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "训练代码/连续预测模型/继续训练/train_half_start.py",
+      "bytes": 13292,
+      "sha256": "855a05157dd9363095580d9951bc4b122a9ca3d3db7a7df2f8fbe4e4b9c985ee",
+      "archive": "source_archive/训练代码/连续预测模型/继续训练/train_half_start.py",
+      "research_copy": "research_scripts/训练代码/连续预测模型/继续训练/train_half_start.py",
+      "research_sha256": "694ca9af1e1452c29ac39618f02f24fd391815af506f9d00526b67aff80fa011",
+      "selected_main_source": false,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    },
+    {
+      "path": "训练代码/连续预测模型/继续训练/极致微调/train_phase2_deep_refine.py",
+      "bytes": 13101,
+      "sha256": "c2e7c77e9ae7ca267b199937c2d6bccaa936c0c7bb25603e7438af43f74deb37",
+      "archive": "source_archive/训练代码/连续预测模型/继续训练/极致微调/train_phase2_deep_refine.py",
+      "research_copy": "research_scripts/训练代码/连续预测模型/继续训练/极致微调/train_phase2_deep_refine.py",
+      "research_sha256": "07d99026a4507bac8b178b25e49a29e5541c790a1e0a2276fc31b866a7df82b8",
+      "selected_main_source": false,
+      "fixes": [
+        "Decode actual image bytes on Unicode paths; preserve original resize, RGB order and normalization.",
+        "Propagate SSIM errors rather than silently remove/change the objective.",
+        "Resolve original companion imports from the research-script tree."
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "path": "check_model_structure.py",
+      "sha256": "f0dfa44caca635bc6ba1c4f5dd50bfb1029ef5916e6b56d66ea34f5fb4f9bbf1",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "check_PINN_frame.py",
+      "sha256": "aae979a4deb60df1836f3c29849a561c9c55f2758eb365ff8e4d9acf7effbcce",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "check_random_test.py",
+      "sha256": "f0d5f036f17d726f2d234c7ef5ccacf4a4ae934f25bf2d3844a6e1d74d53b7eb",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "finetune_PINN_sequence.py",
+      "sha256": "1523b9825f273cec74bb68d3626a39cdca7d0c073ef85ab31d799f49b147ca48",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "PINNtestFFFFFFFF.py",
+      "sha256": "874745acdc74ea265d69e7adabf7655f80145ca97ec5f001ba17eb438d2d7a62",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "train_pi_convlstm.py",
+      "sha256": "7ae5df6803b0e63ea8f3ea549db59a8b20ad07e27a8c22d85f2d1bfa4afd8c07",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "train_PINN_SSIM_20frame.py",
+      "sha256": "8a7cab78db4e7047df0823500a27a3a5e7e9893942b1f8d7f555322c2d9503e5",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    },
+    {
+      "path": "train_pytorch.py",
+      "sha256": "a94b4a06fa200eaad434faf804d5f0de6dbc6b7676fffa74db10a74b0d52e33b",
+      "reason": "Excluded from publication by user instruction on 2026-10-06."
+    }
+  ],
+  "companion_aliases": [
+    {
+      "path": "research_scripts/train_pytorch.py",
+      "source": "训练代码/单帧预测模型/train_pytorch.py",
+      "sha256": "295d9e0e132c13000345a34f97827618a10371ac1b60df60ba743b46ee4c7d0e",
+      "purpose": "Companion import for original normal prediction scripts; exact patched single-frame training copy."
+    }
+  ]
+}

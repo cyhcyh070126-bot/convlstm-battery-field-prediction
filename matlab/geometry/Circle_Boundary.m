@@ -5,6 +5,9 @@ function Ps_Virc=Circle_Boundary(R0,ndm)
 % ndm=3;
 
 kn=floor(R0*pi/2);
+if ~isfinite(R0) || kn < 1
+    error('Boundary radius is too small for the original boundary discretization.');
+end
 if ndm==3
     phi=R0;
     alpha=pi*(0:kn)/kn;

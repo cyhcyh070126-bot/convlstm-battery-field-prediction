@@ -1,0 +1,10 @@
+--- source_archive/新版/Draw_Polycrystal.m
++++ research_scripts/新版/Draw_Polycrystal.m
+@@ -2,6 +2,7 @@
+ % --- Draw_Polycrystal (最终决定版 V2) ---
+ % 目的: 严格按照论文 Fig. 1/2 的要求，生成一个无尖刺的圆形多晶图。
+ figure; 
++ax = gca; 
+ hold on;
+ axis equal; 
+ box on; 

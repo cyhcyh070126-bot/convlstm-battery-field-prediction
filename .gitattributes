@@ -4,3 +4,5 @@
 *.jpg binary
 *.jpeg binary
 *.pdf binary
+source_archive/** -text
+research_scripts/** -text

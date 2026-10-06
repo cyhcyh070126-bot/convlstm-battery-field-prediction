@@ -1,0 +1,1104 @@
+{
+  "standalone_prefix": "passed",
+  "radius_parity": [
+    {
+      "N": 40,
+      "command": 1,
+      "maximum_radius_difference": 0,
+      "count": 40,
+      "positive": true
+    },
+    {
+      "N": 40,
+      "command": 2,
+      "maximum_radius_difference": 0,
+      "count": 40,
+      "positive": true
+    },
+    {
+      "N": 40,
+      "command": 3,
+      "maximum_radius_difference": 0,
+      "count": 40,
+      "positive": true
+    },
+    {
+      "N": 60,
+      "command": 1,
+      "maximum_radius_difference": 0,
+      "count": 60,
+      "positive": true
+    },
+    {
+      "N": 60,
+      "command": 2,
+      "maximum_radius_difference": 0,
+      "count": 60,
+      "positive": true
+    },
+    {
+      "N": 60,
+      "command": 3,
+      "maximum_radius_difference": 0,
+      "count": 60,
+      "positive": true
+    },
+    {
+      "N": 80,
+      "command": 1,
+      "maximum_radius_difference": 0,
+      "count": 80,
+      "positive": true
+    },
+    {
+      "N": 80,
+      "command": 2,
+      "maximum_radius_difference": 0,
+      "count": 80,
+      "positive": true
+    },
+    {
+      "N": 80,
+      "command": 3,
+      "maximum_radius_difference": 0,
+      "count": 80,
+      "positive": true
+    }
+  ],
+  "options": {
+    "N": 80,
+    "command": 2,
+    "mu": 2,
+    "sigma": 0.15
+  },
+  "invalid_options_rejected": 5,
+  "new_draw_ax": "passed",
+  "circular_boundary_checks": "2D and 3D projection, direction and origin passed",
+  "small_boundary_rejected": true,
+  "export_tests_passed": true,
+  "export_test_count": 6,
+  "livelink_function_available": false,
+  "matlab_version": "25.2.0.2998904 (R2025b)",
+  "matlab_analyzer": [
+    {
+      "file": "source_archive/Boundary_Particle_back.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Boundary_Particle_back_circle.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Boundary_Particle_back_circle_2.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Circle_Boundary.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Contact_Detection_1.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Contact_Detection_By_Boundary_Box1.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_Polycrystal.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "source_archive/Draw_particle_1.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          33,
+          34
+        ]
+      }
+    },
+    {
+      "file": "source_archive/Draw_particle_2D_1.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_particle_3D_1.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_particle_Cricle.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_particle_Cricle_2D.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_particle_Cricle_3D.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/Draw_particle_period.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/build_full_comsol_model.m",
+      "scope": "source_archive",
+      "messages": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 118,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 119,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "file": "source_archive/build_full_comsol_model_recovered_preview.m",
+      "scope": "source_archive",
+      "messages": [
+        {
+          "id": "STRIN",
+          "message": "某个带引号的字符向量未终止。",
+          "fix": 0,
+          "line": 17,
+          "column": [
+            6,
+            27
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 148,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 149,
+          "column": [
+            9,
+            22
+          ]
+        },
+        {
+          "id": "STRIN",
+          "message": "某个带引号的字符向量未终止。",
+          "fix": 0,
+          "line": 309,
+          "column": [
+            10,
+            49
+          ]
+        }
+      ]
+    },
+    {
+      "file": "source_archive/calculate_force.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      }
+    },
+    {
+      "file": "source_archive/create_comsol_geometry.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "SAGROW",
+        "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+        "fix": 0,
+        "line": 55,
+        "column": [
+          9,
+          20
+        ]
+      }
+    },
+    {
+      "file": "source_archive/fix_all_crate_colors.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/main_D21origin.m",
+      "scope": "source_archive",
+      "messages": [
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 84,
+          "column": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 166,
+          "column": [
+            14,
+            15
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 244,
+          "column": [
+            12,
+            13
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 390,
+          "column": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 416,
+          "column": [
+            5,
+            19
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 447,
+          "column": [
+            5,
+            9
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 490,
+          "column": [
+            9,
+            26
+          ]
+        },
+        {
+          "id": "CAXIS",
+          "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+          "fix": 1,
+          "line": 767,
+          "column": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "file": "source_archive/run_single_simulation.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "CLALL",
+        "message": "将 'clear' 与 'all' 选项结合使用通常会降低代码性能，一般无需执行此操作。",
+        "fix": 0,
+        "line": 9,
+        "column": [
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "file": "source_archive/保存新代码/Draw_Polycrystal.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "source_archive/保存旧代码/Draw_Polycrystal.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "source_archive/新版/Contact_Detection_By_Boundary_Box1.m",
+      "scope": "source_archive",
+      "messages": []
+    },
+    {
+      "file": "source_archive/新版/Draw_Polycrystal.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 51,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "source_archive/新版/calculate_force.m",
+      "scope": "source_archive",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/Boundary_Particle_back.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Boundary_Particle_back_circle.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Boundary_Particle_back_circle_2.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Circle_Boundary.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Contact_Detection_1.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Contact_Detection_By_Boundary_Box1.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_Polycrystal.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/Draw_particle_1.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          33,
+          34
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/Draw_particle_2D_1.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_particle_3D_1.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_particle_Cricle.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_particle_Cricle_2D.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_particle_Cricle_3D.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/Draw_particle_period.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/build_full_comsol_model.m",
+      "scope": "research_scripts",
+      "messages": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 118,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 119,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research_scripts/build_full_comsol_model_recovered_preview.m",
+      "scope": "research_scripts",
+      "messages": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 148,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 149,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research_scripts/calculate_force.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/create_comsol_geometry.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "SAGROW",
+        "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+        "fix": 0,
+        "line": 55,
+        "column": [
+          9,
+          20
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/fix_all_crate_colors.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/main_D21origin.m",
+      "scope": "research_scripts",
+      "messages": [
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 84,
+          "column": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 166,
+          "column": [
+            14,
+            15
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 244,
+          "column": [
+            12,
+            13
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 390,
+          "column": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 416,
+          "column": [
+            5,
+            19
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 447,
+          "column": [
+            5,
+            9
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 490,
+          "column": [
+            9,
+            26
+          ]
+        },
+        {
+          "id": "CAXIS",
+          "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+          "fix": 1,
+          "line": 767,
+          "column": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "file": "research_scripts/run_single_simulation.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "CLALL",
+        "message": "将 'clear' 与 'all' 选项结合使用通常会降低代码性能，一般无需执行此操作。",
+        "fix": 0,
+        "line": 9,
+        "column": [
+          7,
+          9
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/保存新代码/Draw_Polycrystal.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/保存旧代码/Draw_Polycrystal.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/新版/Contact_Detection_By_Boundary_Box1.m",
+      "scope": "research_scripts",
+      "messages": []
+    },
+    {
+      "file": "research_scripts/新版/Draw_Polycrystal.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 52,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "research_scripts/新版/calculate_force.m",
+      "scope": "research_scripts",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      }
+    },
+    {
+      "file": "matlab/run_workflow.m",
+      "scope": "matlab",
+      "messages": {
+        "id": "MSNU",
+        "message": "此处之前隐藏了一条代码分析器消息，但该消息不再产生。",
+        "fix": 1,
+        "line": 33,
+        "column": [
+          52,
+          62
+        ]
+      }
+    },
+    {
+      "file": "matlab/validate_geometry_options.m",
+      "scope": "matlab",
+      "messages": []
+    },
+    {
+      "file": "matlab/export/export_simulation_images.m",
+      "scope": "matlab",
+      "messages": [
+        {
+          "id": "ALIGN",
+          "message": "此关键字可能未与其在第 38 行上的匹配 END 对齐。",
+          "fix": 0,
+          "line": 36,
+          "column": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "ALIGN",
+          "message": "此关键字可能未与其在第 132 行上的匹配 END 对齐。",
+          "fix": 0,
+          "line": 120,
+          "column": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "matlab/export/validate_simulation_exports.m",
+      "scope": "matlab",
+      "messages": {
+        "id": "ISCL",
+        "message": "要提高性能，请使用 'isscalar' 而不是长度比较。",
+        "fix": 1,
+        "line": 32,
+        "column": [
+          8,
+          31
+        ]
+      }
+    },
+    {
+      "file": "matlab/geometry/Circle_Boundary.m",
+      "scope": "matlab",
+      "messages": []
+    },
+    {
+      "file": "matlab/geometry/Contact_Detection_By_Boundary_Box1.m",
+      "scope": "matlab",
+      "messages": []
+    },
+    {
+      "file": "matlab/geometry/Draw_Polycrystal.m",
+      "scope": "matlab",
+      "messages": {
+        "id": "CAXIS",
+        "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+        "fix": 1,
+        "line": 79,
+        "column": [
+          1,
+          5
+        ]
+      }
+    },
+    {
+      "file": "matlab/geometry/Draw_particle_Cricle.m",
+      "scope": "matlab",
+      "messages": []
+    },
+    {
+      "file": "matlab/geometry/Draw_particle_Cricle_2D.m",
+      "scope": "matlab",
+      "messages": []
+    },
+    {
+      "file": "matlab/geometry/calculate_force.m",
+      "scope": "matlab",
+      "messages": {
+        "id": "INUSD",
+        "message": "可能未使用输入参数。请考虑改用 ~ 替换该参数。",
+        "fix": 1,
+        "line": 1,
+        "column": [
+          73,
+          75
+        ]
+      }
+    },
+    {
+      "file": "matlab/geometry/main_D21origin.m",
+      "scope": "matlab",
+      "messages": [
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 76,
+          "column": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 136,
+          "column": [
+            14,
+            15
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 195,
+          "column": [
+            12,
+            13
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 323,
+          "column": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 346,
+          "column": [
+            5,
+            19
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 372,
+          "column": [
+            5,
+            9
+          ]
+        },
+        {
+          "id": "AGROW",
+          "message": "变量的大小似乎在每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 421,
+          "column": [
+            9,
+            26
+          ]
+        },
+        {
+          "id": "CAXIS",
+          "message": "建议不要使用 'caxis'。请改用 'clim'，它可直接代替前者。",
+          "fix": 1,
+          "line": 634,
+          "column": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "file": "matlab/simulation/build_full_comsol_model.m",
+      "scope": "matlab",
+      "messages": [
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 113,
+          "column": [
+            9,
+            20
+          ]
+        },
+        {
+          "id": "SAGROW",
+          "message": "变量的大小似乎在(脚本内的)每个循环迭代都会更改。请考虑进行预分配以提升速度。",
+          "fix": 0,
+          "line": 114,
+          "column": [
+            9,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "file": "matlab/simulation/run_single_simulation.m",
+      "scope": "matlab",
+      "messages": [
+        {
+          "id": "MSNU",
+          "message": "此处之前隐藏了一条代码分析器消息，但该消息不再产生。",
+          "fix": 1,
+          "line": 11,
+          "column": [
+            60,
+            70
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 51 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 51,
+          "column": [
+            25,
+            28
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 51 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 51,
+          "column": [
+            31,
+            37
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 51 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 51,
+          "column": [
+            40,
+            58
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 52 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 52,
+          "column": [
+            5,
+            7
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 52 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 52,
+          "column": [
+            10,
+            20
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 52 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 52,
+          "column": [
+            23,
+            32
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 52 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 52,
+          "column": [
+            35,
+            40
+          ]
+        },
+        {
+          "id": "USENS",
+          "message": "请显式初始化此变量以避免潜在的未初始化变量，或对第 52 行中的函数调用使用有效语法。",
+          "fix": 0,
+          "line": 52,
+          "column": [
+            43,
+            48
+          ]
+        }
+      ]
+    }
+  ],
+  "python_tests_passed": 15,
+  "data_integrity": {
+    "original_png_paths_checked": 14659,
+    "png_paths": 14616,
+    "readable_pngs": 14616,
+    "case_count": 261,
+    "dimensions": {
+      "512x512:RGB": 13572,
+      "2027x1221:RGB": 1044
+    },
+    "invalid_pngs": [],
+    "removed_case": {
+      "case": "N=60_Normal_mu=2.00_sigma=0.35_R0=17.416_C=3_ID=24901",
+      "reason": "Incomplete export; removed from dataset at user request on 2026-10-06.",
+      "isolated_copy_retained": true
+    }
+  }
+}

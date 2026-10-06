@@ -18,7 +18,7 @@ Tk=200000;
 
 % ftol=5.0e-3; ttol=2.0e-4; deltat0=.4;
 ftol=7.8e-4; ttol=1.48e-4; deltat0=.1;
-if isempty(workflow_random_seed)
+if ~exist('workflow_random_seed', 'var') || isempty(workflow_random_seed)
     rng('shuffle');
 else
     rng(workflow_random_seed, 'twister');
@@ -36,6 +36,15 @@ sigma=0.35; % 标准差
 command=3; % command= 1 对应Weibull distribution；
            % command= 2 对应Lognormal distribution；
            % command= 3 对应normal distribution；
+
+% Optional overrides select the existing source branches; defaults above stay.
+if exist('workflow_geometry_options', 'var') && ~isempty(workflow_geometry_options)
+    workflow_geometry_options = validate_geometry_options(workflow_geometry_options);
+    if isfield(workflow_geometry_options, 'N'), N = workflow_geometry_options.N; end
+    if isfield(workflow_geometry_options, 'command'), command = workflow_geometry_options.command; end
+    if isfield(workflow_geometry_options, 'mu'), mu = workflow_geometry_options.mu; end
+    if isfield(workflow_geometry_options, 'sigma'), sigma = workflow_geometry_options.sigma; end
+end
 
 %(:)强迫表示为列向量
 % ;表示垂直拼接

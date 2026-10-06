@@ -1,0 +1,11 @@
+--- source_archive/main_D21origin.m
++++ research_scripts/main_D21origin.m
+@@ -6,7 +6,7 @@
+ 
+ 
+ 
+-temp_fig_folder = fullfile('C:\Users\20218\Desktop\Amatlab代码实验', 'temp_figs');
++temp_fig_folder = fullfile(pwd, 'temp_figs');
+ if ~exist(temp_fig_folder, 'dir')
+     mkdir(temp_fig_folder);
+ end

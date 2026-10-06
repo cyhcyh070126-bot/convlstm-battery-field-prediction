@@ -1,0 +1,20 @@
+--- source_archive/run_single_simulation.m
++++ research_scripts/run_single_simulation.m
+@@ -16,7 +16,7 @@
+     % =====================================================================
+     % --- 步骤 0: 切换到你的工作目录 ---
+     % =====================================================================
+-    WORK_DIR = 'C:\Users\20218\Desktop\Amatlab代码实验';
++    WORK_DIR = fileparts(mfilename('fullpath'));
+     cd(WORK_DIR);
+     fprintf('已切换到工作目录: %s\n', WORK_DIR);
+ 
+@@ -218,7 +218,7 @@
+     % (在 'clear all' 之后定义，100% 安全)
+     % ！！ 确保这个路径与你在 main_D21origin.m 中设置的 temp_fig_folder 一致 ！！
+ 
+-    WORK_DIR = 'C:\Users\20218\Desktop\Amatlab代码实验';
++    WORK_DIR = fileparts(mfilename('fullpath'));
+     MAIN_D21ORIGIN_TEMP_FIG_FOLDER = fullfile(WORK_DIR, 'temp_figs');
+     % --- V21 修正结束 ---
+ 
