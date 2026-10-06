@@ -63,6 +63,7 @@ the desired particle ensemble.
 | Crystal-orientation map | 5C conditioning map |
 | :---: | :---: |
 | ![Folded crystal-orientation map for case 93203](../assets/figures/orientation-input.png) | ![Uniform dark-red RGB conditioning map for 5C](../assets/figures/c-rate-5c.png) |
+| Grain-wise constant colors encode folded crystal orientation for case 93203. They are distinct from the seed-radius colors in the construction gallery. | Every pixel encodes the same 5C loading condition as RGB `(153, 0, 0)`. This map remains fixed through the field sequence. |
 
 **Orientation.** Each grain is assigned a crystal orientation. The geometry
 script combines its polar position angle with a sampled local angle to obtain
@@ -113,11 +114,20 @@ limits are `4.5e4 mol/m³` and `5e8 Pa`, respectively. Each field has its own
 color encoding. The model learns these RGB representations, and its reported
 MSE and SSIM describe normalized image agreement.
 
+The two simulation-reference GIFs in the
+[README field gallery](../README.md#static-conditioning-and-evolving-fields)
+are separate homepage examples: their case IDs and physical-time labels are
+not recorded. The six snapshots above are explicitly from case 93203 at the
+column times; they should not be read as labeled frames of those GIFs.
+
 File suffixes encode seconds: `concentration_t01000.png` is the concentration
 at **1000 s**. There are 25 concentration images and 25 stress images, with
 the same time list from 0 to 2400 s. The
 [pretrained prediction example](../README.md#5-pretrained-weights-and-5c-prediction-results)
-compares the concentration predictions with these simulation references.
+compares concentration predictions with references from this same case. Its
+GIF shows all ten predicted times from 500 to 1400 s; its static comparison
+selects 500, 800, 1100, and 1400 s. The error row displays mean absolute
+normalized RGB differences, not concentration errors in physical units.
 
 ## 4. From one case to training examples
 

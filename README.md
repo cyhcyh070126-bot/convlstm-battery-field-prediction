@@ -54,6 +54,7 @@ one case becomes many training windows.
 | Grain-orientation input | C-rate input: 5C |
 | :---: | :---: |
 | ![5C case grain orientation](assets/figures/orientation-input.png) | ![5C conditioning image](assets/figures/c-rate-5c.png) |
+| Each polygon is one grain, colored by its folded crystal orientation. This is the structural input for case 93203. | The uniform dark-red image encodes 5C as RGB `(153, 0, 0)`. It is a loading-condition input, not a concentration or stress field. |
 
 The orientation map colors each grain by its folded crystal orientation.
 The C-rate image is spatially uniform: this case encodes 5C as RGB `(153, 0, 0)`.
@@ -66,10 +67,14 @@ also includes the additional grain-orientation image shown on the research homep
 | Concentration evolution | Von Mises stress evolution |
 | :---: | :---: |
 | ![Dataset concentration evolution from the research homepage](assets/gifs/dataset-concentration.gif) | ![Dataset von Mises stress evolution from the research homepage](assets/gifs/dataset-stress.gif) |
+| Simulation-reference concentration images evolving over physical time. The colors represent the exported concentration field. | Simulation-reference von Mises stress images evolving over physical time. Stress uses a different color encoding from concentration. |
 
 These simulation-reference animations from the
 [research homepage](https://cyhcyh070126-bot.github.io/cv/) illustrate the two
-time-dependent fields. The [5C sample guide](docs/simulation-sample.md#3-field-sequences)
+time-dependent fields, rather than network predictions. Their original case IDs
+and physical-time labels are not recorded in the GIFs; they are general field
+examples, not identified as case 93203. The
+[5C sample guide](docs/simulation-sample.md#3-field-sequences)
 shows concentration and stress snapshots from case 93203 at labeled physical times.
 The [5C results](#5c-prediction-results) show the pretrained concentration prediction for that same case.
 
@@ -101,6 +106,7 @@ prediction and training walkthroughs. The archive's C-rate distribution is:
 | Final particle packing, case 93203 | Voronoi grains colored by seed-particle radius |
 | :---: | :---: |
 | ![Final particle packing for the 5C example](assets/sample-5c/03_Final_Placement.png) | ![Voronoi microstructure colored by seed-particle radius for the 5C example](assets/sample-5c/04_Voronoi_Uncolored.png) |
+| Relaxed seed-particle discs inside the circular packing boundary. Disc colors distinguish particles; they do not encode crystal orientation. | Voronoi grain outlines colored by their generating particle's radius. The colorbar spans 1.2–2.6 µm; this is a radius map, not the orientation input above. |
 
 The circles on the left show the relaxed particle positions used to construct
 the grains. Their colors distinguish particles. On the right, polygon colors
@@ -210,7 +216,10 @@ The files connect the stages as follows:
 
 Field history and static conditioning maps enter a recurrent predictor. In this
 implementation, a Conv3d feature extractor precedes the ConvLSTM layers, as
-specified in the configuration table below.
+specified in the configuration table below. Read the illustration from left
+to right: concentration, orientation, and C-rate inputs are stacked, passed
+through three ConvLSTM layers, and decoded into a future field. The Conv3d
+extractor used in this repository is not drawn in this literature schematic.
 Illustration source: Wang et al., Figure 5, [Energy Storage Materials 82 (2025),
 104581](https://doi.org/10.1016/j.ensm.2025.104581).
 
@@ -242,7 +251,9 @@ selected source implementation.
 
 Here, $X_t$ denotes the input feature map, $H_t$ the hidden state, and $C_t$ the
 cell state. Convolutional input, forget, and output gates retain the spatial grid
-while updating information through time.
+while updating information through time. The $\sigma$ blocks are sigmoid gates;
+the $\tanh$ blocks form and transform cell information. This is one recurrent
+cell, not the full three-layer predictor.
 Illustration source: Wang et al., Figure 4, [same article](https://doi.org/10.1016/j.ensm.2025.104581).
 
 <a id="3-training-strategy"></a>
@@ -259,7 +270,9 @@ feedback with the model's own predictions through scheduled sampling.
 Scheduled sampling chooses which field to feed into the next prediction window:
 the simulation reference with probability $\epsilon$, or the model prediction
 with probability $1-\epsilon$. The model applies this strategy to continuous RGB
-regression with a sigmoid output. Illustration: Figure 6 in
+regression with a sigmoid output. The illustration's Softmax and Sample blocks
+depict a generic discrete-output example; this code feeds back RGB predictions
+directly rather than sampling a Softmax output. Illustration: Figure 6 in
 [Wang et al.](https://doi.org/10.1016/j.ensm.2025.104581), also used on the homepage.
 
 | Setting | Initial training | Sequence fine-tuning |
@@ -307,13 +320,20 @@ is fed back into the input window; future reference frames are used for evaluati
 
 ![5C concentration: simulation reference and autoregressive prediction](assets/results/5c/rollout.gif)
 
+**Read the animation:** left is the COMSOL simulation export; right is the
+ConvLSTM concentration prediction for the same case 93203 and physical time.
+The ten frames cover **500, 600, …, 1400 s**. The filename label
+`concentration_t01000`, for example, means **1000 s**. Playback follows physical
+time using one fixed pretrained model.
+
 ![5C concentration prediction and absolute RGB error](assets/results/5c/comparison.png)
 
-In the GIF, the simulation reference is on the left and the autoregressive
-prediction is on the right; the labels identify physical time. In the static
-comparison, each column is a predicted time: reference above, prediction in the
-middle, and mean absolute RGB error below. Brighter error-map regions indicate
-larger differences on the normalized image scale.
+**Read the static comparison:** its four columns show **500, 800, 1100, and
+1400 s**, selected from the ten-frame rollout. Rows show the simulation
+reference, prediction, and mean absolute RGB error, respectively. The bottom
+row averages the absolute difference over the three normalized RGB channels
+at each pixel. Its shared colorbar and brighter colors indicate larger image
+differences; it is not an error map in concentration units.
 
 [Open the comparison PDF](assets/results/5c/comparison.pdf) ·
 [Per-frame metrics CSV](assets/results/5c/metrics.csv) ·
