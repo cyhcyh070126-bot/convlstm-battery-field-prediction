@@ -204,10 +204,7 @@ Files passed between stages:
 ![ConvLSTM architecture illustration used on the research homepage](assets/figures/battery_convlstm_pipeline.png)
 
 The schematic shows field and conditioning inputs, recurrent processing, and
-RGB decoding. This implementation also includes a Conv3d feature extractor
-before the recurrent layers, which is absent from the schematic. Source:
-Wang et al., Figure 5, [Energy Storage Materials 82 (2025),
-104581](https://doi.org/10.1016/j.ensm.2025.104581).
+RGB decoding.
 
 Each training example takes a **five-frame history**, with nine channels per frame:
 three field channels, three grain-orientation channels, and three C-rate
@@ -237,8 +234,7 @@ selected source implementation.
 
 Within each ConvLSTM cell, convolutional gates update the hidden state $H_t$
 and cell state $C_t$ from the input features $X_t$. The diagram depicts one
-cell; the model stacks three layers. Source: Wang et al., Figure 4,
-[same article](https://doi.org/10.1016/j.ensm.2025.104581).
+cell; the model stacks three layers.
 
 <a id="3-training-strategy"></a>
 
@@ -252,10 +248,7 @@ feedback with the model's own predictions through scheduled sampling.
 ![Scheduled sampling illustration used on the research homepage](assets/figures/battery_scheduled_sampling.png)
 
 Scheduled sampling feeds back the simulation reference with probability
-$\epsilon$ and the prediction with probability $1-\epsilon$. This RGB regression
-model uses sigmoid outputs directly; the schematic's Softmax and Sample blocks
-describe a discrete-output example. Source: Wang et al., Figure 6,
-[same article](https://doi.org/10.1016/j.ensm.2025.104581).
+$\epsilon$ and the prediction with probability $1-\epsilon$.
 
 | Setting | Initial training | Sequence fine-tuning |
 | :--- | :---: | :---: |
@@ -468,7 +461,6 @@ for environments and execution records.
 
 ## References and attribution
 
-- Wang, Z., Zhao, Y., Zhong, Z., and Xu, B.-X. *Deep-learning based prediction of chemo-mechanics and damage in battery active materials*. Energy Storage Materials 82 (2025), 104581. [Article](https://doi.org/10.1016/j.ensm.2025.104581). Figures 4–6 correspond to the existing homepage illustrations reused above; they are not covered by the ConvLSTM code license.
 - The recurrent implementation follows [ndrplz/ConvLSTM_pytorch](https://github.com/ndrplz/ConvLSTM_pytorch); its [MIT notice](third_party/ConvLSTM_pytorch-LICENSE) is retained.
 - SSIM uses [pytorch-msssim](https://github.com/VainF/pytorch-msssim).
 
